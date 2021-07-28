@@ -1,6 +1,7 @@
 // this file is for modchart things, this is to declutter playstate.hx
 
 // Lua
+import openfl.display3D.textures.VideoTexture;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 #if windows
@@ -240,7 +241,7 @@ class ModchartState
 					PlayState.instance.removeObject(PlayState.dad);
 					PlayState.dad = new Character(olddadx, olddady, id);
 					PlayState.instance.addObject(PlayState.dad);
-					PlayState.instance.iconP2.animation.play(id);
+					PlayState.instance.iconP2.changeIcon(id);
 	}
 
 	function changeBoyfriendCharacter(id:String)
@@ -249,17 +250,24 @@ class ModchartState
 					PlayState.instance.removeObject(PlayState.boyfriend);
 					PlayState.boyfriend = new Boyfriend(oldboyfriendx, oldboyfriendy, id);
 					PlayState.instance.addObject(PlayState.boyfriend);
-					PlayState.instance.iconP2.animation.play(id);
+					PlayState.instance.iconP1.changeIcon(id);
 	}
 
 	function makeAnimatedLuaSprite(spritePath:String,names:Array<String>,prefixes:Array<String>,startAnim:String, id:String)
 	{
 		#if sys
-		var data:BitmapData = BitmapData.fromFile(Sys.getCwd() + "assets/data/" + PlayState.SONG.song.toLowerCase() + '/' + spritePath + ".png");
+		// pre lowercasing the song name (makeAnimatedLuaSprite)
+		var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+		switch (songLowercase) {
+			case 'dad-battle': songLowercase = 'dadbattle';
+			case 'philly-nice': songLowercase = 'philly';
+		}
+
+		var data:BitmapData = BitmapData.fromFile(Sys.getCwd() + "assets/data/" + songLowercase + '/' + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 
-		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), Sys.getCwd() + "assets/data/" + PlayState.SONG.song.toLowerCase() + "/" + spritePath + ".xml");
+		sprite.frames = FlxAtlasFrames.fromSparrow(FlxGraphic.fromBitmapData(data), Sys.getCwd() + "assets/data/" + songLowercase + "/" + spritePath + ".xml");
 
 		trace(sprite.frames.frames.length);
 
@@ -282,7 +290,19 @@ class ModchartState
 	function makeLuaSprite(spritePath:String,toBeCalled:String, drawBehind:Bool)
 	{
 		#if sys
-		var data:BitmapData = BitmapData.fromFile(Sys.getCwd() + "assets/data/" + PlayState.SONG.song.toLowerCase() + '/' + spritePath + ".png");
+		// pre lowercasing the song name (makeLuaSprite)
+		var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+		switch (songLowercase) {
+			case 'dad-battle': songLowercase = 'dadbattle';
+			case 'philly-nice': songLowercase = 'philly';
+		}
+
+		var path = Sys.getCwd() + "assets/data/" + songLowercase + '/';
+
+		if (PlayState.isSM)
+			path = PlayState.pathToSm + "/";
+
+		var data:BitmapData = BitmapData.fromFile(path + spritePath + ".png");
 
 		var sprite:FlxSprite = new FlxSprite(0,0);
 		var imgWidth:Float = FlxG.width / data.width;
@@ -332,6 +352,8 @@ class ModchartState
 		lua = null;
     }
 
+	public var luaWiggles:Map<String,WiggleEffect> = new Map<String,WiggleEffect>();
+
     // LUA SHIT
 
     function new()
@@ -345,7 +367,18 @@ class ModchartState
 				
 				//shaders = new Array<LuaShader>();
 
-				var result = LuaL.dofile(lua, Paths.lua(PlayState.SONG.song.toLowerCase() + "/modchart")); // execute le file
+				// pre lowercasing the song name (new)
+				var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+				switch (songLowercase) {
+					case 'dad-battle': songLowercase = 'dadbattle';
+					case 'philly-nice': songLowercase = 'philly';
+				}
+
+				var path = Paths.lua(songLowercase + "/modchart");
+				if (PlayState.isSM)
+					path = PlayState.pathToSm + "/modchart.lua";
+
+				var result = LuaL.dofile(lua, path); // execute le file
 	
 				if (result != 0)
 				{
@@ -361,6 +394,8 @@ class ModchartState
 				setVar("scrollspeed", FlxG.save.data.scrollSpeed != 1 ? FlxG.save.data.scrollSpeed : PlayState.SONG.speed);
 				setVar("fpsCap", FlxG.save.data.fpsCap);
 				setVar("downscroll", FlxG.save.data.downscroll);
+				setVar("flashing", FlxG.save.data.flashing);
+				setVar("distractions", FlxG.save.data.distractions);
 	
 				setVar("curStep", 0);
 				setVar("curBeat", 0);
@@ -403,6 +438,41 @@ class ModchartState
 	
 				Lua_helper.add_callback(lua,"getProperty", getPropertyByName);
 				
+				Lua_helper.add_callback(lua,"setNoteWiggle", function(wiggleId) {
+					PlayState.instance.camNotes.setFilters([new ShaderFilter(luaWiggles.get(wiggleId).shader)]);
+				});
+				
+				Lua_helper.add_callback(lua,"setSustainWiggle", function(wiggleId) {
+					PlayState.instance.camSustains.setFilters([new ShaderFilter(luaWiggles.get(wiggleId).shader)]);
+				});
+
+				Lua_helper.add_callback(lua,"createWiggle", function(freq:Float,amplitude:Float,speed:Float) {
+					var wiggle = new WiggleEffect();
+					wiggle.waveAmplitude = amplitude;
+					wiggle.waveSpeed = speed;
+					wiggle.waveFrequency = freq;
+
+					var id = Lambda.count(luaWiggles) + 1 + "";
+
+					luaWiggles.set(id,wiggle);
+					return id;
+				});
+
+				Lua_helper.add_callback(lua,"setWiggleTime", function(wiggleId:String,time:Float) {
+					var wiggle = luaWiggles.get(wiggleId);
+
+					wiggle.shader.uTime.value = [time];
+				});
+
+				
+				Lua_helper.add_callback(lua,"setWiggleAmplitude", function(wiggleId:String,amp:Float) {
+					var wiggle = luaWiggles.get(wiggleId);
+
+					wiggle.waveAmplitude = amp;
+				});
+
+
+
 				// Lua_helper.add_callback(lua,"makeAnimatedSprite", makeAnimatedLuaSprite);
 				// this one is still in development
 
@@ -413,10 +483,43 @@ class ModchartState
 					PlayState.instance.removeObject(sprite);
 					return true;
 				});
-
-				
 	
 				// hud/camera
+
+				Lua_helper.add_callback(lua,"initBackgroundVideo", function(videoName:String) {
+					trace('playing assets/videos/' + videoName + '.webm');
+					PlayState.instance.backgroundVideo("assets/videos/" + videoName + ".webm");
+				});
+
+				Lua_helper.add_callback(lua,"pauseVideo", function() {
+					if (!GlobalVideo.get().paused)
+						GlobalVideo.get().pause();
+				});
+
+				Lua_helper.add_callback(lua,"resumeVideo", function() {
+					if (GlobalVideo.get().paused)
+						GlobalVideo.get().pause();
+				});
+				
+				Lua_helper.add_callback(lua,"restartVideo", function() {
+					GlobalVideo.get().restart();
+				});
+
+				Lua_helper.add_callback(lua,"getVideoSpriteX", function() {
+					return PlayState.instance.videoSprite.x;
+				});
+
+				Lua_helper.add_callback(lua,"getVideoSpriteY", function() {
+					return PlayState.instance.videoSprite.y;
+				});
+
+				Lua_helper.add_callback(lua,"setVideoSpritePos", function(x:Int,y:Int) {
+					PlayState.instance.videoSprite.setPosition(x,y);
+				});
+				
+				Lua_helper.add_callback(lua,"setVideoSpriteScale", function(scale:Float) {
+					PlayState.instance.videoSprite.setGraphicSize(Std.int(PlayState.instance.videoSprite.width * scale));
+				});
 	
 				Lua_helper.add_callback(lua,"setHudAngle", function (x:Float) {
 					PlayState.instance.camHUD.angle = x;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Lua Modcharts
 
 In the 1.4.2 release of Kade Engine, we introduced Mod Charts. Mod Charts are a way of changing gameplay without hard coded values. This is achieved by using the Lua Scripting language to create script files that run during runtime.
@@ -529,3 +530,7 @@ Sets the window's position
 ##### resizeWindow(int width, int height)
 
 Resizes the window
+=======
+### RELOCATED
+Relocated to [here](https://github.com/KadeDev/Kade-Engine/wiki/)
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360

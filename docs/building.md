@@ -28,6 +28,7 @@
 	 - `haxelib git faxe https://github.com/uhrobots/faxe`
 	 - `haxelib git polymod https://github.com/larsiusprime/polymod.git`
 	 - `haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc`
+<<<<<<< HEAD
 
 ### Windows-only dependencies (only for building *to* Windows. Building html5 on Windows does not require this)
 If you are planning to build for Windows, you also need to install **Visual Studio 2019**. While installing it, *don't click on any of the options to install workloads*. Instead, go to the **individual components** tab and choose the following:
@@ -35,6 +36,23 @@ If you are planning to build for Windows, you also need to install **Visual Stud
 -   Windows SDK (10.0.19041.0)
 
 This will install about 4 GB of crap, but is necessary to build for Windows.
+=======
+	 - `haxelib install actuate`
+	 - `haxelib git extension-webm https://github.com/KadeDev/extension-webm`
+	 - `lime rebuild extension-webm <ie. windows, macos, linux>`
+
+### Windows-only dependencies (only for building *to* Windows. Building html5 on Windows does not require this)
+If you are planning to build for Windows, you also need to install **Visual Studio 2019**. While installing it, *don't click on any of the options to install workloads*. Instead, go to the **individual components** tab and choose the following:
+
+-   MSVC v142 - VS 2019 C++ x64/x86 build tools
+-   MSVC v141 - VS 2017 C++ x64/x86 build tools
+-   Windows SDK (10.0.17763.0)
+-   C++ Profiling tools
+-   C++ CMake tools for windows
+-   C++ ATL for v142 build tools (x86 & x64)
+
+This will install about 7 GB of crap, but is necessary to build for Windows.
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 
 ### macOS-only dependencies (these are required for building on macOS at all, including html5.)
 If you are running macOS, you'll need to install Xcode. You can download it from the macOS App Store or from the [Xcode website](https://developer.apple.com/xcode/).

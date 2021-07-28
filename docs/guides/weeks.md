@@ -15,8 +15,15 @@ Scroll down to Line 26, or Search (Windows/Linux: `Ctrl+F`, Mac: `Cmd+F`) for "w
 ---
 
 ```haxe
+<<<<<<< HEAD
 var weekData:Array<Dynamic> = [
 		
+=======
+static function weekData():Array<Dynamic>
+{
+  return [
+
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
     ['Tutorial'],
 		
     ['Bopeebo', 'Fresh', 'Dadbattle'],
@@ -30,8 +37,14 @@ var weekData:Array<Dynamic> = [
     ['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		
     ['Senpai', 'Roses', 'Thorns']
+<<<<<<< HEAD
     
 ];
+=======
+
+  ];
+}
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 ```
 
 ---
@@ -45,8 +58,15 @@ Example
 ---
 
 ```haxe
+<<<<<<< HEAD
 var weekData:Array<Dynamic> = [
 		
+=======
+static function weekData():Array<Dynamic>
+{
+  return [
+
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
     ['Tutorial'],
 		
     ['Bopeebo', 'Fresh', 'Dadbattle'],
@@ -58,12 +78,22 @@ var weekData:Array<Dynamic> = [
     ['Satin-Panties', "High", "Milf"],
 		
     ['Cocoa', 'Eggnog', 'Winter-Horrorland'],
+<<<<<<< HEAD
 		
     ['Senpai', 'Roses', 'Thorns'],
 
     ['Ugh', 'Guns', 'Stress']
     
 ];
+=======
+
+    ['Senpai', 'Roses', 'Thorns'],
+
+    ['Ugh', 'Guns', 'Stress']
+
+  ];
+}
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 ```
  
 ---
@@ -103,12 +133,17 @@ var weekCharacters:Array<Dynamic> = [
 
 ### Step 4. Week Names
 
+<<<<<<< HEAD
 Underneath the song list, there should be another array called `weekNames`. Creating a new line in that array, just enter a string that represents what you want the week to be called.
+=======
+In `assets/preload/data`, there should be a .txt file called `weekNames`. Creating a new line in that file, just enter a string that represents what you want the week to be called.
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 
 Example
 ---
 
 ---
+<<<<<<< HEAD
 ```haxe
 var weekNames:Array<String> = [
 		
@@ -129,6 +164,17 @@ var weekNames:Array<String> = [
 	"Tankman"
 	
 ];
+=======
+```
+Tutorial
+Daddy Dearest
+Spooky Month
+PICO
+MOMMY MUST MURDER
+RED SNOW
+Hating Simulator ft. Moawling
+TANKMAN
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 ```
 
 ---
@@ -137,22 +183,44 @@ var weekNames:Array<String> = [
   
 ### Step 5. Graphics
   
+<<<<<<< HEAD
 Displaying a week icon for your custom week is as simple as dropping a .png into `assets/images/storymenu`. Rename the file to `week7.png`, `week8.png`, etc.
+=======
+Displaying a week icon for your custom week is as simple as dropping a .png into `assets/preload/images/storymenu`. Rename the file to `week7.png`, `week8.png`, etc.
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 
 Example
 ---
 
 ---
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 ![frrf](https://user-images.githubusercontent.com/68293280/118160164-cdab6d00-b3d2-11eb-9b29-a940eaf45025.png)
 
 ![frrf 2](https://user-images.githubusercontent.com/68293280/118160865-b8830e00-b3d3-11eb-8a23-818a1b4cfdb2.png)
 
+<<<<<<< HEAD
 NOTE: You will have to add a new item to `weekUnlocked`, so that the week is playable.
 
 ![frrf 3](https://user-images.githubusercontent.com/68293280/118161461-7908f180-b3d4-11eb-89fa-e531ae5804d8.png)
 
 
+=======
+![frrf 3](https://user-images.githubusercontent.com/68293280/118161461-7908f180-b3d4-11eb-89fa-e531ae5804d8.png)
+=======
+![weeks1](https://user-images.githubusercontent.com/55949451/122635123-69bb4900-d0e2-11eb-8bcc-1071cfda4e35.png)
+
+NOTE: You will have to add a new item to `weekUnlocked`, so that the week is playable.
+Locate to line 39 and add in a new boolean called True so that the week can be playable.
+
+
+---
+
+![weeks2](https://user-images.githubusercontent.com/55949451/122635129-763fa180-d0e2-11eb-841e-3456e74a50ba.png) \* *for this screenshot I removed tankman from weekCharacters as it would crash because I don't have a tankman character added*
+>>>>>>> b125642d00df9e7e72d0505b56efd9c5e91c6360
 ### Conclusion
 
 If you followed all of the steps correctly, you have successfully created a new week in the Story Mode.
