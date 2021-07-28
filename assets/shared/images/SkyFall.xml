@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="SkyFall.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Background0000" x="0" y="0" width="4825" height="2656"/>
+	<SubTexture name="Background0001" x="0" y="0" width="4825" height="2656"/>
+	<SubTexture name="Background0002" x="0" y="2686" width="4825" height="2656"/>
+	<SubTexture name="Background0003" x="0" y="2686" width="4825" height="2656"/>
+	<SubTexture name="Background0004" x="0" y="5372" width="4825" height="2656"/>
+	<SubTexture name="Background0005" x="0" y="5372" width="4825" height="2656"/>
+</TextureAtlas>
