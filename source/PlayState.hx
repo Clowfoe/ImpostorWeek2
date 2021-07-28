@@ -803,7 +803,7 @@ class PlayState extends MusicBeatState
 					add(stageFront);
 
 					
-			10
+			
 			case 'toogus':
 				{
 						defaultCamZoom = 0.85;
