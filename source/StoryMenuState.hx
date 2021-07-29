@@ -28,7 +28,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		return [
 			['Sussus Moogus', 'Sabotage', 'Meltdown'],
-			['Sussus Moogus', 'Sabotage', 'Meltdown']
+			['Sussus Toogus', 'Lights Down', 'Reactor', 'Ejected']
 		];
 	}
 	var curDifficulty:Int = 1;

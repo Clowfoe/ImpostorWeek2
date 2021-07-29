@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bf.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="*crys* why...0000" x="0" y="0" width="335" height="327" frameX="-1" frameY="-2" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0001" x="365" y="0" width="335" height="327" frameX="0" frameY="-1" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0002" x="730" y="0" width="335" height="330" frameX="-2" frameY="0" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0003" x="1095" y="0" width="335" height="327" frameX="0" frameY="-1" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0004" x="1460" y="0" width="335" height="326" frameX="-1" frameY="-2" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0005" x="1825" y="0" width="335" height="327" frameX="0" frameY="-2" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0006" x="2190" y="0" width="335" height="327" frameX="-2" frameY="-1" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0007" x="2555" y="0" width="335" height="330" frameX="0" frameY="0" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="*crys* why...0008" x="2920" y="0" width="335" height="328" frameX="-2" frameY="-1" frameWidth="337" frameHeight="330"/>
+	<SubTexture name="boyfriend happy0000" x="3285" y="0" width="337" height="282" frameX="0" frameY="-6" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0001" x="3652" y="0" width="339" height="280" frameX="0" frameY="-6" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0002" x="0" y="360" width="338" height="281" frameX="0" frameY="-3" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0003" x="368" y="360" width="337" height="282" frameX="0" frameY="-1" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0004" x="735" y="360" width="336" height="283" frameX="0" frameY="0" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0005" x="1101" y="360" width="336" height="282" frameX="0" frameY="-1" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0006" x="1467" y="360" width="336" height="281" frameX="0" frameY="-2" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0007" x="1833" y="360" width="336" height="280" frameX="0" frameY="-5" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend happy0008" x="2199" y="360" width="337" height="280" frameX="0" frameY="-6" frameWidth="339" frameHeight="288"/>
+	<SubTexture name="boyfriend mad0000" x="2566" y="360" width="337" height="282" frameX="0" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0001" x="2933" y="360" width="339" height="280" frameX="-2" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0002" x="3302" y="360" width="337" height="280" frameX="-1" frameY="-3" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0003" x="3669" y="360" width="338" height="281" frameX="-1" frameY="-2" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0004" x="0" y="673" width="336" height="282" frameX="0" frameY="0" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0005" x="366" y="673" width="337" height="281" frameX="-1" frameY="-1" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0006" x="733" y="673" width="336" height="279" frameX="-1" frameY="-3" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0007" x="1099" y="673" width="337" height="278" frameX="-2" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend mad0008" x="1466" y="673" width="337" height="280" frameX="0" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0000" x="1833" y="673" width="337" height="282" frameX="0" frameY="-5" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0001" x="2200" y="673" width="339" height="280" frameX="0" frameY="-5" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0002" x="2569" y="673" width="338" height="280" frameX="0" frameY="-3" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0003" x="2937" y="673" width="337" height="281" frameX="0" frameY="-2" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0004" x="3304" y="673" width="336" height="282" frameX="0" frameY="0" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0005" x="3670" y="673" width="336" height="281" frameX="0" frameY="-1" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0006" x="0" y="985" width="336" height="279" frameX="0" frameY="-3" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0007" x="366" y="985" width="336" height="278" frameX="0" frameY="-5" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend neutral0008" x="732" y="985" width="337" height="280" frameX="0" frameY="-5" frameWidth="339" frameHeight="287"/>
+	<SubTexture name="boyfriend phase0000" x="1099" y="985" width="335" height="289" frameX="-1" frameY="0" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0001" x="1464" y="985" width="335" height="290" frameX="0" frameY="0" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0002" x="1829" y="985" width="335" height="288" frameX="-4" frameY="-2" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0003" x="2194" y="985" width="335" height="291" frameX="-3" frameY="0" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0004" x="2559" y="985" width="335" height="287" frameX="-2" frameY="-2" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0005" x="2924" y="985" width="335" height="288" frameX="-4" frameY="-2" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0006" x="3289" y="985" width="335" height="289" frameX="-3" frameY="0" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0007" x="3654" y="985" width="335" height="290" frameX="-1" frameY="-1" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend phase0008" x="0" y="1306" width="335" height="290" frameX="-4" frameY="-1" frameWidth="339" frameHeight="291"/>
+	<SubTexture name="boyfriend shocked0000" x="365" y="1306" width="341" height="305" frameX="-1" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0001" x="736" y="1306" width="342" height="307" frameX="-1" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0002" x="1108" y="1306" width="339" height="305" frameX="-2" frameY="-1" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0003" x="1477" y="1306" width="339" height="308" frameX="-3" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0004" x="1846" y="1306" width="342" height="306" frameX="-1" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0005" x="2218" y="1306" width="341" height="306" frameX="0" frameY="-1" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0006" x="2589" y="1306" width="342" height="306" frameX="0" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0007" x="2961" y="1306" width="340" height="308" frameX="-3" frameY="0" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend shocked0008" x="3331" y="1306" width="341" height="307" frameX="0" frameY="-1" frameWidth="343" frameHeight="308"/>
+	<SubTexture name="boyfriend stupid0000" x="3702" y="1306" width="319" height="283"/>
+	<SubTexture name="boyfriend very angry probably0000" x="0" y="1644" width="337" height="282" frameX="0" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0001" x="367" y="1644" width="339" height="280" frameX="-2" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0002" x="736" y="1644" width="337" height="280" frameX="-1" frameY="-3" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0003" x="1103" y="1644" width="338" height="281" frameX="-1" frameY="-2" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0004" x="1471" y="1644" width="336" height="282" frameX="0" frameY="0" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0005" x="1837" y="1644" width="337" height="281" frameX="-1" frameY="-1" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0006" x="2204" y="1644" width="336" height="279" frameX="-1" frameY="-3" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0007" x="2570" y="1644" width="337" height="278" frameX="-2" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="boyfriend very angry probably0008" x="2937" y="1644" width="337" height="280" frameX="0" frameY="-5" frameWidth="341" frameHeight="287"/>
+	<SubTexture name="hahha homosexua0000" x="3304" y="1644" width="405" height="291" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0001" x="0" y="1965" width="405" height="290" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0002" x="435" y="1965" width="405" height="288" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0003" x="870" y="1965" width="405" height="289" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0004" x="3304" y="1644" width="405" height="291" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0005" x="1305" y="1965" width="405" height="292"/>
+	<SubTexture name="hahha homosexua0006" x="1740" y="1965" width="405" height="290" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0007" x="2175" y="1965" width="405" height="289" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+	<SubTexture name="hahha homosexua0008" x="2610" y="1965" width="405" height="290" frameX="0" frameY="0" frameWidth="405" frameHeight="292"/>
+</TextureAtlas>

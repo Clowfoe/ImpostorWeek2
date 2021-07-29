@@ -3,4 +3,5 @@ Sabotage:impostor:1
 Meltdown:impostor:1
 Sussus Toogus:impostor3:1
 Lights Down:impostor3:1
+Reactor:impostor3:1
 Ejected:impostor3:1

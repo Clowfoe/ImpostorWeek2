@@ -1008,13 +1008,28 @@ class PlayState extends MusicBeatState
 								bg.active = false;
 								add(bg);
 			
-								var stageFront:FlxSprite = new FlxSprite(1000, 100).loadGraphic(Paths.image('vending_machine'));
+								var stageFront:FlxSprite = new FlxSprite(1000, 150).loadGraphic(Paths.image('vending_machine'));
 								stageFront.updateHitbox();
 								stageFront.antialiasing = true;
 								stageFront.scrollFactor.set(1, 1);
 								stageFront.active = false;
 								add(stageFront);
 			
+								var stageFront2:FlxSprite = new FlxSprite(-150, 400).loadGraphic(Paths.image('table'));
+								stageFront2.updateHitbox();
+								stageFront2.antialiasing = true;
+								stageFront2.scrollFactor.set(1, 1);
+								stageFront2.active = false;
+								add(stageFront2);
+
+								var stageFront3:FlxSprite = new FlxSprite(650, 400).loadGraphic(Paths.image('table'));
+								stageFront3.updateHitbox();
+								stageFront3.antialiasing = true;
+								stageFront3.scrollFactor.set(1, 1);
+								stageFront3.active = false;
+								stageFront3.flipX = true;
+								add(stageFront3);
+
 								var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 								stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 								stageCurtains.updateHitbox();
@@ -1117,7 +1132,7 @@ class PlayState extends MusicBeatState
 		}
 
 		gf = new Character(400, 130, curGf);
-		gf.scrollFactor.set(0.95, 0.95);
+		gf.scrollFactor.set(1, 1);
 
 		dad = new Character(100, 100, SONG.player2);
 
@@ -1214,6 +1229,8 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+			case 'toogus':
+				boyfriend.x += 150;
 			case 'schoolEvil':
 				boyfriend.x += 200;
 				boyfriend.y += 220;
