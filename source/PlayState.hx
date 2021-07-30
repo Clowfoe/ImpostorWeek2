@@ -211,6 +211,12 @@ class PlayState extends MusicBeatState
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
 
+	var firstImpostorCutscene:FlxSprite = new FlxSprite();
+	var firstGFCutscene:FlxSprite = new FlxSprite();
+	var firstBFCutscene:FlxSprite = new FlxSprite();
+
+	var crowd:FlxSprite = new FlxSprite();
+
 	var fc:Bool = true;
 
 	var bgGirls:BackgroundGirls;
@@ -898,105 +904,6 @@ class PlayState extends MusicBeatState
 							add(waveSpriteFG);
 						 */
 					}
-					case 'sabotage':
-						{
-							defaultCamZoom = 0.9;
-							curStage = 'sabotage';
-							var bg:FlxSprite = new FlxSprite(-200, -300).loadGraphic(Paths.image('polusSky'));
-							bg.setGraphicSize(Std.int(bg.width * 1.5));
-							bg.antialiasing = true;
-							bg.scrollFactor.set(0.5, 0.5);
-							bg.active = false;
-							add(bg);
-			
-			
-							var rocks:FlxSprite = new FlxSprite(-800, -300).loadGraphic(Paths.image('polusrocks'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.6, 0.6);
-							rocks.active = false;
-							add(rocks);
-			
-						
-							var rocks:FlxSprite = new FlxSprite(-450, -200).loadGraphic(Paths.image('polusWarehouse'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.9, 0.9);
-							rocks.active = false;
-							add(rocks);
-							
-							var rocks:FlxSprite = new FlxSprite(-1000, 0).loadGraphic(Paths.image('polusHills'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.9, 0.9);
-							rocks.active = false;
-							add(rocks);
-			
-							var stageFront:FlxSprite = new FlxSprite(-400, 450).loadGraphic(Paths.image('polusGround'));
-							stageFront.setGraphicSize(Std.int(stageFront.width * 1.5));
-							stageFront.updateHitbox();
-							stageFront.antialiasing = true;
-							stageFront.scrollFactor.set(1, 1);
-							stageFront.active = false;
-							add(stageFront);
-						}
-					case 'meltdown':
-						{
-							defaultCamZoom = 0.9;
-							curStage = 'meltdown';
-							var bg:FlxSprite = new FlxSprite(-200, -300).loadGraphic(Paths.image('polusSky'));
-							bg.setGraphicSize(Std.int(bg.width * 1.5));
-							bg.antialiasing = true;
-							bg.scrollFactor.set(0.5, 0.5);
-							bg.active = false;
-							add(bg);
-			
-			
-							var rocks:FlxSprite = new FlxSprite(-800, -300).loadGraphic(Paths.image('polusrocks'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.6, 0.6);
-							rocks.active = false;
-							add(rocks);
-			
-						
-							var rocks:FlxSprite = new FlxSprite(-450, -200).loadGraphic(Paths.image('polusWarehouse'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.9, 0.9);
-							rocks.active = false;
-							add(rocks);
-							
-							var rocks:FlxSprite = new FlxSprite(-1000, 0).loadGraphic(Paths.image('polusHills'));
-							rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-							rocks.updateHitbox();
-							rocks.antialiasing = true;
-							rocks.scrollFactor.set(0.9, 0.9);
-							rocks.active = false;
-							add(rocks);
-		
-							var crowd:FlxSprite = new FlxSprite(-40, 405);
-							crowd.frames = Paths.getSparrowAtlas('CrowdBop');
-							crowd.animation.addByPrefix('CrowdBop', 'CrowdBop', 24);
-							crowd.animation.play('CrowdBop');
-							crowd.scrollFactor.set(1, 1);
-							crowd.antialiasing = true;
-							crowd.scale.set(1.5,1.5);
-							add(crowd);
-			
-							var stageFront:FlxSprite = new FlxSprite(-400, 425).loadGraphic(Paths.image('polusGround'));
-							stageFront.setGraphicSize(Std.int(stageFront.width * 1.5));
-							stageFront.updateHitbox();
-							stageFront.antialiasing = true;
-							stageFront.scrollFactor.set(1, 1);
-							stageFront.active = false;
-							add(stageFront);
-						}
 					case 'toogus':
 						{
 								defaultCamZoom = 0.85;
@@ -1039,62 +946,95 @@ class PlayState extends MusicBeatState
 			
 							//	add(stageCurtains);
 						}
+					case 'polus': {
+						curStage = 'polus';
+						defaultCamZoom = 0.9;  
+ 
+						var sky:FlxSprite = new FlxSprite(-834.3, -620.5).loadGraphic(Paths.image('polus/polusSky', 'impostor'));
+						sky.antialiasing = true;
+						sky.scrollFactor.set(0.5, 0.5);
+						sky.active = false;
+						add(sky);		
+		
+						var rocks:FlxSprite = new FlxSprite(-915.8, -411.3).loadGraphic(Paths.image('polus/polusrocks', 'impostor'));
+						rocks.updateHitbox();
+						rocks.antialiasing = true;
+						rocks.scrollFactor.set(0.6, 0.6);
+						rocks.active = false;
+						add(rocks);	
+						
+						var hills:FlxSprite = new FlxSprite(-1238.05, -180.55).loadGraphic(Paths.image('polus/polusHills', 'impostor'));
+						hills.updateHitbox();
+						hills.antialiasing = true;
+						hills.scrollFactor.set(0.9, 0.9);
+						hills.active = false;
+						add(hills);
+
+						var warehouse:FlxSprite = new FlxSprite(-458.35, -315.6).loadGraphic(Paths.image('polus/polusWarehouse', 'impostor'));
+						warehouse.updateHitbox();
+						warehouse.antialiasing = true;
+						warehouse.scrollFactor.set(0.9, 0.9);
+						warehouse.active = false;
+						add(warehouse);
+
+						var crowd:FlxSprite = new FlxSprite(-280.5, 220.8);
+						crowd.frames = Paths.getSparrowAtlas('polus/CrowdBop', 'impostor');
+						crowd.animation.addByPrefix('CrowdBop', 'CrowdBop', 24);
+						crowd.animation.play('CrowdBop');
+						crowd.scrollFactor.set(1, 1);
+						crowd.antialiasing = true;
+						crowd.updateHitbox();
+						crowd.scale.set(1.5, 1.5);
+						if(SONG.song.toLowerCase() == 'meltdown') {
+							add(crowd);
+						}
+		
+						var ground:FlxSprite = new FlxSprite(-580.9, 241.85).loadGraphic(Paths.image('polus/polusGround', 'impostor'));
+						ground.updateHitbox();
+						ground.antialiasing = true;
+						ground.scrollFactor.set(1, 1);
+						ground.active = false;
+						add(ground);
+
+					}
 					case 'ejected':
 						{
 							defaultCamZoom = 0.9;
 							curStage = 'ejected';
-							var crowd:FlxSprite = new FlxSprite(-2500, 	-900);
+							crowd = new FlxSprite(-2500, 	-900);
 							crowd.frames = Paths.getSparrowAtlas('SkyFall');
 							crowd.animation.addByPrefix('Background', 'Background', 24);
 							crowd.animation.play('Background');
 							crowd.antialiasing = true;
+							crowd.updateHitbox();
 							add(crowd);					
 						}
 					default:
 					{
 						defaultCamZoom = 0.9;
 						curStage = 'stage';
-						var bg:FlxSprite = new FlxSprite(-200, -300).loadGraphic(Paths.image('polusSky'));
-						bg.setGraphicSize(Std.int(bg.width * 1.5));
+						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
 						bg.antialiasing = true;
-						bg.scrollFactor.set(0.5, 0.5);
+						bg.scrollFactor.set(0.9, 0.9);
 						bg.active = false;
 						add(bg);
-		
-		
-						var rocks:FlxSprite = new FlxSprite(-800, -300).loadGraphic(Paths.image('polusrocks'));
-						rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-						rocks.updateHitbox();
-						rocks.antialiasing = true;
-						rocks.scrollFactor.set(0.6, 0.6);
-						rocks.active = false;
-						add(rocks);
-		
-					
-						var rocks:FlxSprite = new FlxSprite(-450, -200).loadGraphic(Paths.image('polusWarehouse'));
-						rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-						rocks.updateHitbox();
-						rocks.antialiasing = true;
-						rocks.scrollFactor.set(0.9, 0.9);
-						rocks.active = false;
-						add(rocks);
-						
-						var rocks:FlxSprite = new FlxSprite(-1000, 0).loadGraphic(Paths.image('polusHills'));
-						rocks.setGraphicSize(Std.int(rocks.width * 1.5));
-						rocks.updateHitbox();
-						rocks.antialiasing = true;
-						rocks.scrollFactor.set(0.9, 0.9);
-						rocks.active = false;
-						add(rocks);
-		
-						var stageFront:FlxSprite = new FlxSprite(-400, 450).loadGraphic(Paths.image('polusGround'));
-						stageFront.setGraphicSize(Std.int(stageFront.width * 1.5));
+	
+						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 						stageFront.updateHitbox();
 						stageFront.antialiasing = true;
-						stageFront.scrollFactor.set(1, 1);
+						stageFront.scrollFactor.set(0.9, 0.9);
 						stageFront.active = false;
 						add(stageFront);
-		
+	
+						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+						stageCurtains.updateHitbox();
+						stageCurtains.antialiasing = true;
+						stageCurtains.scrollFactor.set(1.3, 1.3);
+						stageCurtains.active = false;
+	
+						add(stageCurtains);		
 					}
 			}
 		}
@@ -1118,6 +1058,8 @@ class PlayState extends MusicBeatState
 			gfCheck = SONG.gfVersion;
 		}
 
+		
+
 		var curGf:String = '';
 		switch (gfCheck)
 		{
@@ -1138,16 +1080,18 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
+		
 		switch (SONG.player2)
 		{
 			case 'gf':
 				dad.setPosition(gf.x, gf.y);
 				gf.visible = false;
 				if (isStoryMode)
-				{
-					camPos.x += 600;
-					tweenCamIn();
-				}
+					{
+						camPos.x += 600;
+						tweenCamIn();
+					}
+					
 
 			case "spooky":
 				dad.y += 200;
@@ -1206,6 +1150,37 @@ class PlayState extends MusicBeatState
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
 
+		//cutscene fuck
+		if(curStage == 'stage' && isStoryMode) {
+			
+			gf.visible = false;
+			dad.visible = false;
+			boyfriend.visible = false;
+
+			firstImpostorCutscene = new FlxSprite(100, 100);
+			firstImpostorCutscene.frames = Paths.getSparrowAtlas('cutscenes/imposter_week1');
+			firstImpostorCutscene.animation.addByPrefix('cutscene', 'This Is Among Us instance 1', 24, false);
+			firstImpostorCutscene.antialiasing = true;
+			firstImpostorCutscene.updateHitbox();
+			firstImpostorCutscene.scrollFactor.set(1, 1);
+			firstImpostorCutscene.y -= 390;
+			firstImpostorCutscene.x -= 200;
+			
+			firstGFCutscene = new FlxSprite(400, 130);
+			firstGFCutscene.frames = Paths.getSparrowAtlas('cutscenes/gf_week1');
+			firstGFCutscene.animation.addByPrefix('cutscene', 'This is a Girlfriend instance 1', 24, false);
+			firstGFCutscene.antialiasing = true;
+			firstGFCutscene.updateHitbox();
+			firstGFCutscene.scrollFactor.set(1, 1);
+			
+			firstBFCutscene = new FlxSprite(770, 450);
+			firstBFCutscene.frames = Paths.getSparrowAtlas('cutscenes/bf_week1');
+			firstBFCutscene.animation.addByPrefix('cutscene', 'This is a Boyfriend instance 1', 24, false);
+			firstBFCutscene.antialiasing = true;
+			firstBFCutscene.updateHitbox();
+			firstBFCutscene.scrollFactor.set(1, 1);						
+		}
+
 		// REPOSITIONING PER STAGE
 		switch (curStage)
 		{
@@ -1236,6 +1211,10 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+			case 'polus':
+				dad.setPosition(-169.55, 264.9);
+				gf.setPosition(206, -106.7);
+				boyfriend.setPosition(751.7, 217.55);
 		}
 
 		if (!PlayStateChangeables.Optimize)
@@ -1248,6 +1227,12 @@ class PlayState extends MusicBeatState
 
 			add(dad);
 			add(boyfriend);
+
+			if(curStage == 'stage') {
+				add(firstImpostorCutscene);
+				add(firstGFCutscene);
+				add(firstBFCutscene);
+			}
 		}
 
 		if (loadRep)
@@ -1495,6 +1480,12 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, releaseInput);
 		super.create();
 	}
+
+	function week1Cutscene():Void {
+			firstGFCutscene.animation.play('cutscene');
+			firstBFCutscene.animation.play('cutscene');
+			firstImpostorCutscene.animation.play('cutscene');
+	} 
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
@@ -4829,6 +4820,9 @@ class PlayState extends MusicBeatState
 					bottomBoppers.animation.play('bop', true);
 					santa.animation.play('idle', true);
 				}
+
+			case 'meltdown':
+				crowd.animation.play('CrowdBop', true);
 
 			case 'limo':
 				if (FlxG.save.data.distractions)

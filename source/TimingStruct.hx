@@ -39,7 +39,8 @@ class TimingStruct
             if (msTime >= i.startTime * 1000 && msTime < (i.startTime + i.length) * 1000)
                 return i;
         }
-        trace('Apparently ' + msTime + ' is out of any segs');
+        //shut the tfuck uyp
+        //trace('Apparently ' + msTime + ' is out of any segs');
         return null;
     }
 
