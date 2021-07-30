@@ -14,6 +14,7 @@ class Character extends FlxSprite
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
+	public var holdState:Bool = false;
 
 	public var holdTimer:Float = 0;
 
@@ -226,7 +227,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bf':
-				var tex = Paths.getSparrowAtlas('BOYFRIEND','shared',true);
+				var tex = Paths.getSparrowAtlas('BoyFriend_Assets_Impostor','impostor',true);
 				frames = tex;
 
 				trace(tex.frames.length);
@@ -236,11 +237,12 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
 				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
 				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS0', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS0', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS0', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS0', 24, false);
 				animation.addByPrefix('hey', 'BF HEY', 24, false);
+				animation.addByPrefix('kill', 'BFPerish', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
@@ -248,7 +250,21 @@ class Character extends FlxSprite
 
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
 
-				loadOffsetFile(curCharacter);
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset("hey", 7, 4);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
+				addOffset('scared', -4);
+				addOffset('kill', 106, 41);
 
 				playAnim('idle');
 
@@ -478,19 +494,21 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'impostor':
 				// inky is a god
-				tex = Paths.getSparrowAtlas('characters/impostor', 'shared');
+				tex = Paths.getSparrowAtlas('characters/impostor', 'impostor');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, true);
 				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
 				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
+				animation.addByPrefix('kill', 'impostor kill', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", -70, 0);
 				addOffset("singRIGHT", -154, -19);
 				addOffset("singLEFT", 65, -9);
 				addOffset("singDOWN", -41, -62);
+				addOffset('kill', -31, 135);
 
 				playAnim('idle');
 
@@ -627,7 +645,12 @@ class Character extends FlxSprite
 					else
 						playAnim('danceLeft');
 				default:
-					playAnim('idle', forced);
+					if(holdState) {
+						//nothing
+					}
+					else {
+						playAnim('idle', forced);
+					}
 			}
 		}
 	}
@@ -660,6 +683,10 @@ class Character extends FlxSprite
 				danced = !danced;
 			}
 		}
+	}
+
+	public function changeHoldState(state:Bool) {
+		holdState = state;
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)

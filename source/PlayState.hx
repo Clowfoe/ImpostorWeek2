@@ -211,10 +211,6 @@ class PlayState extends MusicBeatState
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
 
-	var firstImpostorCutscene:FlxSprite = new FlxSprite();
-	var firstGFCutscene:FlxSprite = new FlxSprite();
-	var firstBFCutscene:FlxSprite = new FlxSprite();
-
 	var crowd:FlxSprite = new FlxSprite();
 
 	var fc:Bool = true;
@@ -1150,37 +1146,6 @@ class PlayState extends MusicBeatState
 
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
 
-		//cutscene fuck
-		if(curStage == 'stage' && isStoryMode) {
-			
-			gf.visible = false;
-			dad.visible = false;
-			boyfriend.visible = false;
-
-			firstImpostorCutscene = new FlxSprite(100, 100);
-			firstImpostorCutscene.frames = Paths.getSparrowAtlas('cutscenes/imposter_week1');
-			firstImpostorCutscene.animation.addByPrefix('cutscene', 'This Is Among Us instance 1', 24, false);
-			firstImpostorCutscene.antialiasing = true;
-			firstImpostorCutscene.updateHitbox();
-			firstImpostorCutscene.scrollFactor.set(1, 1);
-			firstImpostorCutscene.y -= 390;
-			firstImpostorCutscene.x -= 200;
-			
-			firstGFCutscene = new FlxSprite(400, 130);
-			firstGFCutscene.frames = Paths.getSparrowAtlas('cutscenes/gf_week1');
-			firstGFCutscene.animation.addByPrefix('cutscene', 'This is a Girlfriend instance 1', 24, false);
-			firstGFCutscene.antialiasing = true;
-			firstGFCutscene.updateHitbox();
-			firstGFCutscene.scrollFactor.set(1, 1);
-			
-			firstBFCutscene = new FlxSprite(770, 450);
-			firstBFCutscene.frames = Paths.getSparrowAtlas('cutscenes/bf_week1');
-			firstBFCutscene.animation.addByPrefix('cutscene', 'This is a Boyfriend instance 1', 24, false);
-			firstBFCutscene.antialiasing = true;
-			firstBFCutscene.updateHitbox();
-			firstBFCutscene.scrollFactor.set(1, 1);						
-		}
-
 		// REPOSITIONING PER STAGE
 		switch (curStage)
 		{
@@ -1227,12 +1192,6 @@ class PlayState extends MusicBeatState
 
 			add(dad);
 			add(boyfriend);
-
-			if(curStage == 'stage') {
-				add(firstImpostorCutscene);
-				add(firstGFCutscene);
-				add(firstBFCutscene);
-			}
 		}
 
 		if (loadRep)
@@ -1480,12 +1439,6 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, releaseInput);
 		super.create();
 	}
-
-	function week1Cutscene():Void {
-			firstGFCutscene.animation.play('cutscene');
-			firstBFCutscene.animation.play('cutscene');
-			firstImpostorCutscene.animation.play('cutscene');
-	} 
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
@@ -1930,7 +1883,12 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		FlxG.sound.music.onComplete = endSong;
+		if(SONG.song.toLowerCase() == 'sabotage' && isStoryMode) {
+			FlxG.sound.music.onComplete = endSabotage;
+		}
+		else {
+			FlxG.sound.music.onComplete = endSong;
+		}
 		vocals.play();
 
 		// Song duration in a float, useful for the time left feature
@@ -3416,8 +3374,42 @@ class PlayState extends MusicBeatState
 
 		#if debug
 		if (FlxG.keys.justPressed.ONE)
-			endSong();
+			endSabotage();
 		#end
+	}
+
+	function endSabotage():Void{
+		camHUD.visible = false;
+		inCutscene = true;
+		startedCountdown = false;
+		generatedMusic = false;
+		canPause = false;
+		camZooming = false;
+		
+		FlxG.sound.music.volume = 0;
+		vocals.volume = 0;
+
+		camFollow.setPosition(gf.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 150);	
+		dad.changeHoldState(true);
+		boyfriend.changeHoldState(true);
+		dad.playAnim('kill');
+		boyfriend.playAnim('kill');
+		FlxG.sound.play(Paths.sound('fire', 'impostor'));
+
+		new FlxTimer().start(2.19, function(tmr:FlxTimer)
+		{
+				FlxTween.tween(FlxG.camera, {zoom: 0.95}, 0.5, {ease: FlxEase.circOut});
+		});
+
+		new FlxTimer().start(2.9, function(shot:FlxTimer)
+		{
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.circOut});
+		});
+
+		new FlxTimer().start(5, function(trans:FlxTimer)
+		{
+			endSong();
+		});
 	}
 
 	function endSong():Void
@@ -4049,7 +4041,9 @@ class PlayState extends MusicBeatState
 				if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
 				{
 					if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss') && boyfriend.animation.curAnim.curFrame >= 10)
-						boyfriend.playAnim('idle');
+						if(!boyfriend.holdState) {
+							boyfriend.playAnim('idle');
+						}
 				}
 				else if (!FlxG.save.data.ghost)
 				{
@@ -4094,7 +4088,9 @@ class PlayState extends MusicBeatState
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
 		{
 			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss') && boyfriend.animation.curAnim.curFrame >= 10)
-				boyfriend.playAnim('idle');
+				if(!boyfriend.holdState) {
+					boyfriend.playAnim('idle');
+				}
 		}
 
 		playerStrums.forEach(function(spr:FlxSprite)
@@ -4786,7 +4782,9 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing") && (curBeat % idleBeat == 0 || !idleToBeat))
 		{
-			boyfriend.playAnim('idle', idleToBeat);
+			if(!boyfriend.holdState) {
+				boyfriend.playAnim('idle', idleToBeat);
+			}
 		}
 
 		/*if (!dad.animation.curAnim.name.startsWith("sing"))
