@@ -523,10 +523,28 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", -70, 0);
-				addOffset("singRIGHT", -154, -19);
-				addOffset("singLEFT", 65, -9);
-				addOffset("singDOWN", -41, -62);
+				addOffset("singUP", 245, 89);
+				addOffset("singRIGHT", -56, -16);
+				addOffset("singLEFT", 78, 17);
+				addOffset("singDOWN", -57, -24);
+
+				playAnim('idle');	
+
+			case 'crewmate':
+				// not an impostor
+				tex = Paths.getSparrowAtlas('characters/crewmate', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('singUP', 'impostor up', 24, false);
+				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
+				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
+				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 130, 100);
+				addOffset("singRIGHT", 72, -14);
+				addOffset("singLEFT", 211, 4);
+				addOffset("singDOWN", 152, -28);
 
 				playAnim('idle');
 

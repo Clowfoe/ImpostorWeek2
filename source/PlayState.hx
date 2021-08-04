@@ -204,6 +204,8 @@ class PlayState extends MusicBeatState
 	var trainSound:FlxSound;
 
 	var limo:FlxSprite;
+	var stageFront2:FlxSprite;
+	var stageFront3:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:FlxSprite;
 	var songName:FlxText;
@@ -923,7 +925,7 @@ class PlayState extends MusicBeatState
 								stageFront2.antialiasing = true;
 								stageFront2.scrollFactor.set(1, 1);
 								stageFront2.active = false;
-								add(stageFront2);
+								
 
 								var stageFront3:FlxSprite = new FlxSprite(650, 400).loadGraphic(Paths.image('table'));
 								stageFront3.updateHitbox();
@@ -931,8 +933,7 @@ class PlayState extends MusicBeatState
 								stageFront3.scrollFactor.set(1, 1);
 								stageFront3.active = false;
 								stageFront3.flipX = true;
-								add(stageFront3);
-
+								
 								var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 								stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 								stageCurtains.updateHitbox();
@@ -1118,8 +1119,13 @@ class PlayState extends MusicBeatState
 			case 'impostor3':
 				camPos.y += -200;
 				camPos.x += 400;
-				dad.y += 390;
-				dad.x -= 100;
+				dad.y += 350;
+				dad.x -= 60;
+			case 'crewmate':
+				camPos.y += -200;
+				camPos.x += 400;
+				dad.y += 350;
+				dad.x -= 60;
 			case 'impostor2':
 				camPos.y += -200;
 				camPos.x += 400;
@@ -1169,8 +1175,8 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
-			case 'toogus':
-				boyfriend.x += 150;
+
+				
 			case 'schoolEvil':
 				boyfriend.x += 200;
 				boyfriend.y += 220;
@@ -1187,11 +1193,28 @@ class PlayState extends MusicBeatState
 			add(gf);
 
 			// Shitty layering but whatev it works LOL
-			if (curStage == 'limo')
-				add(limo);
+			
 
 			add(dad);
 			add(boyfriend);
+			
+			var stageFront2:FlxSprite = new FlxSprite(-850, 800).loadGraphic(Paths.image('table'));
+			stageFront2.updateHitbox();
+			stageFront2.antialiasing = true;
+			stageFront2.scrollFactor.set(1, 1);
+			stageFront2.active = false;
+			stageFront2.setGraphicSize(Std.int(stageFront2.width * 1.6));
+
+			var stageFront3:FlxSprite = new FlxSprite(1600, 800).loadGraphic(Paths.image('table'));
+			stageFront3.updateHitbox();
+			stageFront3.antialiasing = true;
+			stageFront3.scrollFactor.set(1, 1);
+			stageFront3.active = false;
+			stageFront3.setGraphicSize(Std.int(stageFront3.width * 1.6));
+			stageFront3.flipX = true;
+			if (curStage == 'toogus')
+				add(stageFront2);
+				add(stageFront3);
 		}
 
 		if (loadRep)
