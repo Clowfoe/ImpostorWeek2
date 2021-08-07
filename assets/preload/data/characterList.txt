@@ -19,4 +19,6 @@ spirit
 impostor
 impostor2
 impostor3
+crewmate
 bfg
+bfeyes
