@@ -4066,7 +4066,7 @@ class PlayState extends MusicBeatState
 				if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
 				{
 					if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss') && boyfriend.animation.curAnim.curFrame >= 10)
-						if(!boyfriend.holdState) {
+						if(!boyfriend.holdState && !inCutscene) {
 							boyfriend.playAnim('idle');
 						}
 				}
@@ -4113,7 +4113,7 @@ class PlayState extends MusicBeatState
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
 		{
 			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss') && boyfriend.animation.curAnim.curFrame >= 10)
-				if(!boyfriend.holdState) {
+				if(!boyfriend.holdState && !inCutscene) {
 					boyfriend.playAnim('idle');
 				}
 		}
@@ -4807,7 +4807,7 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing") && (curBeat % idleBeat == 0 || !idleToBeat))
 		{
-			if(!boyfriend.holdState) {
+			if(!boyfriend.holdState && !inCutscene) {
 				boyfriend.playAnim('idle', idleToBeat);
 			}
 		}
