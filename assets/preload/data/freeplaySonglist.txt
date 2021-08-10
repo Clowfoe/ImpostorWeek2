@@ -5,3 +5,4 @@ Sussus Toogus:impostor3:1
 Lights Down:impostor3:1
 Reactor:impostor3:1
 Ejected:impostor3:1
+Defeat:black:1

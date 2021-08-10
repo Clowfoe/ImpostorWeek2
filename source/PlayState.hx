@@ -201,6 +201,7 @@ class PlayState extends MusicBeatState
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
+	var bgd:FlxSprite;
 	var trainSound:FlxSound;
 
 	var limo:FlxSprite;
@@ -912,6 +913,8 @@ class PlayState extends MusicBeatState
 								bg.scrollFactor.set(1, 1);
 								bg.active = false;
 								add(bg);
+
+								
 			
 								var stageFront:FlxSprite = new FlxSprite(1000, 150).loadGraphic(Paths.image('vending_machine'));
 								stageFront.updateHitbox();
@@ -940,6 +943,40 @@ class PlayState extends MusicBeatState
 								stageCurtains.antialiasing = true;
 								stageCurtains.scrollFactor.set(1.3, 1.3);
 								stageCurtains.active = false;
+			
+							//	add(stageCurtains);
+						}
+					case 'reactor':
+						{
+								defaultCamZoom = 0.3;
+								curStage = 'reactor';
+								var bg:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor background'));
+								bg.setGraphicSize(Std.int(bg.width * 0.7));
+								bg.antialiasing = true;
+								bg.scrollFactor.set(1, 1);
+								bg.active = false;
+								add(bg);
+
+								var pillar1:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('back pillars'));
+								pillar1.setGraphicSize(Std.int(pillar1.width * 0.7));
+								pillar1.antialiasing = true;
+								pillar1.scrollFactor.set(1, 1);
+								pillar1.active = false;
+								add(pillar1);
+
+								var pillar2:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('middle pillars'));
+								pillar2.setGraphicSize(Std.int(pillar2.width * 0.7));
+								pillar2.antialiasing = true;
+								pillar2.scrollFactor.set(1, 1);
+								pillar2.active = false;
+								add(pillar2);
+
+								var pillar3:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('front pillars'));
+								pillar3.setGraphicSize(Std.int(pillar3.width * 0.7));
+								pillar3.antialiasing = true;
+								pillar3.scrollFactor.set(1, 1);
+								pillar3.active = false;
+								add(pillar3);
 			
 							//	add(stageCurtains);
 						}
@@ -1166,6 +1203,8 @@ class PlayState extends MusicBeatState
 
 			case 'mall':
 				boyfriend.x += 200;
+			case 'reactor':
+				gf.x -= 100;
 
 			case 'mallEvil':
 				boyfriend.x += 320;
@@ -1212,9 +1251,13 @@ class PlayState extends MusicBeatState
 			stageFront3.active = false;
 			stageFront3.setGraphicSize(Std.int(stageFront3.width * 1.6));
 			stageFront3.flipX = true;
+
 			if (curStage == 'toogus')
+				{
 				add(stageFront2);
 				add(stageFront3);
+				}
+				
 		}
 
 		if (loadRep)
@@ -2588,6 +2631,27 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
 
+		if(SONG.song.toLowerCase() == 'lights down'){
+
+			var bgd:FlxSprite = new FlxSprite(0,50).loadGraphic(Paths.image('MiraDark'));
+			bgd.setGraphicSize(Std.int(bgd.width * 1.4));
+			bgd.antialiasing = true;
+			bgd.scrollFactor.set(1, 1);
+			bgd.active = false;
+
+			if(curStep == 10){
+				add(bgd);
+				remove(boyfriend);
+				remove(dad);
+				add(boyfriend);
+				add(dad);
+			}
+			if(curStep == 100){
+				remove(bgd);
+			}
+		}
+
+
 		
 
 		if (controls.PAUSE && startedCountdown && canPause && !cannotDie)
@@ -3439,6 +3503,7 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		inCutscene = false;
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, handleInput);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, releaseInput);
 		if (useVideo)

@@ -512,7 +512,7 @@ class Character extends FlxSprite
 				// inky is a god
 				tex = Paths.getSparrowAtlas('characters/impostor', 'impostor');
 				frames = tex;
-				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
 				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
@@ -579,6 +579,25 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -56, -20);
 				addOffset("singLEFT", 113, -3);
 				addOffset("singDOWN", -31, -56);
+
+				playAnim('idle');
+				
+			case 'black':
+				// i hate black people
+				tex = Paths.getSparrowAtlas('characters/black', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'BLACK IDLE', 24, true);
+				animation.addByPrefix('singUP', 'BLACK UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'BLACK RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'BLACK DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'BLACK LEFT', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 46, 104);
+				addOffset("singRIGHT", -225, -10);
+				addOffset("singLEFT", 116, 12);
+				addOffset("singDOWN", -22, -20);
+
 
 				playAnim('idle');
 		}
