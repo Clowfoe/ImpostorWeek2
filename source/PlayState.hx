@@ -948,7 +948,7 @@ class PlayState extends MusicBeatState
 						}
 					case 'reactor':
 						{
-								defaultCamZoom = 0.3;
+								defaultCamZoom = 0.5;
 								curStage = 'reactor';
 								var bg:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor background'));
 								bg.setGraphicSize(Std.int(bg.width * 0.7));
@@ -957,12 +957,26 @@ class PlayState extends MusicBeatState
 								bg.active = false;
 								add(bg);
 
+								var yellow:FlxSprite = new FlxSprite(-400, 150).loadGraphic(Paths.image('yellow sus'));
+								yellow.setGraphicSize(Std.int(yellow.width * 0.7));
+								yellow.antialiasing = true;
+								yellow.scrollFactor.set(1, 1);
+								yellow.active = false;
+								add(yellow);
+
 								var pillar1:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('back pillars'));
 								pillar1.setGraphicSize(Std.int(pillar1.width * 0.7));
 								pillar1.antialiasing = true;
 								pillar1.scrollFactor.set(1, 1);
 								pillar1.active = false;
 								add(pillar1);
+
+								var dripster:FlxSprite = new FlxSprite(1375, 150).loadGraphic(Paths.image('blue sus'));
+								dripster.setGraphicSize(Std.int(dripster.width * 0.7));
+								dripster.antialiasing = true;
+								dripster.scrollFactor.set(1, 1);
+								dripster.active = false;
+								add(dripster);
 
 								var pillar2:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('middle pillars'));
 								pillar2.setGraphicSize(Std.int(pillar2.width * 0.7));
@@ -971,12 +985,57 @@ class PlayState extends MusicBeatState
 								pillar2.active = false;
 								add(pillar2);
 
+								var amogus:FlxSprite = new FlxSprite(1670, 250).loadGraphic(Paths.image('white sus'));
+								amogus.setGraphicSize(Std.int(amogus.width * 0.7));
+								amogus.antialiasing = true;
+								amogus.scrollFactor.set(1, 1);
+								amogus.active = false;
+								add(amogus);
+
+								var brown:FlxSprite = new FlxSprite(-850, 150).loadGraphic(Paths.image('brown sus'));
+								brown.setGraphicSize(Std.int(brown.width * 0.7));
+								brown.antialiasing = true;
+								brown.scrollFactor.set(1, 1);
+								brown.active = false;
+								add(brown);
+
 								var pillar3:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('front pillars'));
 								pillar3.setGraphicSize(Std.int(pillar3.width * 0.7));
 								pillar3.antialiasing = true;
 								pillar3.scrollFactor.set(1, 1);
 								pillar3.active = false;
 								add(pillar3);
+
+								var orb:FlxSprite = new FlxSprite(-460,-1300).loadGraphic(Paths.image('ball of big ol energy'));
+								orb.setGraphicSize(Std.int(orb.width * 0.7));
+								orb.antialiasing = true;
+								orb.scrollFactor.set(1, 1);
+								orb.active = false;
+								add(orb);
+
+								var cranes:FlxSprite = new FlxSprite(-735, -1500).loadGraphic(Paths.image('upper cranes'));
+								cranes.setGraphicSize(Std.int(cranes.width * 0.7));
+								cranes.antialiasing = true;
+								cranes.scrollFactor.set(1, 1);
+								cranes.active = false;
+								add(cranes);
+
+								var console1:FlxSprite = new FlxSprite(-260,150).loadGraphic(Paths.image('center console'));
+								console1.setGraphicSize(Std.int(console1.width * 0.7));
+								console1.antialiasing = true;
+								console1.scrollFactor.set(1, 1);
+								console1.active = false;
+								add(console1);
+
+								
+								var console2:FlxSprite = new FlxSprite(-1380,450).loadGraphic(Paths.image('side console'));
+								console2.setGraphicSize(Std.int(console2.width * 0.7));
+								console2.antialiasing = true;
+								console2.scrollFactor.set(1, 1);
+								console2.active = false;
+								add(console2);
+								
+
 			
 							//	add(stageCurtains);
 						}
@@ -1103,6 +1162,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-christmas';
 			case 'gf-pixel':
 				curGf = 'gf-pixel';
+			case 'gfr':
+				curGf = 'gfr';
 			default:
 				curGf = 'gf';
 		}
@@ -1154,6 +1215,11 @@ class PlayState extends MusicBeatState
 				dad.y += 390;
 				dad.x -= 100;
 			case 'impostor3':
+				camPos.y += -200;
+				camPos.x += 400;
+				dad.y += 350;
+				dad.x -= 60;
+			case 'impostorr':
 				camPos.y += -200;
 				camPos.x += 400;
 				dad.y += 350;
@@ -2982,6 +3048,9 @@ class PlayState extends MusicBeatState
 					case 'senpai' | 'senpai-angry':
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
+					case 'impostorr' | 'impostorr':
+						camFollow.x = dad.getMidpoint().x + 245;
+						camFollow.y = dad.getMidpoint().y - 350;
 				}
 			}
 
@@ -4857,6 +4926,12 @@ class PlayState extends MusicBeatState
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;
 			}
+
+			if (curSong.toLowerCase() == 'reactor' && curBeat >= 128 && curBeat < 191 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.025;
+				camHUD.zoom += 0.03;
+			}
 		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
@@ -4886,6 +4961,12 @@ class PlayState extends MusicBeatState
 		{
 			boyfriend.playAnim('hey', true);
 		}
+	
+		if (curStep == 128 && curSong == 'Meltdown')
+         {
+			defaultCamZoom = 5;
+         }
+		
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{

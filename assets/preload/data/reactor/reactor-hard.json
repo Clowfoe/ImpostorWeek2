@@ -1,7 +1,7 @@
 {
  "song": {
-  "player1": "bf",
-  "gfVersion": "gf",
+  "player1": "bfr",
+  "gfVersion": "gfr",
   "notes": [
    {
     "endTime": 960,
@@ -32349,7 +32349,7 @@
     "mustHitSection": true
    }
   ],
-  "player2": "impostor3",
+  "player2": "impostorr",
   "chartVersion": "2",
   "eventObjects": [
    {
