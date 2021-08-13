@@ -199,6 +199,8 @@ class PlayState extends MusicBeatState
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
 
+	var fuckingREACTOROFFSET:Float = 0;
+
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
 	var bgd:FlxSprite;
@@ -214,6 +216,8 @@ class PlayState extends MusicBeatState
 	var upperBoppers:FlxSprite;
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
+
+	var orb:FlxSprite = new FlxSprite();
 
 	var crowd:FlxSprite = new FlxSprite();
 
@@ -1007,7 +1011,7 @@ class PlayState extends MusicBeatState
 								pillar3.active = false;
 								add(pillar3);
 
-								var orb:FlxSprite = new FlxSprite(-460,-1300).loadGraphic(Paths.image('ball of big ol energy'));
+								orb = new FlxSprite(-460,-1300).loadGraphic(Paths.image('ball of big ol energy'));
 								orb.setGraphicSize(Std.int(orb.width * 0.7));
 								orb.antialiasing = true;
 								orb.scrollFactor.set(1, 1);
@@ -1034,7 +1038,7 @@ class PlayState extends MusicBeatState
 								console2.antialiasing = true;
 								console2.scrollFactor.set(1, 1);
 								console2.active = false;
-								add(console2);
+								add(console2);						
 								
 
 			
@@ -1327,8 +1331,9 @@ class PlayState extends MusicBeatState
 				add(stageFront2);
 				add(stageFront3);
 				}
-				
-		}
+			
+
+		}			
 
 		if (loadRep)
 		{
@@ -1402,6 +1407,10 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 
+		if(SONG.song.toLowerCase() == 'reactor') {
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
+		}
+
 		if (FlxG.save.data.songPosition) // I dont wanna talk about this code :(
 		{
 			songPosBG = new FlxSprite(0, 10).loadGraphic(Paths.image('healthBar'));
@@ -1430,10 +1439,10 @@ class PlayState extends MusicBeatState
 		ass2 = new FlxSprite(0, FlxG.height * 1).loadGraphic(Paths.image('vignette')); 
 		ass2.scrollFactor.set();
 		ass2.screenCenter();
-		if (curSong == 'reactor')
-			{
-				add(ass2);
-			}
+		if (curSong == 'Reactor')
+		{
+			add(ass2);
+		}
 
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
@@ -2594,6 +2603,15 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if(curSong == 'Reactor') {
+			if(orb != null) {
+				orb.scale.x = FlxMath.lerp(0.7, orb.scale.x, 0.90);
+				orb.scale.y = FlxMath.lerp(0.7, orb.scale.y, 0.90);
+				orb.alpha = FlxMath.lerp(0.96, orb.alpha, 0.90);
+				ass2.alpha = FlxMath.lerp(1, ass2.alpha, 0.90);
+			}
+		}
+
 		PlayStateChangeables.scrollSpeed = newScroll;
 	
 		if (PlayStateChangeables.botPlay && FlxG.keys.justPressed.ONE)
@@ -3033,6 +3051,8 @@ class PlayState extends MusicBeatState
 				}
 			}
 
+
+
 			#if windows
 			if (luaModchart != null)
 				luaModchart.setVar("mustHit", PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
@@ -3049,24 +3069,28 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y - 100 + offsetY);
+				if(curSong != 'Reactor') {
+					camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y - 100 + offsetY);
+				}
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerTwoTurn', []);
 				#end
 				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
 
-				switch (dad.curCharacter)
-				{
-					case 'tomongus':
-						camFollow.y = dad.getMidpoint().y - 230;
-						camFollow.x = dad.getMidpoint().x - 200;
-					case 'senpai' | 'senpai-angry':
-						camFollow.y = dad.getMidpoint().y - 430;
-						camFollow.x = dad.getMidpoint().x - 100;
-					case 'impostorr' | 'impostorr':
-						camFollow.x = dad.getMidpoint().x + 245;
-						camFollow.y = dad.getMidpoint().y - 350;
+				if(curSong != 'Reactor') {
+					switch (dad.curCharacter)
+					{
+						case 'tomongus':
+							camFollow.y = dad.getMidpoint().y - 230;
+							camFollow.x = dad.getMidpoint().x - 200;
+						case 'senpai' | 'senpai-angry':
+							camFollow.y = dad.getMidpoint().y - 430;
+							camFollow.x = dad.getMidpoint().x - 100;
+						case 'impostorr':
+							camFollow.x = dad.getMidpoint().x + 245;
+							camFollow.y = dad.getMidpoint().y - 350;
+					}
 				}
 			}
 
@@ -3081,25 +3105,29 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
+				if(curSong != 'Reactor') {
+					camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
+				}
 
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerOneTurn', []);
 				#end
 
-				switch (curStage)
-				{
-					case 'limo':
-						camFollow.x = boyfriend.getMidpoint().x - 300;
-					case 'mall':
-						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'school':
-						camFollow.x = boyfriend.getMidpoint().x - 200;
-						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'schoolEvil':
-						camFollow.x = boyfriend.getMidpoint().x - 200;
-						camFollow.y = boyfriend.getMidpoint().y - 200;
+				if(curSong != 'Reactor') {
+					switch (curStage)
+					{
+						case 'limo':
+							camFollow.x = boyfriend.getMidpoint().x - 300;
+						case 'mall':
+							camFollow.y = boyfriend.getMidpoint().y - 200;
+						case 'school':
+							camFollow.x = boyfriend.getMidpoint().x - 200;
+							camFollow.y = boyfriend.getMidpoint().y - 200;
+						case 'schoolEvil':
+							camFollow.x = boyfriend.getMidpoint().x - 200;
+							camFollow.y = boyfriend.getMidpoint().y - 200;
+					}
 				}
 			}
 		}
@@ -4977,12 +5005,19 @@ class PlayState extends MusicBeatState
 		{
 			boyfriend.playAnim('hey', true);
 		}
+
+		if (curBeat % 4 == 0 && curSong == 'Reactor')
+		{
+			orb.scale.set(0.75, 0.75);
+			ass2.alpha = 0.9;
+			orb.alpha = 1;
+		}
 	
 		if (curBeat == 128 && curSong == 'Reactor')
-         {
+    {
 			defaultCamZoom = 0.7;
-			camFollow.y = dad.getMidpoint().y - 200;
-         }
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
 		
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
