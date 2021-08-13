@@ -4971,9 +4971,22 @@ class PlayState extends MusicBeatState
 				camHUD.zoom += 0.03;
 			}
 
+			//drop 1
 			if (curSong.toLowerCase() == 'reactor' && curBeat >= 128 && curBeat < 191 && camZooming && FlxG.camera.zoom < 1.35)
 			{
 				FlxG.camera.zoom += 0.025;
+				camHUD.zoom += 0.03;
+			}
+			//drop 2
+			if (curSong.toLowerCase() == 'reactor' && curBeat >= 319 && curBeat < 383 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.025;
+				camHUD.zoom += 0.03;
+			}
+			
+			if (curSong.toLowerCase() == 'reactor' && curBeat >= 480 && curBeat < 607 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.035;
 				camHUD.zoom += 0.03;
 			}
 		}
@@ -5012,13 +5025,42 @@ class PlayState extends MusicBeatState
 			ass2.alpha = 0.9;
 			orb.alpha = 1;
 		}
-	
+	//drop 1
 		if (curBeat == 128 && curSong == 'Reactor')
     {
 			defaultCamZoom = 0.7;
 			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
     }
-		
+
+		if (curBeat == 191 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.5;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
+    }
+	//drop 2
+		if (curBeat == 319 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.7;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
+
+		if (curBeat == 383 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.5;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
+    }
+	//FUCKING EPIC DROP NIGGA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (curBeat == 480 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.9;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
+
+		if (curBeat == 607 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.7;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
