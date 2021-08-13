@@ -54,6 +54,19 @@ class Character extends FlxSprite
 
 				playAnim('danceRight');
 
+			case 'gfr':
+				// GIRLFRIEND CODE 2
+				tex = Paths.getSparrowAtlas('gfR','shared',true);
+				frames = tex;
+				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				playAnim('danceRight');
+
+
 			case 'gfparachute':
 				tex = Paths.getSparrowAtlas('characters/gfparachute');
 				frames = tex;
@@ -71,7 +84,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 			case 'gf-christmas':
-				tex = Paths.getSparrowAtlas('gfChristmas','shared',true);
+				tex = Paths.getSparrowAtlas('gfghost','shared',true);
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
 				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
@@ -100,6 +113,7 @@ class Character extends FlxSprite
 				loadOffsetFile(curCharacter);
 
 				playAnim('danceRight');
+				
 
 			case 'gf-pixel':
 				tex = Paths.getSparrowAtlas('gfPixel','shared',true);
@@ -269,8 +283,52 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+				
+			case 'bfr':
+				var tex = Paths.getSparrowAtlas('characters/bfR', 'shared');
+				frames = tex;
 
-				case 'bfg':
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP instance 1', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT instance 1', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT instance 1', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN instance 1', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS instance 1', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS instance 1', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS instance 1', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS instance 1', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+				animation.addByPrefix('kill', 'BFPerish', 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset("hey", 7, 4);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
+				addOffset('scared', -4);
+				addOffset('kill', 106, 41);
+
+				playAnim('idle');
+
+				flipX = true;
+
+			case 'bfg':
 				var tex = Paths.getSparrowAtlas('characters/bfghost');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
@@ -458,6 +516,49 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				antialiasing = false;
+
+			case 'tomongus':
+				frames = Paths.getSparrowAtlas('tomongus','shared',true);
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -250, -384);
+				addOffset("singRIGHT", -268, -442);
+				addOffset("singLEFT", -192, -414);
+				addOffset("singDOWN", 0, 0);
+
+				playAnim('idle');
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				antialiasing = false;
+
+			case 'hamster':
+				frames = Paths.getSparrowAtlas('tomongus','shared',true);
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -250, -384);
+				addOffset("singRIGHT", -268, -442);
+				addOffset("singLEFT", -192, -414);
+				addOffset("singDOWN", 0, 0);
+
+				playAnim('idle');
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				antialiasing = false;
+
 			case 'senpai-angry':
 				frames = Paths.getSparrowAtlas('senpai','shared',true);
 				animation.addByPrefix('idle', 'Angry Senpai Idle', 24, false);
@@ -512,7 +613,7 @@ class Character extends FlxSprite
 				// inky is a god
 				tex = Paths.getSparrowAtlas('characters/impostor', 'impostor');
 				frames = tex;
-				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
 				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
@@ -532,7 +633,25 @@ class Character extends FlxSprite
 				// inky is a god
 				tex = Paths.getSparrowAtlas('characters/impostor3', 'shared');
 				frames = tex;
-				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
+				animation.addByPrefix('singUP', 'impostor up', 24, false);
+				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
+				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
+				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 245, 89);
+				addOffset("singRIGHT", -56, -16);
+				addOffset("singLEFT", 78, 17);
+				addOffset("singDOWN", -57, -24);
+
+				playAnim('idle');	
+
+				case 'impostorr':
+				// ethan
+				tex = Paths.getSparrowAtlas('characters/impostorR', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
 				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
@@ -550,7 +669,7 @@ class Character extends FlxSprite
 				// not an impostor
 				tex = Paths.getSparrowAtlas('characters/crewmate', 'shared');
 				frames = tex;
-				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
 				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
@@ -568,7 +687,7 @@ class Character extends FlxSprite
 				// impostor
 				tex = Paths.getSparrowAtlas('characters/impostor2', 'shared');
 				frames = tex;
-				animation.addByPrefix('idle', 'impostor idle', 24, true);
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
 				animation.addByPrefix('singUP', 'impostor up2', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
@@ -579,6 +698,25 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -56, -20);
 				addOffset("singLEFT", 113, -3);
 				addOffset("singDOWN", -31, -56);
+
+				playAnim('idle');
+				
+			case 'black':
+				// i hate black people
+				tex = Paths.getSparrowAtlas('characters/black', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'BLACK IDLE', 24, true);
+				animation.addByPrefix('singUP', 'BLACK UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'BLACK RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'BLACK DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'BLACK LEFT', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 46, 104);
+				addOffset("singRIGHT", -225, -10);
+				addOffset("singLEFT", 116, 12);
+				addOffset("singDOWN", -22, -20);
+
 
 				playAnim('idle');
 		}
@@ -661,7 +799,7 @@ class Character extends FlxSprite
 		{
 			switch (curCharacter)
 			{
-				case 'gf' | 'gf-christmas' | 'gf-car' | 'gf-pixel':
+				case 'gf' | 'gf-christmas' | 'gfr' | 'gf-pixel':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;

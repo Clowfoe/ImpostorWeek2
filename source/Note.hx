@@ -124,15 +124,15 @@ class Note extends FlxSprite
 		else
 		{
 			if (PlayState.SONG.noteStyle == null) {
-				switch(PlayState.storyWeek) {case 6: noteTypeCheck = 'pixel';}
+				switch(PlayState.storyWeek) {case 3: noteTypeCheck = 'pixel';}
 			} else {noteTypeCheck = PlayState.SONG.noteStyle;}
 			
 			switch (noteTypeCheck)
 			{
 				case 'pixel':
-					loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
+					loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'shared'), true, 17, 17);
 					if (isSustainNote)
-						loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'week6'), true, 7, 6);
+						loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'shared'), true, 7, 6);
 
 					for (i in 0...4)
 					{
