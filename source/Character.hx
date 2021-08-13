@@ -84,7 +84,7 @@ class Character extends FlxSprite
 				playAnim('danceRight');
 
 			case 'gf-christmas':
-				tex = Paths.getSparrowAtlas('gfChristmas','shared',true);
+				tex = Paths.getSparrowAtlas('gfghost','shared',true);
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
 				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
@@ -516,6 +516,49 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				antialiasing = false;
+
+			case 'tomongus':
+				frames = Paths.getSparrowAtlas('tomongus','shared',true);
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -250, -384);
+				addOffset("singRIGHT", -268, -442);
+				addOffset("singLEFT", -192, -414);
+				addOffset("singDOWN", 0, 0);
+
+				playAnim('idle');
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				antialiasing = false;
+
+			case 'hamster':
+				frames = Paths.getSparrowAtlas('tomongus','shared',true);
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -250, -384);
+				addOffset("singRIGHT", -268, -442);
+				addOffset("singLEFT", -192, -414);
+				addOffset("singDOWN", 0, 0);
+
+				playAnim('idle');
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				antialiasing = false;
+
 			case 'senpai-angry':
 				frames = Paths.getSparrowAtlas('senpai','shared',true);
 				animation.addByPrefix('idle', 'Angry Senpai Idle', 24, false);

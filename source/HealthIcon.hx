@@ -29,7 +29,7 @@ class HealthIcon extends FlxSprite
 		{
 			switch(char)
 			{
-				case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel':
+				case 'bf-pixel' | 'tomongus'| 'hamster':
 					antialiasing = false;
 				default:
 					antialiasing = true;

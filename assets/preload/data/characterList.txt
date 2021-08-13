@@ -9,3 +9,5 @@ black
 crewmate
 bfg
 bfeyes
+tomongus
+bf-pixel

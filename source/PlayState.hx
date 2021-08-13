@@ -205,6 +205,7 @@ class PlayState extends MusicBeatState
 	var trainSound:FlxSound;
 
 	var limo:FlxSprite;
+	var ass2:FlxSprite;
 	var stageFront2:FlxSprite;
 	var stageFront3:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -777,26 +778,26 @@ class PlayState extends MusicBeatState
 
 						// defaultCamZoom = 0.9;
 
-						var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky', 'week6'));
+						var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
 						bgSky.scrollFactor.set(0.1, 0.1);
 						add(bgSky);
 
 						var repositionShit = -200;
 
-						var bgSchool:FlxSprite = new FlxSprite(repositionShit, 0).loadGraphic(Paths.image('weeb/weebSchool', 'week6'));
+						var bgSchool:FlxSprite = new FlxSprite(repositionShit, 0).loadGraphic(Paths.image('weeb/weebSchool'));
 						bgSchool.scrollFactor.set(0.6, 0.90);
 						add(bgSchool);
 
-						var bgStreet:FlxSprite = new FlxSprite(repositionShit).loadGraphic(Paths.image('weeb/weebStreet', 'week6'));
+						var bgStreet:FlxSprite = new FlxSprite(repositionShit).loadGraphic(Paths.image('weeb/weebStreet'));
 						bgStreet.scrollFactor.set(0.95, 0.95);
 						add(bgStreet);
 
-						var fgTrees:FlxSprite = new FlxSprite(repositionShit + 170, 130).loadGraphic(Paths.image('weeb/weebTreesBack', 'week6'));
+						var fgTrees:FlxSprite = new FlxSprite(repositionShit + 170, 130).loadGraphic(Paths.image('weeb/weebTreesBack'));
 						fgTrees.scrollFactor.set(0.9, 0.9);
 						add(fgTrees);
 
 						var bgTrees:FlxSprite = new FlxSprite(repositionShit - 380, -800);
-						var treetex = Paths.getPackerAtlas('weeb/weebTrees', 'week6');
+						var treetex = Paths.getPackerAtlas('weeb/weebTrees');
 						bgTrees.frames = treetex;
 						bgTrees.animation.add('treeLoop', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 12);
 						bgTrees.animation.play('treeLoop');
@@ -804,11 +805,11 @@ class PlayState extends MusicBeatState
 						add(bgTrees);
 
 						var treeLeaves:FlxSprite = new FlxSprite(repositionShit, -40);
-						treeLeaves.frames = Paths.getSparrowAtlas('weeb/petals', 'week6');
+						treeLeaves.frames = Paths.getSparrowAtlas('weeb/petals');
 						treeLeaves.animation.addByPrefix('leaves', 'PETALS ALL', 24, true);
 						treeLeaves.animation.play('leaves');
 						treeLeaves.scrollFactor.set(0.85, 0.85);
-						add(treeLeaves);
+				//		add(treeLeaves);
 
 						var widShit = Std.int(bgSky.width * 6);
 
@@ -1224,6 +1225,9 @@ class PlayState extends MusicBeatState
 				camPos.x += 400;
 				dad.y += 350;
 				dad.x -= 60;
+			case 'tomongus':
+				dad.y += 350;
+				dad.x += 200;
 			case 'crewmate':
 				camPos.y += -200;
 				camPos.x += 400;
@@ -1276,10 +1280,10 @@ class PlayState extends MusicBeatState
 				boyfriend.x += 320;
 				dad.y -= 80;
 			case 'school':
-				boyfriend.x += 200;
+				boyfriend.x += 270;
 				boyfriend.y += 220;
-				gf.x += 180;
-				gf.y += 300;
+				gf.x += 280;
+				gf.y += 360;
 
 				
 			case 'schoolEvil':
@@ -1422,6 +1426,16 @@ class PlayState extends MusicBeatState
 			songName.cameras = [camHUD];
 		}
 
+
+		ass2 = new FlxSprite(0, FlxG.height * 1).loadGraphic(Paths.image('vignette')); 
+		ass2.scrollFactor.set();
+		ass2.screenCenter();
+		if (curSong == 'reactor')
+			{
+				add(ass2);
+			}
+
+
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
 		if (PlayStateChangeables.useDownscroll)
 			healthBarBG.y = 50;
@@ -1474,7 +1488,7 @@ class PlayState extends MusicBeatState
 		}
 		// Literally copy-paste of the above, fu
 		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0,
-			"BOTPLAY", 20);
+			"", 20);
 		botPlayState.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botPlayState.scrollFactor.set();
 		botPlayState.borderSize = 4;
@@ -1491,6 +1505,7 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 
 		strumLineNotes.cameras = [camHUD];
+		ass2.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -2281,7 +2296,7 @@ class PlayState extends MusicBeatState
 			{
 				switch (storyWeek)
 				{
-					case 6:
+					case 3:
 						noteTypeCheck = 'pixel';
 				}
 			}
@@ -2293,7 +2308,7 @@ class PlayState extends MusicBeatState
 			switch (noteTypeCheck)
 			{
 				case 'pixel':
-					babyArrow.loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
+					babyArrow.loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels','shared'), true, 17, 17);
 					babyArrow.animation.add('green', [6]);
 					babyArrow.animation.add('red', [7]);
 					babyArrow.animation.add('blue', [5]);
@@ -2706,7 +2721,7 @@ class PlayState extends MusicBeatState
 			bgd.active = false;
 
 			if(curStep == 10){
-				add(bgd);
+				//add(bgd);
 				remove(boyfriend);
 				remove(dad);
 				add(boyfriend);
@@ -3043,8 +3058,9 @@ class PlayState extends MusicBeatState
 
 				switch (dad.curCharacter)
 				{
-					case 'mom' | 'mom-car':
-						camFollow.y = dad.getMidpoint().y;
+					case 'tomongus':
+						camFollow.y = dad.getMidpoint().y - 230;
+						camFollow.x = dad.getMidpoint().x - 200;
 					case 'senpai' | 'senpai-angry':
 						camFollow.y = dad.getMidpoint().y - 430;
 						camFollow.x = dad.getMidpoint().x - 100;
@@ -4962,9 +4978,10 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 	
-		if (curStep == 128 && curSong == 'Meltdown')
+		if (curBeat == 128 && curSong == 'Reactor')
          {
-			defaultCamZoom = 5;
+			defaultCamZoom = 0.7;
+			camFollow.y = dad.getMidpoint().y - 200;
          }
 		
 
