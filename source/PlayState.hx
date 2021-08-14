@@ -5025,47 +5025,42 @@ class PlayState extends MusicBeatState
 			ass2.alpha = 0.9;
 			orb.alpha = 1;
 		}
+	//drop 1
+		if (curBeat == 128 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.7;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
 
-	if(curSong.toLowerCase == 'reactor')
-	{
-		switch(curBeat)
-		{
-			//drop 1
-			case 128:
-			{
-				defaultCamZoom = 0.7;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
-			}
-			case 191:
-			{
-				defaultCamZoom = 0.5;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
-			}
-			//drop 2
-			case 319:
-			{
-				defaultCamZoom = 0.7;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
-			}
-			case 383:
-			{
-				defaultCamZoom = 0.5;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
-			}
-			//FUCKING EPIC DROP NIGGA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			case 480:
-			{
-				defaultCamZoom = 0.9;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
-			}
-			case 607:
-			{
-				defaultCamZoom = 0.7;
-				camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
-			}
-			
-		}
-	}
+		if (curBeat == 191 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.5;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
+    }
+	//drop 2
+		if (curBeat == 319 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.7;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
+
+		if (curBeat == 383 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.5;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
+    }
+	//FUCKING EPIC DROP NIGGA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (curBeat == 480 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.9;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
+
+		if (curBeat == 607 && curSong == 'Reactor')
+    {
+			defaultCamZoom = 0.7;
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y + 100);
+    }
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
 		{
