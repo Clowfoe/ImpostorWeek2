@@ -217,6 +217,11 @@ class PlayState extends MusicBeatState
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
 
+	var amogus:FlxSprite;
+	var dripster:FlxSprite;
+	var yellow:FlxSprite;
+	var brown:FlxSprite;
+
 	var orb:FlxSprite = new FlxSprite();
 
 	var crowd:FlxSprite = new FlxSprite();
@@ -955,77 +960,89 @@ class PlayState extends MusicBeatState
 						{
 								defaultCamZoom = 0.5;
 								curStage = 'reactor';
-								var bg:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor background'));
+								var bg:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor/reactor background', 'impostor'));
 								bg.setGraphicSize(Std.int(bg.width * 0.7));
 								bg.antialiasing = true;
 								bg.scrollFactor.set(1, 1);
 								bg.active = false;
 								add(bg);
 
-								var yellow:FlxSprite = new FlxSprite(-400, 150).loadGraphic(Paths.image('yellow sus'));
+								yellow = new FlxSprite(-400, 150);
+								yellow.frames = Paths.getSparrowAtlas('reactor/susBoppers', 'impostor');
+								yellow.animation.addByPrefix('bop', 'yellow sus', 24, false);
+								yellow.animation.play('bop');
 								yellow.setGraphicSize(Std.int(yellow.width * 0.7));
 								yellow.antialiasing = true;
 								yellow.scrollFactor.set(1, 1);
-								yellow.active = false;
+								yellow.active = true;
 								add(yellow);
 
-								var pillar1:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('back pillars'));
+								var pillar1:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor/back pillars', 'impostor'));
 								pillar1.setGraphicSize(Std.int(pillar1.width * 0.7));
 								pillar1.antialiasing = true;
 								pillar1.scrollFactor.set(1, 1);
 								pillar1.active = false;
 								add(pillar1);
 
-								var dripster:FlxSprite = new FlxSprite(1375, 150).loadGraphic(Paths.image('blue sus'));
+								dripster = new FlxSprite(1375, 150);
+								dripster.frames = Paths.getSparrowAtlas('reactor/susBoppers', 'impostor');
+								dripster.animation.addByPrefix('bop', 'blue sus', 24, false);
+								dripster.animation.play('bop');
 								dripster.setGraphicSize(Std.int(dripster.width * 0.7));
 								dripster.antialiasing = true;
 								dripster.scrollFactor.set(1, 1);
-								dripster.active = false;
+								dripster.active = true;
 								add(dripster);
 
-								var pillar2:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('middle pillars'));
+								var pillar2:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor/middle pillars', 'impostor'));
 								pillar2.setGraphicSize(Std.int(pillar2.width * 0.7));
 								pillar2.antialiasing = true;
 								pillar2.scrollFactor.set(1, 1);
 								pillar2.active = false;
 								add(pillar2);
 
-								var amogus:FlxSprite = new FlxSprite(1670, 250).loadGraphic(Paths.image('white sus'));
+								amogus = new FlxSprite(1670, 250);
+								amogus.frames = Paths.getSparrowAtlas('reactor/susBoppers', 'impostor');
+								amogus.animation.addByPrefix('bop', 'white sus', 24, false);
+								amogus.animation.play('bop');
 								amogus.setGraphicSize(Std.int(amogus.width * 0.7));
 								amogus.antialiasing = true;
 								amogus.scrollFactor.set(1, 1);
-								amogus.active = false;
+								amogus.active = true;
 								add(amogus);
 
-								var brown:FlxSprite = new FlxSprite(-850, 150).loadGraphic(Paths.image('brown sus'));
+								brown = new FlxSprite(-850, 170);
+								brown.frames = Paths.getSparrowAtlas('reactor/susBoppers', 'impostor');
+								brown.animation.addByPrefix('bop', 'brown sus', 24, false);
+								brown.animation.play('bop');
 								brown.setGraphicSize(Std.int(brown.width * 0.7));
 								brown.antialiasing = true;
 								brown.scrollFactor.set(1, 1);
-								brown.active = false;
+								brown.active = true;
 								add(brown);
 
-								var pillar3:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('front pillars'));
+								var pillar3:FlxSprite = new FlxSprite(-2300,-1700).loadGraphic(Paths.image('reactor/front pillars', 'impostor'));
 								pillar3.setGraphicSize(Std.int(pillar3.width * 0.7));
 								pillar3.antialiasing = true;
 								pillar3.scrollFactor.set(1, 1);
 								pillar3.active = false;
 								add(pillar3);
 
-								orb = new FlxSprite(-460,-1300).loadGraphic(Paths.image('ball of big ol energy'));
+								orb = new FlxSprite(-460,-1300).loadGraphic(Paths.image('reactor/ball of big ol energy', 'impostor'));
 								orb.setGraphicSize(Std.int(orb.width * 0.7));
 								orb.antialiasing = true;
 								orb.scrollFactor.set(1, 1);
 								orb.active = false;
 								add(orb);
 
-								var cranes:FlxSprite = new FlxSprite(-735, -1500).loadGraphic(Paths.image('upper cranes'));
+								var cranes:FlxSprite = new FlxSprite(-735, -1500).loadGraphic(Paths.image('reactor/upper cranes', 'impostor'));
 								cranes.setGraphicSize(Std.int(cranes.width * 0.7));
 								cranes.antialiasing = true;
 								cranes.scrollFactor.set(1, 1);
 								cranes.active = false;
 								add(cranes);
 
-								var console1:FlxSprite = new FlxSprite(-260,150).loadGraphic(Paths.image('center console'));
+								var console1:FlxSprite = new FlxSprite(-260,150).loadGraphic(Paths.image('reactor/center console', 'impostor'));
 								console1.setGraphicSize(Std.int(console1.width * 0.7));
 								console1.antialiasing = true;
 								console1.scrollFactor.set(1, 1);
@@ -1033,7 +1050,7 @@ class PlayState extends MusicBeatState
 								add(console1);
 
 								
-								var console2:FlxSprite = new FlxSprite(-1380,450).loadGraphic(Paths.image('side console'));
+								var console2:FlxSprite = new FlxSprite(-1380,450).loadGraphic(Paths.image('reactor/side console', 'impostor'));
 								console2.setGraphicSize(Std.int(console2.width * 0.7));
 								console2.antialiasing = true;
 								console2.scrollFactor.set(1, 1);
@@ -5082,6 +5099,13 @@ class PlayState extends MusicBeatState
 					upperBoppers.animation.play('bop', true);
 					bottomBoppers.animation.play('bop', true);
 					santa.animation.play('idle', true);
+				}
+			case 'reactor':
+				if(curBeat % 4 == 0) {
+					amogus.animation.play('bop', true);
+					dripster.animation.play('bop', true);
+					yellow.animation.play('bop', true);
+					brown.animation.play('bop', true);
 				}
 
 			case 'meltdown':
