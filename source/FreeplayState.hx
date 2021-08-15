@@ -19,6 +19,9 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.util.FlxTimer;
 
 
 #if windows
@@ -52,6 +55,16 @@ class FreeplayState extends MusicBeatState
 	public static var openedPreview = false;
 
 	public static var songData:Map<String,Array<SwagSong>> = [];
+
+	var polusWarehouse:FlxSprite;
+	var polusRocks:FlxSprite;
+	var polusHills:FlxSprite;
+	var polusGround:FlxSprite;
+
+	var reactor:FlxSprite;
+	var baller:FlxSprite;
+
+	var defeatScroll:FlxSprite;
 
 	public static function loadDiff(diff:Int, format:String, name:String, array:Array<SwagSong>)
 	{
@@ -178,12 +191,53 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
-		if(FlxG.save.data.antialiasing)
-			{
-				bg.antialiasing = true;
-			}
+		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('spacep'));
+		bg.scrollFactor.x = 0;
+		bg.scrollFactor.y = 0.10;
+		bg.setGraphicSize(Std.int(bg.width * 1.1));
+		bg.updateHitbox();
+		bg.screenCenter();
 		add(bg);
+
+		
+		
+
+		polusGround = new FlxSprite(-406.63, 1169.29).loadGraphic(Paths.image('polusGround'));
+		polusHills = new FlxSprite(-866.63, 873.62).loadGraphic(Paths.image('polusHills'));
+		polusRocks = new FlxSprite(-641.06, 712.09).loadGraphic(Paths.image('polusrocks'));
+		polusWarehouse = new FlxSprite(-320.84, 1220.92).loadGraphic(Paths.image('polusWarehouse'));
+		polusGround.setGraphicSize(Std.int(polusGround.width * 0.7));
+		polusHills.setGraphicSize(Std.int(polusHills.width * 0.7));
+		polusRocks.setGraphicSize(Std.int(polusRocks.width * 0.7));
+		polusWarehouse.setGraphicSize(Std.int(polusWarehouse.width * 0.7));
+		add(polusRocks);
+		add(polusHills);
+		add(polusWarehouse);
+		add(polusGround);
+
+		baller = new FlxSprite(-505, 100).loadGraphic(Paths.image('reactorball'));
+		baller.setGraphicSize(Std.int(baller.width * 0.3));
+		add(baller);
+
+		reactor = new FlxSprite(-2300, -400).loadGraphic(Paths.image('reactorroom'));
+		reactor.setGraphicSize(Std.int(reactor.width * 0.3));
+		add(reactor);
+
+		defeatScroll = new FlxSprite(-100, 937).loadGraphic(Paths.image('defeatScroll'));
+		defeatScroll.scrollFactor.x = 0;
+		defeatScroll.scrollFactor.y = 0.10;
+		defeatScroll.setGraphicSize(Std.int(defeatScroll.width * 1.1));
+		defeatScroll.updateHitbox();
+		defeatScroll.screenCenter();
+		add(defeatScroll);
+
+		var gradient:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuGr'));
+		gradient.scrollFactor.x = 0;
+		gradient.scrollFactor.y = 0.10;
+		gradient.setGraphicSize(Std.int(gradient.width * 1.1));
+		gradient.updateHitbox();
+		gradient.screenCenter();
+		add(gradient);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -430,6 +484,25 @@ class FreeplayState extends MusicBeatState
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 	}
 
+	var groundTween:FlxTween;
+	var hillsTween:FlxTween;
+	var rocksTween:FlxTween;
+	var warehouseTween:FlxTween;
+	var reactorTween:FlxTween;
+	var ballerTween:FlxTween;
+	var defeatTween:FlxTween;
+
+	function cancelTweens()
+	{
+		groundTween.cancel();
+		hillsTween.cancel();
+		rocksTween.cancel();
+		warehouseTween.cancel();
+		reactorTween.cancel();
+		ballerTween.cancel();
+		defeatTween.cancel();
+	}	
+
 	function changeSelection(change:Int = 0)
 	{
 		#if !switch
@@ -530,6 +603,53 @@ class FreeplayState extends MusicBeatState
 			{
 				item.alpha = 1;
 				// item.setGraphicSize(Std.int(item.width));
+			}
+		}
+
+		switch(songs[curSelected].week)
+		{
+			case 1: 
+			{
+				if(groundTween != null)
+				{
+					cancelTweens();
+				}
+				groundTween = FlxTween.tween(polusGround,{y: 169.29}, 0.5 ,{ease: FlxEase.expoOut});
+				hillsTween = FlxTween.tween(polusHills,{y: -126.38}, 0.6 ,{ease: FlxEase.expoOut});
+				rocksTween = FlxTween.tween(polusRocks,{y: -287.91}, 1 ,{ease: FlxEase.expoOut});
+				warehouseTween = FlxTween.tween(polusWarehouse,{y: -220.92}, 0.8 ,{ease: FlxEase.expoOut});
+				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
+				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
+				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
+
+			}
+			case 2:
+			{
+				if(groundTween != null)
+				{
+						cancelTweens();
+				}
+				groundTween = FlxTween.tween(polusGround,{y: 1169.29}, 0.5 ,{ease: FlxEase.expoIn});
+				hillsTween = FlxTween.tween(polusHills,{y: 873.62}, 0.6 ,{ease: FlxEase.expoIn});
+				rocksTween = FlxTween.tween(polusRocks,{y: 712.09}, 0.8 ,{ease: FlxEase.expoIn});
+				warehouseTween = FlxTween.tween(polusWarehouse,{y: 1220.92}, 0.7 ,{ease: FlxEase.expoIn});
+				reactorTween = FlxTween.tween(reactor,{y: -1400}, 0.6 ,{ease: FlxEase.expoOut});
+				ballerTween = FlxTween.tween(baller,{y: -900}, 0.8 ,{ease: FlxEase.expoOut});
+				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
+			}
+			case 3:
+			{
+				if(groundTween != null)
+				{
+						cancelTweens();
+				}
+				groundTween = FlxTween.tween(polusGround,{y: 1169.29}, 0.5 ,{ease: FlxEase.expoIn});
+				hillsTween = FlxTween.tween(polusHills,{y: 873.62}, 0.6 ,{ease: FlxEase.expoIn});
+				rocksTween = FlxTween.tween(polusRocks,{y: 712.09}, 0.8 ,{ease: FlxEase.expoIn});
+				warehouseTween = FlxTween.tween(polusWarehouse,{y: 1220.92}, 0.7 ,{ease: FlxEase.expoIn});
+				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
+				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
+				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
 			}
 		}
 	}

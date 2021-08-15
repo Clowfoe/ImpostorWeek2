@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="amongRun.png">
+	<!-- Created with Adobe Animate version 18.0.1.115 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Idle0000" x="0" y="0" width="165" height="211"/>
+	<SubTexture name="Walk0000" x="165" y="0" width="182" height="243"/>
+	<SubTexture name="Walk0001" x="165" y="0" width="182" height="243"/>
+	<SubTexture name="Walk0002" x="0" y="243" width="182" height="243"/>
+	<SubTexture name="Walk0003" x="0" y="243" width="182" height="243"/>
+	<SubTexture name="Walk0004" x="182" y="243" width="182" height="243"/>
+	<SubTexture name="Walk0005" x="182" y="243" width="182" height="243"/>
+	<SubTexture name="Walk0006" x="0" y="486" width="182" height="243"/>
+	<SubTexture name="Walk0007" x="0" y="486" width="182" height="243"/>
+	<SubTexture name="Walk0008" x="182" y="486" width="182" height="243"/>
+	<SubTexture name="Walk0009" x="182" y="486" width="182" height="243"/>
+	<SubTexture name="Walk0010" x="0" y="729" width="182" height="243"/>
+	<SubTexture name="Walk0011" x="0" y="729" width="182" height="243"/>
+</TextureAtlas>
