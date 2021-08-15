@@ -47,6 +47,9 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
+	var redImpostor:FlxSprite;
+	var greenImpostor:FlxSprite;
+
 	override function create()
 	{
 		#if windows
@@ -72,6 +75,26 @@ class MainMenuState extends MusicBeatState
 				bg.antialiasing = true;
 			}
 		add(bg);
+
+		redImpostor = new FlxSprite(704.55, 106.65);
+		redImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		redImpostor.animation.addByPrefix('idle', 'red smile', 24, true);
+		redImpostor.animation.play('idle');
+		redImpostor.antialiasing = true;
+		redImpostor.updateHitbox();
+		redImpostor.active = true;
+		redImpostor.scrollFactor.set();
+		add(redImpostor);
+
+		greenImpostor = new FlxSprite(-159.35, 102.35);
+		greenImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		greenImpostor.animation.addByPrefix('idle', 'green smile', 24, true);
+		greenImpostor.animation.play('idle');
+		greenImpostor.antialiasing = true;
+		greenImpostor.updateHitbox();
+		greenImpostor.active = true;
+		greenImpostor.scrollFactor.set();
+		add(greenImpostor);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
