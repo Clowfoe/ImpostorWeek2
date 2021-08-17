@@ -496,6 +496,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/senpai/senpaiDialogue'));
 			case 'sussus-moogus':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-moogus/moogus'));
+			case 'sussus-toogus':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-toogus/toogus'));
 			case 'roses':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/roses/rosesDialogue'));
 			case 'thorns':
@@ -1594,6 +1596,9 @@ class PlayState extends MusicBeatState
 				case 'senpai':
 					schoolIntro(doof);
 				case 'sussus-moogus':
+					schoolIntro(doof);
+				case 'sussus-toogus':
+					doof.greenImpostor = true;
 					schoolIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
