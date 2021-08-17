@@ -827,6 +827,14 @@ class Character extends FlxSprite
 		}
 	}
 
+	public function changeSheet(newTex:FlxAtlasFrames){
+		//okay some important stuff before using this function
+		//this is gonna load ONLY the spritesheet
+		//so ALL OF THE ANIMATION NAMES MUST BE THE SAME!!!!!!!!!!!
+		//also be wary, this function is really complex. we take advantage of quantum physics to make this work. so please be careful!
+		frames = newTex;
+	}
+
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
 		animation.play(AnimName, Force, Reversed, Frame);

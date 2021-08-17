@@ -494,6 +494,8 @@ class PlayState extends MusicBeatState
 				];
 			case 'senpai':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/senpai/senpaiDialogue'));
+			case 'sussus-moogus':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-moogus/moogus'));
 			case 'roses':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/roses/rosesDialogue'));
 			case 'thorns':
@@ -1590,6 +1592,8 @@ class PlayState extends MusicBeatState
 						});
 					});
 				case 'senpai':
+					schoolIntro(doof);
+				case 'sussus-moogus':
 					schoolIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
@@ -2746,26 +2750,6 @@ class PlayState extends MusicBeatState
 		var lengthInPx = scoreTxt.textField.length * scoreTxt.frameHeight; // bad way but does more or less a better job
 
 		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
-
-		if(SONG.song.toLowerCase() == 'lights down'){
-
-			var bgd:FlxSprite = new FlxSprite(0,50).loadGraphic(Paths.image('MiraDark'));
-			bgd.setGraphicSize(Std.int(bgd.width * 1.4));
-			bgd.antialiasing = true;
-			bgd.scrollFactor.set(1, 1);
-			bgd.active = false;
-
-			if(curStep == 10){
-				//add(bgd);
-				remove(boyfriend);
-				remove(dad);
-				add(boyfriend);
-				add(dad);
-			}
-			if(curStep == 100){
-				remove(bgd);
-			}
-		}
 
 
 		
