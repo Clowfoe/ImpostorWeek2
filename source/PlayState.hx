@@ -1122,7 +1122,7 @@ class PlayState extends MusicBeatState
 					}
 					case 'ejected':
 						{
-							defaultCamZoom = 0.9;
+							defaultCamZoom = 0.7;
 							curStage = 'ejected';
 							crowd = new FlxSprite(-2500, 	-900);
 							crowd.frames = Paths.getSparrowAtlas('SkyFall');
@@ -1131,6 +1131,16 @@ class PlayState extends MusicBeatState
 							crowd.antialiasing = true;
 							crowd.updateHitbox();
 							add(crowd);					
+						}
+					case 'defeat':
+						{
+							defaultCamZoom = 0.7;
+							curStage = 'defeat';
+							var defeat:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('defeatfnf', 'shared'));		
+							defeat.setGraphicSize(Std.int(defeat.width * 2));
+							defeat.scrollFactor.set(1,1);
+							defeat.antialiasing = true;
+							add(defeat);
 						}
 					default:
 					{
