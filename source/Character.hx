@@ -738,12 +738,14 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'BLACK DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'BLACK LEFT', 24, false);
 
+				animation.addByPrefix('death', 'BLACK DEATH', 24, false);
+
 				addOffset('idle');
 				addOffset("singUP", 46, 104);
 				addOffset("singRIGHT", -225, -10);
 				addOffset("singLEFT", 116, 12);
 				addOffset("singDOWN", -22, -20);
-
+				addOffset("death", 252, 238);
 
 				playAnim('idle');
 		}

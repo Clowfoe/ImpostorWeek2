@@ -3128,7 +3128,8 @@ class PlayState extends MusicBeatState
 							camFollow.y = dad.getMidpoint().y - 230;
 							camFollow.x = dad.getMidpoint().x - 200;
 						case 'black':
-							camFollow.y = dad.getMidpoint().y + 50;
+							camFollow.y = dad.getMidpoint().y - 200;
+							camFollow.x = dad.getMidpoint().x - 400;
 						case 'hamster':
 							camFollow.y = dad.getMidpoint().y - 230;
 							camFollow.x = dad.getMidpoint().x - 200;
@@ -3220,6 +3221,63 @@ class PlayState extends MusicBeatState
 					// FlxG.sound.music.stop();
 					// FlxG.switchState(new PlayState());
 			}
+		}
+
+		if(curSong == "Defeat" && misses == 1 && !inCutscene)
+		{
+			camHUD.visible = false;
+			inCutscene = true;
+			canPause = false;
+			camZooming = false;
+			startedCountdown = false;
+			generatedMusic = false;
+				
+			vocals.stop();
+	// case 'black'
+			camFollow.setPosition(dad.getMidpoint().x - 400, dad.getMidpoint().y - 170);	
+			dad.changeHoldState(true);
+			boyfriend.changeHoldState(true);
+			dad.playAnim('death');
+
+			camFollow.y = dad.getMidpoint().y - 200;
+			camFollow.x = dad.getMidpoint().x - 450;
+	
+			new FlxTimer().start(0, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(FlxG.camera, {zoom: 1.2}, 1.5, {ease: FlxEase.circOut});
+			});
+
+			new FlxTimer().start(0.6, function(tmr:FlxTimer)
+			{
+				boyfriend.stunned = true;
+
+				persistentUpdate = false;
+				persistentDraw = false;
+				paused = true;
+
+				vocals.stop();
+				FlxG.sound.music.stop();
+
+				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+
+				#if windows
+				// Game Over doesn't get his own variable because it's only used here
+				DiscordClient.changePresence("GAME OVER -- "
+					+ SONG.song
+					+ " ("
+					+ storyDifficultyText
+					+ ") "
+					+ Ratings.GenerateLetterRank(accuracy),
+					"\nAcc: "
+					+ HelperFunctions.truncateFloat(accuracy, 2)
+					+ "% | Score: "
+					+ songScore
+					+ " | Misses: "
+					+ misses, iconRPC);
+				#end
+
+				// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			});
 		}
 
 		if (health <= 0 && !cannotDie)
