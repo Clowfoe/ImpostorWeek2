@@ -64,6 +64,8 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
+		FlxG.mouse.visible = true;
+
 		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('spacep'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.10;
@@ -168,12 +170,43 @@ class MainMenuState extends MusicBeatState
 
 	var selectedSomethin:Bool = false;
 
+	var canClick:Bool = true;
+	var usingMouse:Bool = false;
+
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			if(usingMouse)
+			{
+				if(!FlxG.mouse.overlaps(spr))
+					spr.animation.play('idle');
+			}
+	
+			if (FlxG.mouse.overlaps(spr))
+			{
+				if(canClick)
+				{
+					curSelected = spr.ID;
+					usingMouse = true;
+					spr.animation.play('selected');
+					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+				}
+					
+				if(FlxG.mouse.pressed && canClick)
+				{
+					selectSomething();
+					canClick = false;
+				}
+			}
+	
+			spr.updateHitbox();
+		});
 
 		if (!selectedSomethin)
 		{
@@ -212,49 +245,7 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
-				{
-					fancyOpenURL("https://ninja-muffin24.itch.io/funkin");
-				}
-				else
-				{
-					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
-					
-					if (FlxG.save.data.flashing)
-						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
-
-					menuItems.forEach(function(spr:FlxSprite)
-					{
-						if (curSelected != spr.ID)
-						{
-							FlxTween.tween(spr, {alpha: 0}, 1.3, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
-							});
-						}
-						else
-						{
-							if (FlxG.save.data.flashing)
-							{
-								FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-								{
-									goToState();
-								});
-							}
-							else
-							{
-								new FlxTimer().start(1, function(tmr:FlxTimer)
-								{
-									goToState();
-								});
-							}
-						}
-					});
-				}
+				selectSomething();
 			}
 		}
 
@@ -264,6 +255,53 @@ class MainMenuState extends MusicBeatState
 		{
 			spr.screenCenter(X);
 		});
+	}
+
+	function selectSomething()
+	{
+		if (optionShit[curSelected] == 'donate')
+		{
+				fancyOpenURL("https://ninja-muffin24.itch.io/funkin");
+		}
+		else
+		{
+			selectedSomethin = true;
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+				
+			if (FlxG.save.data.flashing)
+				FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+
+			menuItems.forEach(function(spr:FlxSprite)
+			{
+				if (curSelected != spr.ID)
+				{
+					FlxTween.tween(spr, {alpha: 0}, 1.3, {
+						ease: FlxEase.quadOut,
+						onComplete: function(twn:FlxTween)
+						{
+							spr.kill();
+						}
+					});
+				}
+				else
+				{
+					if (FlxG.save.data.flashing)
+					{
+						FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+						{
+							goToState();
+						});
+					}
+					else
+					{
+						new FlxTimer().start(1, function(tmr:FlxTimer)
+						{
+							goToState();
+						});
+					}
+				}
+			});
+		}
 	}
 	
 	function goToState()
