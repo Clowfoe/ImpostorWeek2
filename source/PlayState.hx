@@ -1134,7 +1134,7 @@ class PlayState extends MusicBeatState
 						}
 					case 'defeat':
 						{
-							defaultCamZoom = 0.7;
+							defaultCamZoom = 0.9;
 							curStage = 'defeat';
 							var defeat:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('defeatfnf', 'shared'));		
 							defeat.setGraphicSize(Std.int(defeat.width * 2));
@@ -1226,6 +1226,7 @@ class PlayState extends MusicBeatState
 						camPos.x += 600;
 						tweenCamIn();
 					}
+				
 					
 
 			case "spooky":
@@ -1259,6 +1260,11 @@ class PlayState extends MusicBeatState
 				camPos.x += 400;
 				dad.y += 350;
 				dad.x -= 60;
+			case 'black':
+				camPos.y += -200;
+				camPos.x += 400;
+				dad.y += 50;
+				dad.x -= 400;
 			case 'impostorr':
 				camPos.y += -200;
 				camPos.x += 400;
@@ -1317,6 +1323,8 @@ class PlayState extends MusicBeatState
 				boyfriend.x += 200;
 			case 'reactor':
 				gf.x -= 100;
+			case 'defeat':
+				gf.y -= 2000;
 
 			case 'mallEvil':
 				boyfriend.x += 320;
@@ -3119,6 +3127,8 @@ class PlayState extends MusicBeatState
 						case 'tomongus':
 							camFollow.y = dad.getMidpoint().y - 230;
 							camFollow.x = dad.getMidpoint().x - 200;
+						case 'black':
+							camFollow.y = dad.getMidpoint().y + 50;
 						case 'hamster':
 							camFollow.y = dad.getMidpoint().y - 230;
 							camFollow.x = dad.getMidpoint().x - 200;
