@@ -66,7 +66,7 @@ class DialogueBox extends FlxSpriteGroup
 		box.screenCenter(X);
 		
 		rightChar = new FlxSprite(820.25, 131.95);
-		rightChar.frames = Paths.getSparrowAtlas('dialogue/boyfriend', 'impostor');
+		rightChar.frames = Paths.getSparrowAtlas('dialogue/rightCharacter', 'impostor');
 		rightChar.antialiasing = true;
 
 		rightChar.animation.addByPrefix('b-neutral-talking', 'boyfriend neutral', 24, true);
@@ -82,6 +82,18 @@ class DialogueBox extends FlxSpriteGroup
 		rightChar.animation.addByIndices('b-stupid', 'boyfriend stupid', [0], "", 24, true);
 		rightChar.animation.addByIndices('b-angry', 'boyfriend very angry', [0], "", 24, true);
 		rightChar.animation.addByIndices('b-neutral', 'boyfriend neutral', [0], "", 24, true);
+
+		rightChar.animation.addByPrefix('gf-neutral-talking', 'girlfriend neutral', 24, true);
+		rightChar.animation.addByPrefix('gf-happy-talking', 'girlfriend happy', 24, true);
+		rightChar.animation.addByPrefix('gf-concern-talking', 'girlfriend concern', 24, true);
+		rightChar.animation.addByPrefix('gf-raised-talking', 'girlfriend :raised_eyeborw:', 24, true);
+		rightChar.animation.addByPrefix('gf-angry-talking', 'girlfreind angry', 24, true);
+
+		rightChar.animation.addByIndices('gf-happy', 'girlfriend happy', [0], "", 24, true);
+		rightChar.animation.addByIndices('gf-concern', 'girlfriend concern', [0], "", 24, true);
+		rightChar.animation.addByIndices('gf-raised', 'girlfriend :raised_eyeborw:', [0], "", 24, true);
+		rightChar.animation.addByIndices('gf-angry', 'girlfreind angry', [0], "", 24, true);
+		rightChar.animation.addByIndices('gf-neutral', 'girlfriend neutral', [0], "", 24, true);
 
 		rightChar.animation.play('neutral');
 		add(rightChar);
@@ -212,11 +224,19 @@ class DialogueBox extends FlxSpriteGroup
 				leftChar.animation.play(curCharacter + "-" + emotion + "-talking");
 				prevSide = curSide;
 				curSide = false;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('i-text', 'impostor'), 0.6)];
 			case 'b':
 				rightChar.animation.play(curCharacter + "-" + emotion + "-talking");
 				prevSide = curSide;
 				curSide = true;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bf-text', 'impostor'), 0.6)];
+			case 'gf':
+				rightChar.animation.play(curCharacter + "-" + emotion + "-talking");
+				prevSide = curSide;
+				curSide = true;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('gf-text', 'impostor'), 0.6)];
 		}
+
 		if(curSide) {
 			if(curSide != prevSide) {
 				rightChar.x = 820.25 + 30;
@@ -245,6 +265,7 @@ class DialogueBox extends FlxSpriteGroup
 				rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.5, {ease: FlxEase.quadOut});
 			}
 		}
+
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 3 + splitName[2].length).trim();
 	}
 }

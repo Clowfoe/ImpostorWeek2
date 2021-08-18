@@ -1,10 +1,11 @@
-:b:shocked:Impostor!!
-:b:mad:Don't kill me bitchass
-:i:happy:no im a crewmate
-:b:happy:oh ok
-:i:sex:sex
-:b:happy:bitch what?
-:b:shocked:you cant say sex!!!
-:i:shocked:wwhat? i wouldnt say sex please no i dont say sex
-:b:stupid:oh
-:b:angry:FUCKING BITCH ASS BITCH MOTHERFUCKER NI
+:b:neutral:hi im boyfriend
+:gf:happy:Hi, I am Girlfriend from Friday Night Funkin'. Watch as I cycle through my many animations.
+:gf:happy:I am happy.
+:gf:neutral:I am neutral.
+:gf:concern:I am concerned.
+:gf:raised:I am confused.
+:gf:angry:I am angry.
+:gf:happy:This concludes my animation showcase.
+:i:shocked:
+:b:shocked:
+:b:shocked:bitch what the fuck
