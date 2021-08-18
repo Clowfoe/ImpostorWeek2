@@ -496,6 +496,10 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/senpai/senpaiDialogue'));
 			case 'sussus-moogus':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-moogus/moogus'));
+			case 'sabotage':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sabotage/sabotage'));
+			case 'meltdown':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/meltdown/meltdown'));
 			case 'sussus-toogus':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-toogus/toogus'));
 			case 'roses':
@@ -1253,6 +1257,9 @@ class PlayState extends MusicBeatState
 			case 'tomongus':
 				dad.y += 350;
 				dad.x += 200;
+			case 'hamster':
+				dad.y += 350;
+				dad.x += 200;
 			case 'crewmate':
 				camPos.y += -200;
 				camPos.x += 400;
@@ -1327,7 +1334,10 @@ class PlayState extends MusicBeatState
 			add(gf);
 
 			// Shitty layering but whatev it works LOL
-			
+			if (curSong == 'sabotage')
+				{
+				gf.y -= 200;
+				}
 
 			add(dad);
 			add(boyfriend);
@@ -1602,6 +1612,12 @@ class PlayState extends MusicBeatState
 				case 'senpai':
 					schoolIntro(doof);
 				case 'sussus-moogus':
+					schoolIntro(doof);
+				case 'sabotage':
+					doof.greenImpostor = false;
+					schoolIntro(doof);
+				case 'meltdown':
+					doof.greenImpostor = false;
 					schoolIntro(doof);
 				case 'sussus-toogus':
 					schoolIntro(doof);
@@ -3093,6 +3109,9 @@ class PlayState extends MusicBeatState
 					switch (dad.curCharacter)
 					{
 						case 'tomongus':
+							camFollow.y = dad.getMidpoint().y - 230;
+							camFollow.x = dad.getMidpoint().x - 200;
+						case 'hamster':
 							camFollow.y = dad.getMidpoint().y - 230;
 							camFollow.x = dad.getMidpoint().x - 200;
 						case 'senpai' | 'senpai-angry':
