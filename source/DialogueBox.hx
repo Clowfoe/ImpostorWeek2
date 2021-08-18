@@ -1,6 +1,7 @@
 package;
 
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.text.FlxTypeText;
@@ -30,12 +31,17 @@ class DialogueBox extends FlxSpriteGroup
 	var rightState:String = 'neutral';
 	var leftState:String = 'neutral';
 
+	var leftTween:FlxTween;
+	var rightTween:FlxTween;
+	var prevSide:Bool;
+	var curSide:Bool;
+
 	public var finishThing:Void->Void;
 
 	var handSelect:FlxSprite;
 
 	//fuck you
-	public var greenImpostor:Bool = true;
+	public var greenImpostor:Bool = false;
 
 	var bgFade:FlxSprite;
 
@@ -79,6 +85,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		rightChar.animation.play('neutral');
 		add(rightChar);
+		rightChar.alpha = 0;
 		
 		leftChar = new FlxSprite(207.15, 148.4);
 
@@ -88,8 +95,8 @@ class DialogueBox extends FlxSpriteGroup
 			leftChar.animation.addByPrefix('i-neutral-talking', 'green impoters neutral', 24, true);
 			leftChar.animation.addByPrefix('i-happy-talking', 'green crewmate happy', 24, true);
 			leftChar.animation.addByPrefix('i-nervous-talking', 'green crewmate nervous', 24, true);
-			leftChar.animation.addByPrefix('i-smile-talking', 'green imposor evilous', 24, true);
-			leftChar.animation.addByPrefix('i-evil-talking', 'the secret impostor', 24, true);
+			leftChar.animation.addByPrefix('i-smile-talking', 'green crewmate smile', 24, true);
+			leftChar.animation.addByPrefix('i-evil-talking', 'green imposor evilous', 24, true);
 			leftChar.animation.addByPrefix('i-angry-talking', 'green impostor angry', 24, true);
 			leftChar.animation.addByPrefix('i-happyevil-talking', 'greenimportor happy', 24, true);
 	
@@ -118,7 +125,8 @@ class DialogueBox extends FlxSpriteGroup
 		}		
 
 		leftChar.antialiasing = true;
-		leftChar.animation.play('neutral');
+		leftChar.animation.play('i-neutral');
+		leftChar.alpha = 0;
 
 		add(leftChar);
 
@@ -202,8 +210,40 @@ class DialogueBox extends FlxSpriteGroup
 		switch(curCharacter) {
 			case 'i':
 				leftChar.animation.play(curCharacter + "-" + emotion + "-talking");
+				prevSide = curSide;
+				curSide = false;
 			case 'b':
 				rightChar.animation.play(curCharacter + "-" + emotion + "-talking");
+				prevSide = curSide;
+				curSide = true;
+		}
+		if(curSide) {
+			if(curSide != prevSide) {
+				rightChar.x = 820.25 + 30;
+				rightChar.alpha = 0;
+				if(leftTween != null) {
+					leftTween.cancel();
+				}
+				if(rightTween != null) {
+					rightTween.cancel();
+				}
+				rightTween = FlxTween.tween(rightChar, {x: 820.25 - 30, alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+				leftTween = FlxTween.tween(leftChar, {x: 207.15 - 30, alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+			}
+		}
+		else {
+			if(curSide != prevSide) {
+				leftChar.x = 207.15 - 30;
+				leftChar.alpha = 0;
+				if(leftTween != null) {
+					leftTween.cancel();
+				}
+				if(rightTween != null) {
+					rightTween.cancel();
+				}
+				leftTween = FlxTween.tween(leftChar, {x: 207.15 + 30, alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+				rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+			}
 		}
 		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 3 + splitName[2].length).trim();
 	}
