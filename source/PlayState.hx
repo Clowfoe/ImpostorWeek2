@@ -1614,10 +1614,8 @@ class PlayState extends MusicBeatState
 				case 'sussus-moogus':
 					schoolIntro(doof);
 				case 'sabotage':
-					doof.greenImpostor = false;
 					schoolIntro(doof);
 				case 'meltdown':
-					doof.greenImpostor = false;
 					schoolIntro(doof);
 				case 'sussus-toogus':
 					schoolIntro(doof);
