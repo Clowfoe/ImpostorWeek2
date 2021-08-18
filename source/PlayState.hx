@@ -1373,6 +1373,7 @@ class PlayState extends MusicBeatState
 
 		var greenImpostor:Bool = false;
 		if(SONG.song.toLowerCase() == 'sussus-toogus') {
+			//bitch update
 			greenImpostor = true;
 		}
 
