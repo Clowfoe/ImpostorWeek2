@@ -1371,7 +1371,12 @@ class PlayState extends MusicBeatState
 
 		trace("SF CALC: " + Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
-		var doof:DialogueBox = new DialogueBox(false, dialogue);
+		var greenImpostor:Bool = false;
+		if(SONG.song.toLowerCase() == 'sussus-toogus') {
+			greenImpostor = true;
+		}
+
+		var doof:DialogueBox = new DialogueBox(false, dialogue, greenImpostor);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
@@ -1596,10 +1601,8 @@ class PlayState extends MusicBeatState
 				case 'senpai':
 					schoolIntro(doof);
 				case 'sussus-moogus':
-					doof.greenImpostor = false;
 					schoolIntro(doof);
 				case 'sussus-toogus':
-					doof.greenImpostor = true;
 					schoolIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));

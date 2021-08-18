@@ -40,12 +40,9 @@ class DialogueBox extends FlxSpriteGroup
 
 	var handSelect:FlxSprite;
 
-	//fuck you
-	public var greenImpostor:Bool = false;
-
 	var bgFade:FlxSprite;
 
-	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
+	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>, ?greenImpostor:Bool)
 	{
 		super();
 		
@@ -247,8 +244,8 @@ class DialogueBox extends FlxSpriteGroup
 				if(rightTween != null) {
 					rightTween.cancel();
 				}
-				rightTween = FlxTween.tween(rightChar, {x: 820.25 - 30, alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-				leftTween = FlxTween.tween(leftChar, {x: 207.15 - 30, alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+				rightTween = FlxTween.tween(rightChar, {x: 820.25 - 30, alpha: 1}, 0.3, {ease: FlxEase.quadOut});
+				leftTween = FlxTween.tween(leftChar, {x: 207.15 - 30, alpha: 0}, 0.3, {ease: FlxEase.quadOut});
 			}
 		}
 		else {
@@ -261,8 +258,8 @@ class DialogueBox extends FlxSpriteGroup
 				if(rightTween != null) {
 					rightTween.cancel();
 				}
-				leftTween = FlxTween.tween(leftChar, {x: 207.15 + 30, alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-				rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.5, {ease: FlxEase.quadOut});
+				leftTween = FlxTween.tween(leftChar, {x: 207.15 + 30, alpha: 1}, 0.3, {ease: FlxEase.quadOut});
+				rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.3, {ease: FlxEase.quadOut});
 			}
 		}
 
