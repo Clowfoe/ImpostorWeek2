@@ -484,6 +484,33 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				flipX = true;
+
+			case 'bf-sus':
+				frames = Paths.getSparrowAtlas('bfSus','shared',true);
+				animation.addByPrefix('idle', 'BF IDLE', 24, false);
+				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
+				animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF RIGHT NOTE', 24, false);
+				animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF DOWN MISS', 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				setGraphicSize(Std.int(width * 6));
+				updateHitbox();
+
+				playAnim('idle');
+
+				width -= 100;
+				height -= 100;
+
+				antialiasing = false;
+
+				flipX = true;
+
 			case 'bf-pixel-dead':
 				frames = Paths.getSparrowAtlas('bfPixelsDEAD','shared',true);
 				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);
@@ -539,18 +566,18 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'hamster':
-				frames = Paths.getSparrowAtlas('tomongus','shared',true);
-				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				frames = Paths.getSparrowAtlas('hamster','shared',true);
+				animation.addByPrefix('idle', 'HamsterIdle', 24, false);
+				animation.addByPrefix('singUP', 'HamsterUp', 24, false);
+				animation.addByPrefix('singLEFT', 'HamsterLeft', 24, false);
+				animation.addByPrefix('singRIGHT', 'HamsterRight', 24, false);
+				animation.addByPrefix('singDOWN', 'HamsterDown', 24, false);
 
-				addOffset('idle');
-				addOffset("singUP", -250, -384);
-				addOffset("singRIGHT", -268, -442);
-				addOffset("singLEFT", -192, -414);
-				addOffset("singDOWN", 0, 0);
+				addOffset("idle", 5, 0);
+				addOffset("singUP", 5, 0);
+				addOffset("singRIGHT", 5, 0);
+				addOffset("singLEFT", 5, 0);
+				addOffset("singDOWN", 5, 0);
 
 				playAnim('idle');
 
