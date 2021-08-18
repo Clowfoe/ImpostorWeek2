@@ -3223,15 +3223,17 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if(curSong == "Defeat" && misses == 1 && !inCutscene)
+		if(curSong == "Defeat" && misses == 1 && camHUD.visible)
 		{
+			camSustains.visible = false;
+			camNotes.visible = false;
 			camHUD.visible = false;
 			inCutscene = true;
 			canPause = false;
 			camZooming = false;
 			startedCountdown = false;
 			generatedMusic = false;
-				
+	
 			vocals.stop();
 	// case 'black'
 			camFollow.setPosition(dad.getMidpoint().x - 400, dad.getMidpoint().y - 170);	
