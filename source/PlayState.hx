@@ -3235,7 +3235,7 @@ class PlayState extends MusicBeatState
 			generatedMusic = false;
 	
 			vocals.stop();
-	// case 'black'
+
 			camFollow.setPosition(dad.getMidpoint().x - 400, dad.getMidpoint().y - 170);	
 			dad.changeHoldState(true);
 			boyfriend.changeHoldState(true);
@@ -3243,11 +3243,10 @@ class PlayState extends MusicBeatState
 
 			camFollow.y = dad.getMidpoint().y - 200;
 			camFollow.x = dad.getMidpoint().x - 450;
-	
-			new FlxTimer().start(0, function(tmr:FlxTimer)
-			{
-				FlxTween.tween(FlxG.camera, {zoom: 1.2}, 1.5, {ease: FlxEase.circOut});
-			});
+
+			FlxG.sound.play(Paths.sound('black-death', 'impostor'));
+			
+			FlxTween.tween(FlxG.camera, {zoom: 1.2}, 1.5, {ease: FlxEase.circOut});
 
 			new FlxTimer().start(0.6, function(tmr:FlxTimer)
 			{
