@@ -13,3 +13,4 @@ bfeyes
 tomongus
 bf-pixel
 bf-sus
+bf-defeat-death

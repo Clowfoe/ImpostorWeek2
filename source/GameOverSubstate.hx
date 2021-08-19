@@ -27,6 +27,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf';
 		}
 
+		switch (PlayState.SONG.player2)
+		{
+			case 'black':
+				daBf = 'bf-defeat-death';
+		}
+
 		super();
 
 		Conductor.songPosition = 0;
@@ -70,7 +76,12 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.loadRep = false;
 		}
 
-		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
+		if(PlayState.SONG.player2 == 'black')
+		{
+			FlxG.camera.follow(camFollow, LOCKON);
+		}
+
+		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12 && PlayState.SONG.player2 != 'black')
 		{
 			FlxG.camera.follow(camFollow, LOCKON, 0.01);
 		}
