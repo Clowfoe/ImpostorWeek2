@@ -9,3 +9,4 @@ singDOWN 0 -20
 hairBlow 45 -8
 hairFall 0 -9
 scared -2 -17
+die -2 -11

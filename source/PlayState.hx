@@ -1630,13 +1630,13 @@ class PlayState extends MusicBeatState
 				case 'senpai':
 					schoolIntro(doof);
 				case 'sussus-moogus':
-					schoolIntro(doof);
+					susIntro(doof);
 				case 'sabotage':
-					schoolIntro(doof);
+					susIntro(doof);
 				case 'meltdown':
-					schoolIntro(doof);
+					susIntro(doof);
 				case 'sussus-toogus':
-					schoolIntro(doof);
+					susIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
@@ -1743,6 +1743,20 @@ class PlayState extends MusicBeatState
 			}
 		});
 	}
+
+	function susIntro(?dialogueBox:DialogueBox):Void
+		{
+			FlxG.camera.fade(FlxColor.BLACK, 2, true, function()
+			{
+				if (dialogueBox != null)
+					{
+						inCutscene = true;
+						add(dialogueBox);
+					}
+					else
+						startCountdown();
+			}, true);
+		}
 
 	var startTimer:FlxTimer;
 	var perfectMode:Bool = false;
@@ -2104,6 +2118,9 @@ class PlayState extends MusicBeatState
 
 		if(SONG.song.toLowerCase() == 'sabotage' && isStoryMode) {
 			FlxG.sound.music.onComplete = endSabotage;
+		}
+		else if (SONG.song.toLowerCase() == 'sussus-moogus' && isStoryMode) {
+			FlxG.sound.music.onComplete = endMoogus;
 		}
 		else {
 			FlxG.sound.music.onComplete = endSong;
@@ -3684,6 +3701,8 @@ class PlayState extends MusicBeatState
 		#if debug
 		if (FlxG.keys.justPressed.ONE)
 			endSabotage();
+		if (FlxG.keys.justPressed.TWO)
+			endMoogus();
 		#end
 	}
 
@@ -3717,6 +3736,39 @@ class PlayState extends MusicBeatState
 		new FlxTimer().start(2.9, function(shot:FlxTimer)
 		{
 			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5, {ease: FlxEase.circOut});
+		});
+
+		new FlxTimer().start(5, function(trans:FlxTimer)
+		{
+			endSong();
+		});
+	}
+
+	function endMoogus():Void{
+		camHUD.visible = false;
+		inCutscene = true;
+		startedCountdown = false;
+		generatedMusic = false;
+		canPause = false;
+		camZooming = false;
+
+		trace('we got past the initial stuff');
+		
+		FlxG.sound.music.volume = 0;
+		vocals.volume = 0;
+
+		trace('change volume');
+
+		camFollow.setPosition(gf.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 150);	
+		dad.changeHoldState(true);
+		gf.changeHoldState(true);
+
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom - 0.1}, 1, {ease: FlxEase.quadOut});
+
+		new FlxTimer().start(1, function(wait:FlxTimer)
+		{
+			dad.playAnim('gf');
+			gf.playAnim('die');
 		});
 
 		new FlxTimer().start(5, function(trans:FlxTimer)
@@ -4896,7 +4948,9 @@ class PlayState extends MusicBeatState
 			//flashSprite.alpha = 0;
 			//FlxTween.tween(flashSprite.alpha, 0.4, 0.15);
 			trace('BG FLASH FUNNY');
-			flashSprite.alpha = 0.4;
+			//yeaaah nice try buckaroo cant FLASH WHILE IN A CUTSCENE!! BITCH!!!!!!!!
+			if(!inCutscene)
+				flashSprite.alpha = 0.4;
 		}
 	var danced:Bool = false;
 
