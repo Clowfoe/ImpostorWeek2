@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
+import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -12,6 +13,8 @@ class GameOverSubstate extends MusicBeatSubstate
 {
 	var bf:Boyfriend;
 	var camFollow:FlxObject;
+
+	var inSecret:Bool = false;
 
 	var stageSuffix:String = "";
 
@@ -31,7 +34,15 @@ class GameOverSubstate extends MusicBeatSubstate
 		switch (PlayState.SONG.player2)
 		{
 			case 'black':
-				daBf = 'bf-defeat-death';
+			{
+				if(FlxG.random.bool(1))	
+				{
+					daBf = 'bf-defeat-secret';
+					inSecret = true;
+				}
+				else
+					daBf = 'bf-defeat-death';
+			}
 		}
 
 		super();
@@ -49,11 +60,16 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(bf);
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y - 100, 1, 1);
+		if(inSecret)
+			camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
 		if(PlayState.SONG.player2 == 'black')
 		{
-			FlxG.sound.play(Paths.sound('loss-defeat', 'impostor'));
+			if(!inSecret)
+				FlxG.sound.play(Paths.sound('loss-defeat', 'impostor'));
+			else
+				FlxG.sound.play(Paths.sound('no-balls', 'impostor'));
 		}else{
 			FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
 		}
@@ -75,7 +91,10 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (controls.ACCEPT)
 		{
-			endBullshit();
+			if(bf.animation.curAnim.name != 'firstDeath' && inSecret)
+				endBullshit();
+			if(!inSecret)
+				endBullshit();
 		}
 
 		if (controls.BACK)

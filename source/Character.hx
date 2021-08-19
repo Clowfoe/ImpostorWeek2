@@ -301,6 +301,24 @@ class Character extends FlxSprite
 	
 				flipX = true;
 					
+			case 'bf-defeat-secret':
+				var tex = Paths.getSparrowAtlas('noMoreBalls','impostor',true);
+				frames = tex;
+	
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				addOffset('idle', -5);
+				addOffset('firstDeath', 989, 87);
+				addOffset('deathLoop', 24, 2);
+				addOffset('deathConfirm', 24, 66);
+	
+				flipX = true;
+			
 			case 'bfr':
 				var tex = Paths.getSparrowAtlas('characters/bfR', 'shared');
 				frames = tex;
@@ -655,23 +673,21 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'impostor':
 				// inky is a god
-				tex = Paths.getSparrowAtlas('characters/impostorPolus', 'impostor');
+				tex = Paths.getSparrowAtlas('characters/impostor', 'impostor');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
-				animation.addByPrefix('singUP', 'impostor up2', 24, false);
+				animation.addByPrefix('singUP', 'impostor up', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
 				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
 				animation.addByPrefix('kill', 'impostor kill', 24, false);
-				animation.addByPrefix('gf', 'impostor gf', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", -49, 66);
-				addOffset("singRIGHT", -80, 0);
-				addOffset("singLEFT", 140, 3);
-				addOffset("singDOWN", -11, -12);
-				addOffset('kill', -30, 140);
-				addOffset('gf', -59, 65);
+				addOffset("singUP", -70, 0);
+				addOffset("singRIGHT", -154, -19);
+				addOffset("singLEFT", 65, -9);
+				addOffset("singDOWN", -41, -62);
+				addOffset('kill', -31, 135);
 
 				playAnim('idle');
 
@@ -853,11 +869,9 @@ class Character extends FlxSprite
 						danced = !danced;
 
 						if (danced)
-							if(!holdState)
-								playAnim('danceRight');
+							playAnim('danceRight');
 						else
-							if(!holdState)
-								playAnim('danceLeft');
+							playAnim('danceLeft');
 					}
 				case 'spooky':
 					danced = !danced;
