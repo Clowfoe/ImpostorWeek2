@@ -35,13 +35,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			case 'black':
 			{
-				if(FlxG.random.bool(1))	
-				{
 					daBf = 'bf-defeat-secret';
 					inSecret = true;
-				}
-				else
-					daBf = 'bf-defeat-death';
+
 			}
 		}
 

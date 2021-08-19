@@ -5263,7 +5263,9 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'meltdown':
-				crowd.animation.play('CrowdBop', true);
+				if(curBeat % 4 == 0) {
+					crowd.animation.play('CrowdBop', true);
+				}
 
 			case 'limo':
 				if (FlxG.save.data.distractions)
