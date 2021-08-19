@@ -2656,7 +2656,7 @@ class PlayState extends MusicBeatState
 
 		var newScroll = PlayStateChangeables.scrollSpeed;
 
-		for(i in SONG.eventObjects)
+		/*for(i in SONG.eventObjects)
 		{
 			switch(i.type)
 			{
@@ -2664,7 +2664,7 @@ class PlayState extends MusicBeatState
 					if (i.position < curDecimalBeat)
 						newScroll = i.value;
 			}
-		}
+		}*/
 
 		if(curSong == 'Reactor') {
 			if(orb != null) {
@@ -3694,9 +3694,13 @@ class PlayState extends MusicBeatState
 		generatedMusic = false;
 		canPause = false;
 		camZooming = false;
+
+		trace('we got past the initial stuff');
 		
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+
+		trace('change volume');
 
 		camFollow.setPosition(gf.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 150);	
 		dad.changeHoldState(true);
@@ -3726,16 +3730,20 @@ class PlayState extends MusicBeatState
 		inCutscene = false;
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, handleInput);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, releaseInput);
+		trace('pass event listeners');
 		if (useVideo)
 		{
 			GlobalVideo.get().stop();
 			FlxG.stage.window.onFocusOut.remove(focusOut);
 			FlxG.stage.window.onFocusIn.remove(focusIn);
 			PlayState.instance.remove(PlayState.instance.videoSprite);
+			trace('video shit');
 		}
 
 		if (isStoryMode)
 			campaignMisses = misses;
+
+		trace('misses');
 
 		if (!loadRep)
 			rep.SaveReplay(saveNotes, saveJudge, replayAna);
@@ -3762,6 +3770,7 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 		FlxG.sound.music.pause();
 		vocals.pause();
+		trace('pause funny');
 		if (SONG.validScore)
 		{
 			// adjusting the highscore song name to be compatible
@@ -3787,6 +3796,7 @@ class PlayState extends MusicBeatState
 			offsetTesting = false;
 			LoadingState.loadAndSwitchState(new OptionsMenu());
 			FlxG.save.data.offset = offsetTest;
+			trace('offset');
 		}
 		else
 		{
