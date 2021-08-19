@@ -35,7 +35,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			case 'black':
 			{
-				if(FlxG.random.bool(1))	
+				if(FlxG.random.bool(5))	
 				{
 					daBf = 'bf-defeat-secret';
 					inSecret = true;
