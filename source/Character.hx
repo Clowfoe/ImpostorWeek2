@@ -283,7 +283,23 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
-				
+			
+			case 'bf-defeat-death':
+				var tex = Paths.getSparrowAtlas('defeatDeath','impostor',true);
+				frames = tex;
+
+				trace(tex.frames.length);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				addOffset('firstDeath', 392, 87);
+				addOffset('deathLoop', 34, 76);
+				addOffset('deathConfirm', 34, 76);
+	
+				flipX = true;
+					
 			case 'bfr':
 				var tex = Paths.getSparrowAtlas('characters/bfR', 'shared');
 				frames = tex;
