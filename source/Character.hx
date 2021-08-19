@@ -290,12 +290,10 @@ class Character extends FlxSprite
 
 				trace(tex.frames.length);
 
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 
-				addOffset('idle', -5);
 				addOffset('firstDeath', 392, 87);
 				addOffset('deathLoop', 34, 76);
 				addOffset('deathConfirm', 34, 76);

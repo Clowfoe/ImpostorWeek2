@@ -48,7 +48,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
-		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
+		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y - 100, 1, 1);
 		add(camFollow);
 
 		if(PlayState.SONG.player2 == 'black')
