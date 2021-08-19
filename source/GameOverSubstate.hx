@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
@@ -37,13 +38,25 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		Conductor.songPosition = 0;
 
+		if(PlayState.SONG.player2 == 'black')
+		{
+			var defeatBG:FlxSprite = new FlxSprite(-70, -70).makeGraphic(5000, 5000, 0xFF1a182e);
+			defeatBG.screenCenter();
+			add(defeatBG);
+		}
+
 		bf = new Boyfriend(x, y, daBf);
 		add(bf);
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);
 		add(camFollow);
 
-		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+		if(PlayState.SONG.player2 == 'black')
+		{
+			FlxG.sound.play(Paths.sound('loss-defeat', 'impostor'));
+		}else{
+			FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+		}
 		Conductor.changeBPM(100);
 
 		// FlxG.camera.followLerp = 1;
