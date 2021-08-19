@@ -673,21 +673,23 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'impostor':
 				// inky is a god
-				tex = Paths.getSparrowAtlas('characters/impostor', 'impostor');
+				tex = Paths.getSparrowAtlas('characters/impostorPolus', 'impostor');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
-				animation.addByPrefix('singUP', 'impostor up', 24, false);
+				animation.addByPrefix('singUP', 'impostor up2', 24, false);
 				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
 				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
 				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
 				animation.addByPrefix('kill', 'impostor kill', 24, false);
+				animation.addByPrefix('gf', 'impostor gf', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", -70, 0);
-				addOffset("singRIGHT", -154, -19);
-				addOffset("singLEFT", 65, -9);
-				addOffset("singDOWN", -41, -62);
-				addOffset('kill', -31, 135);
+				addOffset("singUP", -49, 66);
+				addOffset("singRIGHT", -80, 0);
+				addOffset("singLEFT", 140, 3);
+				addOffset("singDOWN", -11, -12);
+				addOffset('kill', -30, 140);
+				addOffset('gf', -59, 65);
 
 				playAnim('idle');
 
@@ -869,9 +871,14 @@ class Character extends FlxSprite
 						danced = !danced;
 
 						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
+						{
+							if(!holdState)
+								playAnim('danceRight');
+						}else{
+							if(!holdState)
+								playAnim('danceLeft');
+						}
+	
 					}
 				case 'spooky':
 					danced = !danced;
