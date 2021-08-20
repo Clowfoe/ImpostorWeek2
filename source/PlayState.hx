@@ -171,6 +171,7 @@ class PlayState extends MusicBeatState
 
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
+	private var lightBar:FlxBar;
 	private var songPositionBar:Float = 0;
 
 	private var generatedMusic:Bool = false;
@@ -299,6 +300,7 @@ class PlayState extends MusicBeatState
 	var _cb = 0;
 
 	var flashSprite:FlxSprite = new FlxSprite(-70, -70).makeGraphic(5000, 5000, 0xFFb30000);
+	var lightsOutSprite:FlxSprite = new FlxSprite(-700, -70).makeGraphic(10000, 10000, 0xFF000000);
 
 	override public function create()
 	{
@@ -940,20 +942,6 @@ class PlayState extends MusicBeatState
 								stageFront.scrollFactor.set(1, 1);
 								stageFront.active = false;
 								add(stageFront);
-			
-								var stageFront2:FlxSprite = new FlxSprite(-150, 400).loadGraphic(Paths.image('table'));
-								stageFront2.updateHitbox();
-								stageFront2.antialiasing = true;
-								stageFront2.scrollFactor.set(1, 1);
-								stageFront2.active = false;
-								
-
-								var stageFront3:FlxSprite = new FlxSprite(650, 400).loadGraphic(Paths.image('table'));
-								stageFront3.updateHitbox();
-								stageFront3.antialiasing = true;
-								stageFront3.scrollFactor.set(1, 1);
-								stageFront3.active = false;
-								stageFront3.flipX = true;
 								
 								var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 								stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
@@ -961,6 +949,10 @@ class PlayState extends MusicBeatState
 								stageCurtains.antialiasing = true;
 								stageCurtains.scrollFactor.set(1.3, 1.3);
 								stageCurtains.active = false;
+
+								lightsOutSprite.alpha = 0;
+								flashSprite.scrollFactor.set(0, 0);
+								add(lightsOutSprite); // lights out stuff
 			
 							//	add(stageCurtains);
 						}
@@ -1360,26 +1352,25 @@ class PlayState extends MusicBeatState
 			add(dad);
 			add(boyfriend);
 			
-			var stageFront2:FlxSprite = new FlxSprite(-850, 800).loadGraphic(Paths.image('table'));
-			stageFront2.updateHitbox();
-			stageFront2.antialiasing = true;
-			stageFront2.scrollFactor.set(1, 1);
-			stageFront2.active = false;
-			stageFront2.setGraphicSize(Std.int(stageFront2.width * 1.6));
-
-			var stageFront3:FlxSprite = new FlxSprite(1600, 800).loadGraphic(Paths.image('table'));
-			stageFront3.updateHitbox();
-			stageFront3.antialiasing = true;
-			stageFront3.scrollFactor.set(1, 1);
-			stageFront3.active = false;
-			stageFront3.setGraphicSize(Std.int(stageFront3.width * 1.6));
-			stageFront3.flipX = true;
+			
 
 			if (curStage == 'toogus')
-				{
+			{
+				stageFront2 = new FlxSprite(-850, 800).loadGraphic(Paths.image('table'));
+				stageFront2.updateHitbox();
+				stageFront2.antialiasing = true;
+				stageFront2.scrollFactor.set(1, 1);
+				stageFront2.setGraphicSize(Std.int(stageFront2.width * 1.6));
+
+				stageFront3 = new FlxSprite(1600, 800).loadGraphic(Paths.image('table'));
+				stageFront3.updateHitbox();
+				stageFront3.antialiasing = true;
+				stageFront3.scrollFactor.set(1, 1);
+				stageFront3.setGraphicSize(Std.int(stageFront3.width * 1.6));
+				stageFront3.flipX = true;
 				add(stageFront2);
 				add(stageFront3);
-				}
+			}
 			
 
 		}			
@@ -1513,6 +1504,17 @@ class PlayState extends MusicBeatState
 		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 		// healthBar
 		add(healthBar);
+
+		if(curSong == "Lights Down")
+		{
+			lightBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+			'health', 0, 2);
+			lightBar.scrollFactor.set();
+			lightBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+			lightBar.y += 2000;
+			add(lightBar);
+			lightBar.cameras = [camHUD];
+		}
 
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, healthBarBG.y
@@ -5005,6 +5007,95 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
+		if(curSong == "Lights Down" && curBeat == 64)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 128)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 160)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 192)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 272)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 276)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 280)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 284)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 288)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 292)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 296)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 297)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 298)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 299)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 300)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 301)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 302)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 303)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 304)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 360)
+		{
+			LightsOUT(false);
+		}
+		if(curSong == "Lights Down" && curBeat == 368)
+		{
+			LightsOUT(true);
+		}
+		if(curSong == "Lights Down" && curBeat == 400)
+		{
+			LightsOUT(false);
+		}
+
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, (PlayStateChangeables.useDownscroll ? FlxSort.ASCENDING : FlxSort.DESCENDING));
@@ -5315,6 +5406,50 @@ class PlayState extends MusicBeatState
 				lightningStrikeShit();
 			}
 		}
+	}
+
+	function LightsOUT(id:Bool)
+	{
+		if(id)
+		{
+			lightsOutSprite.alpha = 1;
+			gf.y += 2000;
+			stageFront2.y += 2000;
+			stageFront3.y += 2000;
+			lightBar.y -= 2000;
+			changeDadCharacter("whiteimpostor");
+			changeBFCharacter("bfeyes");
+			
+		}else{
+			lightsOutSprite.alpha = 0;
+			gf.y -= 2000;
+			stageFront2.y -= 2000;
+			stageFront3.y -= 2000;
+			lightBar.y += 2000;
+			changeDadCharacter("impostor3");
+			changeBFCharacter("bf");
+		}
+		
+	}
+
+	function changeDadCharacter(id:String) // thth an kj you bob mod you are epic!!!!1!! - fabs
+	{				
+		var olddadx = dad.x;
+		var olddady = dad.y;
+		remove(dad);
+		dad = new Character(olddadx, olddady, id);
+		add(dad);
+		iconP2.changeIcon(id);
+	}
+
+	function changeBFCharacter(id:String) // thth an kj you bob mod you are epic!!!!1!! - fabs
+	{				
+		var oldboyfriendx = boyfriend.x;
+		var oldboyfriendy = boyfriend.y;
+		remove(boyfriend);
+		boyfriend = new Boyfriend(oldboyfriendx, oldboyfriendy, id);
+		add(boyfriend);
+		iconP1.changeIcon(id);
 	}
 
 	var curLight:Int = 0;
