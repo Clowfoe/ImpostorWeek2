@@ -5028,7 +5028,7 @@ class PlayState extends MusicBeatState
 				flashSprite.alpha = 0;
 				flashSprite.scrollFactor.set(0, 0);
 		
-				if(curSong == 'Sussus-Moogus') // sussus flashes
+				if(curSong == 'Sussus Moogus') // sussus flashes
 				{
 					
 					if(curBeat == 97 || curBeat == 192 || curBeat == 320)
