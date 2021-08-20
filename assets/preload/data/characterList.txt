@@ -5,6 +5,7 @@ bfeyes
 impostor
 impostor2
 impostor3
+whiteimpostor
 impostorr
 black
 crewmate

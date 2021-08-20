@@ -711,7 +711,24 @@ class Character extends FlxSprite
 
 				playAnim('idle');	
 
-				case 'impostorr':
+			case 'whiteimpostor':
+				tex = Paths.getSparrowAtlas('characters/whitegreen', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'impostor idle', 24, false);
+				animation.addByPrefix('singUP', 'impostor up', 24, false);
+				animation.addByPrefix('singRIGHT', 'impostor right', 24, false);
+				animation.addByPrefix('singDOWN', 'impostor down', 24, false);
+				animation.addByPrefix('singLEFT', 'imposter left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+
+				playAnim('idle');	
+
+			case 'impostorr':
 				// ethan
 				tex = Paths.getSparrowAtlas('characters/impostorR', 'shared');
 				frames = tex;
