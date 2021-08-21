@@ -211,6 +211,11 @@ class PlayState extends MusicBeatState
 	var ass2:FlxSprite;
 	var stageFront2:FlxSprite;
 	var stageFront3:FlxSprite;
+	var stageFront2Dark:FlxSprite;
+	var stageFront3Dark:FlxSprite;
+	var bgDark:FlxSprite;
+	var machineDark:FlxSprite;
+	var miraGradient:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:FlxSprite;
 	var songName:FlxText;
@@ -934,14 +939,28 @@ class PlayState extends MusicBeatState
 								bg.active = false;
 								add(bg);
 
-								
-			
+								bgDark = new FlxSprite(0,50).loadGraphic(Paths.image('MiraDark'));
+								bgDark.setGraphicSize(Std.int(bgDark.width * 1.4));
+								bgDark.antialiasing = true;
+								bgDark.scrollFactor.set(1, 1);
+								bgDark.active = false;
+								bgDark.alpha = 0;
+								add(bgDark);
+
 								var stageFront:FlxSprite = new FlxSprite(1000, 150).loadGraphic(Paths.image('vending_machine'));
 								stageFront.updateHitbox();
 								stageFront.antialiasing = true;
 								stageFront.scrollFactor.set(1, 1);
 								stageFront.active = false;
 								add(stageFront);
+
+								machineDark = new FlxSprite(1000, 150).loadGraphic(Paths.image('vending_machineDark'));
+								machineDark.updateHitbox();
+								machineDark.antialiasing = true;
+								machineDark.scrollFactor.set(1, 1);
+								machineDark.active = false;
+								machineDark.alpha = 0;
+								add(machineDark);
 								
 								var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 								stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
@@ -1370,7 +1389,34 @@ class PlayState extends MusicBeatState
 				stageFront3.flipX = true;
 				add(stageFront2);
 				add(stageFront3);
+
+				stageFront2Dark = new FlxSprite(-850, 800).loadGraphic(Paths.image('tableDark'));
+				stageFront2Dark.updateHitbox();
+				stageFront2Dark.antialiasing = true;
+				stageFront2Dark.scrollFactor.set(1, 1);
+				stageFront2Dark.setGraphicSize(Std.int(stageFront2Dark.width * 1.6));
+				stageFront2Dark.alpha = 0;
+
+				stageFront3Dark = new FlxSprite(1600, 800).loadGraphic(Paths.image('tableDark'));
+				stageFront3Dark.updateHitbox();
+				stageFront3Dark.antialiasing = true;
+				stageFront3Dark.scrollFactor.set(1, 1);
+				stageFront3Dark.setGraphicSize(Std.int(stageFront3Dark.width * 1.6));
+				stageFront3Dark.flipX = true;
+				stageFront3Dark.alpha = 0;
+				add(stageFront2Dark);
+				add(stageFront3Dark);
+
+				miraGradient = new FlxSprite(0,50).loadGraphic(Paths.image('MiraGradient'));
+				miraGradient.setGraphicSize(Std.int(miraGradient.width * 1.4));
+				miraGradient.antialiasing = true;
+				miraGradient.scrollFactor.set(1, 1);
+				miraGradient.active = false;
+				miraGradient.alpha = 0;
+				add(miraGradient);
 			}
+
+			
 			
 
 		}			
@@ -5007,93 +5053,32 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if(curSong == "Lights Down" && curBeat == 64)
+		var lightsDownTrue = [64, 160, 272, 280, 288, 296, 298, 300, 302, 304, 368];
+		var lightsDownFalse = [128, 192, 276, 284, 292, 297, 299, 301, 303, 360, 400];
+		if(curSong == "Lights Down" && curBeat == 1) 
 		{
-			LightsOUT(true);
+			changeDadCharacter("whiteimpostor");
+			changeBFCharacter("bfeyes");
+			changeDadCharacter("impostor3");
+			changeBFCharacter("bf");
 		}
-		if(curSong == "Lights Down" && curBeat == 128)
+		if(curSong == "Lights Down" && curBeat == 32) 
 		{
-			LightsOUT(false);
+			PartialLightsOUT(true);
 		}
-		if(curSong == "Lights Down" && curBeat == 160)
+		if(curSong == "Lights Down")
 		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 192)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 272)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 276)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 280)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 284)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 288)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 292)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 296)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 297)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 298)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 299)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 300)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 301)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 302)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 303)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 304)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 360)
-		{
-			LightsOUT(false);
-		}
-		if(curSong == "Lights Down" && curBeat == 368)
-		{
-			LightsOUT(true);
-		}
-		if(curSong == "Lights Down" && curBeat == 400)
-		{
-			LightsOUT(false);
+			for (i in 0...lightsDownTrue.length)
+			{
+				if (curBeat == lightsDownTrue[i])
+					LightsOUT(true);
+			}
+			for (i in 0...lightsDownFalse.length)
+			{
+				if (curBeat == lightsDownFalse[i])
+					LightsOUT(false);
+			}
+
 		}
 
 		if (generatedMusic)
@@ -5408,10 +5393,32 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function PartialLightsOUT(id:Bool)
+	{
+		if(id)
+		{
+			camGame.flash(FlxColor.BLACK, 1);
+			machineDark.alpha = 1;
+			bgDark.alpha = 1;
+			stageFront2Dark.alpha = 1;
+			stageFront3Dark.alpha = 1;
+			miraGradient.alpha = 1;
+		}else{
+			camGame.flash(FlxColor.WHITE, 0.35);
+			machineDark.alpha = 0;
+			bgDark.alpha = 0;
+			stageFront2Dark.alpha = 0;
+			stageFront3Dark.alpha = 0;
+			miraGradient.alpha = 0;
+		}
+
+	}
+
 	function LightsOUT(id:Bool)
 	{
 		if(id)
 		{
+			camGame.flash(FlxColor.WHITE, 0.35);
 			lightsOutSprite.alpha = 1;
 			gf.y += 2000;
 			stageFront2.y += 2000;
@@ -5419,8 +5426,12 @@ class PlayState extends MusicBeatState
 			lightBar.y -= 2000;
 			changeDadCharacter("whiteimpostor");
 			changeBFCharacter("bfeyes");
+			miraGradient.alpha = 0;
+			stageFront2Dark.alpha = 0;
+			stageFront3Dark.alpha = 0;
 			
 		}else{
+			camGame.flash(FlxColor.BLACK, 0.35);
 			lightsOutSprite.alpha = 0;
 			gf.y -= 2000;
 			stageFront2.y -= 2000;
@@ -5428,6 +5439,9 @@ class PlayState extends MusicBeatState
 			lightBar.y += 2000;
 			changeDadCharacter("impostor3");
 			changeBFCharacter("bf");
+			miraGradient.alpha = 1;
+			stageFront2Dark.alpha = 1;
+			stageFront2Dark.alpha = 1;
 		}
 		
 	}
