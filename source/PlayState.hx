@@ -5421,8 +5421,8 @@ class PlayState extends MusicBeatState
 			camGame.flash(FlxColor.WHITE, 0.35);
 			lightsOutSprite.alpha = 1;
 			gf.y += 2000;
-			stageFront2.y += 2000;
-			stageFront3.y += 2000;
+			stageFront2.alpha = 0;
+			stageFront3.alpha = 0;
 			lightBar.y -= 2000;
 			changeDadCharacter("whiteimpostor");
 			changeBFCharacter("bfeyes");
@@ -5434,8 +5434,8 @@ class PlayState extends MusicBeatState
 			camGame.flash(FlxColor.BLACK, 0.35);
 			lightsOutSprite.alpha = 0;
 			gf.y -= 2000;
-			stageFront2.y -= 2000;
-			stageFront3.y -= 2000;
+			stageFront2.alpha = 1;
+			stageFront3.alpha = 1;
 			lightBar.y += 2000;
 			changeDadCharacter("impostor3");
 			changeBFCharacter("bf");

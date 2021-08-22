@@ -120,7 +120,12 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 		{
-			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+			if(PlayState.SONG.player2 != 'black')
+				FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
+			else
+				FlxG.sound.playMusic(Paths.music('gameOverEmpty' + stageSuffix));
+
+
 			startVibin = true;
 		}
 
@@ -151,7 +156,11 @@ class GameOverSubstate extends MusicBeatSubstate
 			isEnding = true;
 			bf.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+			if(PlayState.SONG.player2 != 'black')
+				FlxG.sound.play(Paths.music('gameOverEnd' + stageSuffix));
+			else
+				FlxG.sound.play(Paths.music('gameOverEndEmpty' + stageSuffix));
+			
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
