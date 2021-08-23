@@ -26,7 +26,7 @@ class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
 
-	var menuItems:FlxTypedGroup<FlxSprite>;
+	var menuItems:FlxTypedGroup<AmongButton>;
 
 	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
@@ -116,18 +116,14 @@ class MainMenuState extends MusicBeatState
 		add(magenta);
 		// magenta.scrollFactor.set();
 
-		menuItems = new FlxTypedGroup<FlxSprite>();
+		menuItems = new FlxTypedGroup<AmongButton>();
 		add(menuItems);
 
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
-			menuItem.frames = tex;
-			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
-			menuItem.animation.play('idle');
+			var menuItem:AmongButton = new AmongButton(0, 0, 'the fuck');
 			menuItem.ID = i;
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -180,12 +176,12 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach(function(spr:AmongButton)
 		{
 			if(usingMouse)
 			{
 				if(!FlxG.mouse.overlaps(spr))
-					spr.animation.play('idle');
+					spr.unHighlight();
 			}
 	
 			if (FlxG.mouse.overlaps(spr))
@@ -194,7 +190,7 @@ class MainMenuState extends MusicBeatState
 				{
 					curSelected = spr.ID;
 					usingMouse = true;
-					spr.animation.play('selected');
+					spr.highlight();
 					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 				}
 					
@@ -271,7 +267,7 @@ class MainMenuState extends MusicBeatState
 			if (FlxG.save.data.flashing)
 				FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-			menuItems.forEach(function(spr:FlxSprite)
+			menuItems.forEach(function(spr:AmongButton)
 			{
 				if (curSelected != spr.ID)
 				{
@@ -334,13 +330,13 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 		}
-		menuItems.forEach(function(spr:FlxSprite)
+		menuItems.forEach(function(spr:AmongButton)
 		{
-			spr.animation.play('idle');
+			spr.unHighlight();
 
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
-				spr.animation.play('selected');
+				spr.highlight();
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 			}
 
