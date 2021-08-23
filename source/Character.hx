@@ -592,10 +592,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", -250, -384);
-				addOffset("singRIGHT", -268, -442);
-				addOffset("singLEFT", -192, -414);
-				addOffset("singDOWN", 0, 0);
+				addOffset('singUP');
+				addOffset('singRIGHT');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
 
 				playAnim('idle');
 

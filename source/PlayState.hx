@@ -1282,8 +1282,8 @@ class PlayState extends MusicBeatState
 				dad.y += 350;
 				dad.x -= 60;
 			case 'tomongus':
-				dad.y += 350;
-				dad.x += 200;
+				dad.y += 570;
+				dad.x += 250;
 			case 'hamster':
 				dad.y += 350;
 				dad.x += 200;
@@ -3190,8 +3190,8 @@ class PlayState extends MusicBeatState
 					switch (dad.curCharacter)
 					{
 						case 'tomongus':
-							camFollow.y = dad.getMidpoint().y - 230;
-							camFollow.x = dad.getMidpoint().x - 200;
+							camFollow.y = dad.getMidpoint().y - 240;
+							camFollow.x = dad.getMidpoint().x - 50;
 						case 'black':
 							camFollow.y = dad.getMidpoint().y - 200;
 							camFollow.x = dad.getMidpoint().x - 400;
