@@ -171,7 +171,6 @@ class PlayState extends MusicBeatState
 
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
-	private var lightBar:FlxBar;
 	private var songPositionBar:Float = 0;
 
 	private var generatedMusic:Bool = false;
@@ -1547,20 +1546,9 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		healthBar.createFilledBar(FlxColor.fromString('#FF' + dad.playerColor), FlxColor.fromString('#FF' + boyfriend.playerColor));
 		// healthBar
 		add(healthBar);
-
-		if(curSong == "Lights Down")
-		{
-			lightBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
-			lightBar.scrollFactor.set();
-			lightBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-			lightBar.y += 2000;
-			add(lightBar);
-			lightBar.cameras = [camHUD];
-		}
 
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, healthBarBG.y
@@ -5420,12 +5408,12 @@ class PlayState extends MusicBeatState
 		{
 			camGame.flash(FlxColor.WHITE, 0.35);
 			lightsOutSprite.alpha = 1;
-			gf.y += 2000;
+			gf.alpha = 0;
 			stageFront2.alpha = 0;
 			stageFront3.alpha = 0;
-			lightBar.y -= 2000;
 			changeDadCharacter("whiteimpostor");
 			changeBFCharacter("bfeyes");
+			healthBar.createFilledBar(FlxColor.fromString('#FF' + dad.playerColor), FlxColor.fromString('#FF' + boyfriend.playerColor));
 			miraGradient.alpha = 0;
 			stageFront2Dark.alpha = 0;
 			stageFront3Dark.alpha = 0;
@@ -5433,12 +5421,12 @@ class PlayState extends MusicBeatState
 		}else{
 			camGame.flash(FlxColor.BLACK, 0.35);
 			lightsOutSprite.alpha = 0;
-			gf.y -= 2000;
+			gf.alpha = 1;
 			stageFront2.alpha = 1;
 			stageFront3.alpha = 1;
-			lightBar.y += 2000;
 			changeDadCharacter("impostor3");
 			changeBFCharacter("bf");
+			healthBar.createFilledBar(FlxColor.fromString('#FF' + dad.playerColor), FlxColor.fromString('#FF' + boyfriend.playerColor));
 			miraGradient.alpha = 1;
 			stageFront2Dark.alpha = 1;
 			stageFront2Dark.alpha = 1;

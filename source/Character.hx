@@ -11,6 +11,7 @@ class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
+	public var playerColor:String = "31B0D1";
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'bf';
@@ -463,6 +464,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bfeyes':
+				playerColor = "FFFFFF";
 				var tex = Paths.getSparrowAtlas('whitebf','shared',true);
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
@@ -499,6 +501,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 			case 'bf-pixel':
+				playerColor = "7BD6F6";
 				frames = Paths.getSparrowAtlas('bfPixel','shared',true);
 				animation.addByPrefix('idle', 'BF IDLE', 24, false);
 				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
@@ -525,6 +528,7 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bf-sus':
+				playerColor = "7BD6F6";
 				frames = Paths.getSparrowAtlas('bfSus','shared',true);
 				animation.addByPrefix('idle', 'BF IDLE', 24, false);
 				animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
@@ -584,6 +588,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'tomongus':
+				playerColor = "FF6770";
 				frames = Paths.getSparrowAtlas('tomongus','shared',true);
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
@@ -605,6 +610,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 			case 'hamster':
+				playerColor = "FFCF86";
 				frames = Paths.getSparrowAtlas('hamster','shared',true);
 				animation.addByPrefix('idle', 'HamsterIdle', 24, false);
 				animation.addByPrefix('singUP', 'HamsterUp', 24, false);
@@ -677,6 +683,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'impostor':
 				// inky is a god
+				playerColor = "FF3333";
 				tex = Paths.getSparrowAtlas('characters/impostorPolus', 'impostor');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -699,6 +706,7 @@ class Character extends FlxSprite
 
 			case 'impostor3':
 				// inky is a god
+				playerColor = "40AB22";
 				tex = Paths.getSparrowAtlas('characters/impostor3', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -716,6 +724,7 @@ class Character extends FlxSprite
 				playAnim('idle');	
 
 			case 'whiteimpostor':
+				playerColor = "000000";
 				tex = Paths.getSparrowAtlas('characters/whitegreen', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -734,6 +743,7 @@ class Character extends FlxSprite
 
 			case 'impostorr':
 				// ethan
+				playerColor = "40AB22";
 				tex = Paths.getSparrowAtlas('characters/impostorR', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -752,6 +762,7 @@ class Character extends FlxSprite
 
 			case 'crewmate':
 				// not an impostor
+				playerColor = "40AB22";
 				tex = Paths.getSparrowAtlas('characters/crewmate', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -770,6 +781,7 @@ class Character extends FlxSprite
 
 			case 'impostor2':
 				// impostor
+				playerColor = "FF3333";
 				tex = Paths.getSparrowAtlas('characters/impostor2', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'impostor idle', 24, false);
@@ -788,6 +800,7 @@ class Character extends FlxSprite
 				
 			case 'black':
 				// i hate black people
+				playerColor = "2B2B2B";
 				tex = Paths.getSparrowAtlas('characters/black', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'BLACK IDLE', 24, true);
