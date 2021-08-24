@@ -26,10 +26,10 @@ class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
 
-	var menuItems:FlxTypedGroup<AmongButton>;
+	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'donate', 'options'];
+	var optionShit:Array<String> = ['Story', 'Freeplay', 'Options', 'Discord'];
 	#else
 	var optionShit:Array<String> = ['story mode', 'freeplay'];
 	#end
@@ -44,7 +44,6 @@ class MainMenuState extends MusicBeatState
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
-	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
 	var redImpostor:FlxSprite;
@@ -79,7 +78,7 @@ class MainMenuState extends MusicBeatState
 		add(bg);
 
 		redImpostor = new FlxSprite(704.55, 106.65);
-		redImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		redImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
 		redImpostor.animation.addByPrefix('idle', 'red smile', 24, true);
 		redImpostor.animation.play('idle');
 		redImpostor.antialiasing = true;
@@ -89,7 +88,7 @@ class MainMenuState extends MusicBeatState
 		add(redImpostor);
 
 		greenImpostor = new FlxSprite(-159.35, 102.35);
-		greenImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		greenImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
 		greenImpostor.animation.addByPrefix('idle', 'green smile', 24, true);
 		greenImpostor.animation.play('idle');
 		greenImpostor.antialiasing = true;
@@ -98,53 +97,48 @@ class MainMenuState extends MusicBeatState
 		greenImpostor.scrollFactor.set();
 		add(greenImpostor);
 
-		camFollow = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.x = 0;
-		magenta.scrollFactor.y = 0.10;
-		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
-		magenta.updateHitbox();
-		magenta.screenCenter();
-		magenta.visible = false;
-		if(FlxG.save.data.antialiasing)
-			{
-				magenta.antialiasing = true;
-			}
-		magenta.color = 0xFFfd719b;
-		add(magenta);
-		// magenta.scrollFactor.set();
-
-		menuItems = new FlxTypedGroup<AmongButton>();
-		add(menuItems);
+		menuItems = new FlxTypedGroup<FlxSprite>();
 
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
-		for (i in 0...optionShit.length)
-		{
-			var menuItem:AmongButton = new AmongButton(0, 0, 'the fuck');
-			menuItem.ID = i;
-			menuItem.screenCenter(X);
-			menuItems.add(menuItem);
-			menuItem.scrollFactor.set();
-			if(FlxG.save.data.antialiasing)
-				{
-					menuItem.antialiasing = true;
-				}
-			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{ 
-						finishedFunnyMove = true; 
-						changeItem();
-					}});
-			else
-				menuItem.y = 60 + (i * 160);
-		}
+		for(i in 0...optionShit.length) {
+			var testButton:FlxSprite = new FlxSprite(0, 130);
+			testButton.ID = i;
+			testButton.frames = Paths.getSparrowAtlas('menu/ButtonSheet', 'impostor');
+			testButton.animation.addByPrefix('idle', optionShit[i] + 'Idle', 24, true);
+			testButton.animation.addByPrefix('hover', optionShit[i] + 'Hover', 24, true);
+			testButton.animation.play('idle');
+			testButton.antialiasing = true;
+			testButton.updateHitbox();
+			testButton.screenCenter(X);
+			testButton.scrollFactor.set();
+			switch(i) {
+				case 0:
+					testButton.setPosition(347.35, 389.9);
+				case 1:
+					testButton.setPosition(645.5, 389.9);
+				case 2:
+					testButton.setPosition(347.35, 523.3);
+				case 3:
+					testButton.setPosition(645.5, 523.3);
+			}
+			menuItems.add(testButton);
+		}		
+
+		add(menuItems);
+
+		var logo:FlxSprite = new FlxSprite(0, 100);
+		logo.frames = Paths.getSparrowAtlas('logoBumpin');
+		logo.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		logo.updateHitbox();
+		logo.screenCenter();
+		logo.antialiasing = true;
+		logo.scale.set(0.7, 0.7);
+		logo.y -= 160;
+		add(logo);
 
 		firstStart = false;
-
-		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer +  (Main.watermarks ? " FNF - " + kadeEngineVer + " Kade Engine" : ""), 12);
 		versionShit.scrollFactor.set();
@@ -176,12 +170,12 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
-		menuItems.forEach(function(spr:AmongButton)
+		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if(usingMouse)
 			{
 				if(!FlxG.mouse.overlaps(spr))
-					spr.unHighlight();
+					spr.animation.play('idle');
 			}
 	
 			if (FlxG.mouse.overlaps(spr))
@@ -190,8 +184,7 @@ class MainMenuState extends MusicBeatState
 				{
 					curSelected = spr.ID;
 					usingMouse = true;
-					spr.highlight();
-					camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+					spr.animation.play('hover');
 				}
 					
 				if(FlxG.mouse.pressed && canClick)
@@ -247,27 +240,26 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
+		/*menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.screenCenter(X);
-		});
+		});*/
 	}
 
 	function selectSomething()
 	{
-		if (optionShit[curSelected] == 'donate')
+		if (optionShit[curSelected] == 'Discord')
 		{
-				fancyOpenURL("https://ninja-muffin24.itch.io/funkin");
+			//LOL!!! SELF PROMOTION BITCHASS!!!
+				fancyOpenURL("https://discord.gg/pY54h9wq7q");
 		}
 		else
 		{
 			selectedSomethin = true;
 			FlxG.sound.play(Paths.sound('confirmMenu'));
-				
-			if (FlxG.save.data.flashing)
-				FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+			
 
-			menuItems.forEach(function(spr:AmongButton)
+			menuItems.forEach(function(spr:FlxSprite)
 			{
 				if (curSelected != spr.ID)
 				{
@@ -281,20 +273,10 @@ class MainMenuState extends MusicBeatState
 				}
 				else
 				{
-					if (FlxG.save.data.flashing)
-					{
-						FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+					new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
 							goToState();
 						});
-					}
-					else
-					{
-						new FlxTimer().start(1, function(tmr:FlxTimer)
-						{
-							goToState();
-						});
-					}
 				}
 			});
 		}
@@ -306,15 +288,15 @@ class MainMenuState extends MusicBeatState
 
 		switch (daChoice)
 		{
-			case 'story mode':
+			case 'Story':
 				FlxG.switchState(new StoryMenuState());
 				trace("Story Menu Selected");
-			case 'freeplay':
+			case 'Freeplay':
 				FlxG.switchState(new FreeplayState());
 
 				trace("Freeplay Menu Selected");
 
-			case 'options':
+			case 'Options':
 				FlxG.switchState(new OptionsMenu());
 		}
 	}
@@ -330,14 +312,13 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 		}
-		menuItems.forEach(function(spr:AmongButton)
+		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.unHighlight();
+			spr.animation.play('idle');
 
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
-				spr.highlight();
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+				spr.animation.play('hover');
 			}
 
 			spr.updateHitbox();

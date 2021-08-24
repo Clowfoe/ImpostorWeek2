@@ -15,22 +15,23 @@ class AmongButton extends FlxSprite
   
   public var func:Void->Void;
 
-  public function new(_x:Int,_y:Int, buttonText:String = 'button')
+  public function new(_x:Float,_y:Float, buttonText:String = 'button')
     {
-        super(-100,-100);
+        super(-100, -100);
 
         trueX = _x;
         trueY = _y;
 
         trueText = buttonText;
 
-        spriteOne = new FlxSprite(trueX, trueY).loadGraphic(Paths.image('MENU/idlebutton', 'impostor'));
-        spriteTwo = new FlxSprite(trueX, trueY).loadGraphic(Paths.image('MENU/hoverbutton', 'impostor'));
+        spriteOne = new FlxSprite(trueX, trueY).loadGraphic(Paths.image('menu/idlebutton', 'impostor'));
+        spriteTwo = new FlxSprite(trueX, trueY).loadGraphic(Paths.image('menu/hoverbutton', 'impostor'));
 
         spriteOne.antialiasing = true;
         spriteTwo.antialiasing = true;
         
         spriteTwo.alpha = 0;
+        spriteOne.alpha = 1;
     }
 
     override function update(elapsed)
