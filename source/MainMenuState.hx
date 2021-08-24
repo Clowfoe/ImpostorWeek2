@@ -318,7 +318,7 @@ class MainMenuState extends MusicBeatState
 
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
-				spr.animation.play('hover');
+				spr.animation.play('hover');				
 			}
 
 			spr.updateHitbox();

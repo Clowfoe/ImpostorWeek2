@@ -1,5 +1,7 @@
 package;
 
+import flixel.graphics.tile.FlxGraphicsShader;
+import flixel.graphics.FlxGraphic;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -185,6 +187,12 @@ class StoryMenuState extends MusicBeatState
 		gradient.screenCenter();
 		add(gradient);
 
+		var topBlack:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 60, FlxColor.BLACK);
+		add(topBlack);
+
+		var bottomBlack:FlxSprite = new FlxSprite(0, 450).makeGraphic(FlxG.width, 500, FlxColor.BLACK);
+		add(bottomBlack);
+
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
@@ -301,17 +309,12 @@ class StoryMenuState extends MusicBeatState
 		for (item in grpWeekText.members)
 		{
 			item.targetY = bullShit - curWeek;
-			if (item.targetY <= Std.int(0) && weekUnlocked[curWeek])
-				item.alpha = 0;
-			
-			if (item.targetY == Std.int(0) && weekUnlocked[curWeek])
-				item.alpha = 1;
-			else
-				item.alpha = 0.6;
 			bullShit++;
 		}
 
 		trace("Line 165");
+
+		changeWeek();
 
 		super.create();
 	}
@@ -535,13 +538,6 @@ class StoryMenuState extends MusicBeatState
 		for (item in grpWeekText.members)
 		{
 			item.targetY = bullShit - curWeek;
-			if (item.targetY <= Std.int(0) && weekUnlocked[curWeek])
-				item.alpha = 0;
-
-			if (item.targetY == Std.int(0) && weekUnlocked[curWeek])
-				item.alpha = 1;
-			else
-				item.alpha = 0.6;
 			bullShit++;
 		}
 
@@ -565,13 +561,15 @@ class StoryMenuState extends MusicBeatState
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
 
-				for (item in grpWeekText.members)
-				{
-					if (item.targetY >= Std.int(0) && weekUnlocked[curWeek])
-						FlxTween.tween(item,{alpha: 1}, 0.5 ,{ease: FlxEase.expoOut});
-					else
-						FlxTween.tween(item,{alpha: 0}, 0.5 ,{ease: FlxEase.expoOut});
-				}
+				for (i in 0...grpWeekText.members.length)
+					{
+						if(i != curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i == curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+					}
 
 			}
 			case 1:
@@ -588,13 +586,15 @@ class StoryMenuState extends MusicBeatState
 				ballerTween = FlxTween.tween(baller,{y: -900}, 0.8 ,{ease: FlxEase.expoOut});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
 
-				for (item in grpWeekText.members)
-				{
-					if (item.targetY >= Std.int(0) && weekUnlocked[curWeek])
-						FlxTween.tween(item,{alpha: 1}, 0.5 ,{ease: FlxEase.expoOut});
-					else
-						FlxTween.tween(item,{alpha: 0}, 0.5 ,{ease: FlxEase.expoOut});
-				}
+				for (i in 0...grpWeekText.members.length)
+					{
+						if(i != curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i == curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+					}
 			}
 			case 2:
 			{
@@ -610,12 +610,14 @@ class StoryMenuState extends MusicBeatState
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
 
-				for (item in grpWeekText.members)
+				for (i in 0...grpWeekText.members.length)
 					{
-						if (item.targetY >= Std.int(0) && weekUnlocked[curWeek])
-							FlxTween.tween(item,{alpha: 1}, 0.5 ,{ease: FlxEase.expoOut});
-						else
-							FlxTween.tween(item,{alpha: 0}, 0.5 ,{ease: FlxEase.expoOut});
+						if(i != curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i == curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
 					}
 			}
 		}
