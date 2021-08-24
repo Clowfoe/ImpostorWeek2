@@ -78,7 +78,7 @@ class MainMenuState extends MusicBeatState
 		add(bg);
 
 		redImpostor = new FlxSprite(704.55, 106.65);
-		redImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
+		redImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
 		redImpostor.animation.addByPrefix('idle', 'red smile', 24, true);
 		redImpostor.animation.play('idle');
 		redImpostor.antialiasing = true;
@@ -88,7 +88,7 @@ class MainMenuState extends MusicBeatState
 		add(redImpostor);
 
 		greenImpostor = new FlxSprite(-159.35, 102.35);
-		greenImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
+		greenImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
 		greenImpostor.animation.addByPrefix('idle', 'green smile', 24, true);
 		greenImpostor.animation.play('idle');
 		greenImpostor.antialiasing = true;
@@ -105,7 +105,7 @@ class MainMenuState extends MusicBeatState
 		for(i in 0...optionShit.length) {
 			var testButton:FlxSprite = new FlxSprite(0, 130);
 			testButton.ID = i;
-			testButton.frames = Paths.getSparrowAtlas('menu/ButtonSheet', 'impostor');
+			testButton.frames = Paths.getSparrowAtlas('MENU/ButtonSheet', 'impostor');
 			testButton.animation.addByPrefix('idle', optionShit[i] + 'Idle', 24, true);
 			testButton.animation.addByPrefix('hover', optionShit[i] + 'Hover', 24, true);
 			testButton.animation.play('idle');
