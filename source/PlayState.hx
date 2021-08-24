@@ -227,6 +227,10 @@ class PlayState extends MusicBeatState
 	var yellow:FlxSprite;
 	var brown:FlxSprite;
 
+	var bfStartpos:FlxPoint;
+	var dadStartpos:FlxPoint;
+	var gfStartpos:FlxPoint;
+
 	var orb:FlxSprite = new FlxSprite();
 
 	var crowd:FlxSprite = new FlxSprite();
@@ -1370,7 +1374,10 @@ class PlayState extends MusicBeatState
 			add(dad);
 			add(boyfriend);
 			
-			
+			if(curStage == "ejected")
+			{
+				bfStartpos = new FlxPoint(boyfriend.x, boyfriend.y);
+			}
 
 			if (curStage == 'toogus')
 			{
@@ -2654,11 +2661,33 @@ class PlayState extends MusicBeatState
 
 	public var updateFrame = 0;
 
+	public var tweeningChar:Bool = false;
+
 	override public function update(elapsed:Float)
 	{
 		#if !debug
 		perfectMode = false;
 		#end
+
+		if(curStage == "ejected")
+		{
+			camGame.shake(0.002, 0.1);
+
+			gf.alpha = 0;
+			dad.alpha = 0;
+
+			if(!tweeningChar)
+			{
+				tweeningChar = true;
+				FlxTween.tween(boyfriend, {x: FlxG.random.float(bfStartpos.x - 15, bfStartpos.x + 15), y: FlxG.random.float(bfStartpos.y - 15, bfStartpos.y + 15)}, 0.4, {
+					ease: FlxEase.smoothStepInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						tweeningChar = false;
+					}
+				});
+			}
+		}
 
 		if (updateFrame == 4)
 			{
