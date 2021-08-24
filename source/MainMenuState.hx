@@ -132,7 +132,7 @@ class MainMenuState extends MusicBeatState
 		logo.frames = Paths.getSparrowAtlas('logoBumpin');
 		logo.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logo.updateHitbox();
-		logo.screenCenter(x);
+		logo.screenCenter();
 		logo.antialiasing = true;
 		logo.scale.set(0.7, 0.7);
 		logo.y -= 160;

@@ -512,6 +512,10 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/meltdown/meltdown'));
 			case 'sussus-toogus':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-toogus/toogus'));
+			case 'lights-down':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/lights-down/down'));
+			case 'reactor':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/reactor/reactor'));
 			case 'roses':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/roses/rosesDialogue'));
 			case 'thorns':
@@ -1366,10 +1370,7 @@ class PlayState extends MusicBeatState
 			add(gf);
 
 			// Shitty layering but whatev it works LOL
-			if (curSong == 'sabotage')
-				{
-				gf.y -= 200;
-				}
+			
 
 			add(dad);
 			add(boyfriend);
@@ -1444,6 +1445,16 @@ class PlayState extends MusicBeatState
 
 		var greenImpostor:Bool = false;
 		if(SONG.song.toLowerCase() == 'sussus-toogus') {
+			//bitch update
+			greenImpostor = true;
+		}
+
+		if(SONG.song.toLowerCase() == 'lights-down') {
+			//bitch update
+			greenImpostor = true;
+		}
+
+		if(SONG.song.toLowerCase() == 'reactor') {
 			//bitch update
 			greenImpostor = true;
 		}
@@ -1679,6 +1690,10 @@ class PlayState extends MusicBeatState
 				case 'meltdown':
 					susIntro(doof);
 				case 'sussus-toogus':
+					susIntro(doof);
+				case 'lights-down':
+					susIntro(doof);
+				case 'reactor':
 					susIntro(doof);
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
@@ -5072,18 +5087,18 @@ class PlayState extends MusicBeatState
 
 		var lightsDownTrue = [64, 160, 272, 280, 288, 296, 298, 300, 302, 304, 368];
 		var lightsDownFalse = [128, 192, 276, 284, 292, 297, 299, 301, 303, 360, 400];
-		if(curSong == "Lights Down" && curBeat == 1) 
+		if(curSong == "Lights-Down" && curBeat == 1) 
 		{
 			changeDadCharacter("whiteimpostor");
 			changeBFCharacter("bfeyes");
 			changeDadCharacter("impostor3");
 			changeBFCharacter("bf");
 		}
-		if(curSong == "Lights Down" && curBeat == 32) 
+		if(curSong == "Lights-Down" && curBeat == 32) 
 		{
 			PartialLightsOUT(true);
 		}
-		if(curSong == "Lights Down")
+		if(curSong == "Lights-Down")
 		{
 			for (i in 0...lightsDownTrue.length)
 			{
