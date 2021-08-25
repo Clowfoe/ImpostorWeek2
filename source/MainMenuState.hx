@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
 import flixel.input.gamepad.FlxGamepad;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
@@ -46,8 +47,11 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	public static var finishedFunnyMove:Bool = false;
 
+	var starFG:FlxBackdrop;
+	var starBG:FlxBackdrop;
 	var redImpostor:FlxSprite;
 	var greenImpostor:FlxSprite;
+	var vignette:FlxSprite;
 
 	override function create()
 	{
@@ -65,20 +69,28 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 
-		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('spacep'));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.10;
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
-		bg.updateHitbox();
-		bg.screenCenter();
+		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.scrollFactor.set();
 		if(FlxG.save.data.antialiasing)
 			{
 				bg.antialiasing = true;
 			}
 		add(bg);
 
+		starFG = new FlxBackdrop(Paths.image('menu/starFG', 'impostor'), 1, 1, true, true);
+		starFG.updateHitbox();
+		starFG.antialiasing = true;
+		starFG.scrollFactor.set();
+		add(starFG);
+
+		starBG = new FlxBackdrop(Paths.image('menu/starBG', 'impostor'), 1, 1, true, true);
+		starBG.updateHitbox();
+		starBG.antialiasing = true;
+		starBG.scrollFactor.set();
+		add(starBG);
+
 		redImpostor = new FlxSprite(704.55, 106.65);
-		redImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		redImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
 		redImpostor.animation.addByPrefix('idle', 'red smile', 24, true);
 		redImpostor.animation.play('idle');
 		redImpostor.antialiasing = true;
@@ -88,7 +100,7 @@ class MainMenuState extends MusicBeatState
 		add(redImpostor);
 
 		greenImpostor = new FlxSprite(-159.35, 102.35);
-		greenImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		greenImpostor.frames = Paths.getSparrowAtlas('menu/impostorMenu', 'impostor');
 		greenImpostor.animation.addByPrefix('idle', 'green smile', 24, true);
 		greenImpostor.animation.play('idle');
 		greenImpostor.antialiasing = true;
@@ -96,6 +108,13 @@ class MainMenuState extends MusicBeatState
 		greenImpostor.active = true;
 		greenImpostor.scrollFactor.set();
 		add(greenImpostor);
+
+		vignette = new FlxSprite(0, 0).loadGraphic(Paths.image('menu/vignette', 'impostor'));
+		vignette.antialiasing = true;
+		vignette.updateHitbox();
+		vignette.active = false;
+		vignette.scrollFactor.set();
+		add(vignette);		
 
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -105,7 +124,7 @@ class MainMenuState extends MusicBeatState
 		for(i in 0...optionShit.length) {
 			var testButton:FlxSprite = new FlxSprite(0, 130);
 			testButton.ID = i;
-			testButton.frames = Paths.getSparrowAtlas('MENU/ButtonSheet', 'impostor');
+			testButton.frames = Paths.getSparrowAtlas('menu/ButtonSheet', 'impostor');
 			testButton.animation.addByPrefix('idle', optionShit[i] + 'Idle', 24, true);
 			testButton.animation.addByPrefix('hover', optionShit[i] + 'Hover', 24, true);
 			testButton.animation.play('idle');
@@ -115,13 +134,13 @@ class MainMenuState extends MusicBeatState
 			testButton.scrollFactor.set();
 			switch(i) {
 				case 0:
-					testButton.setPosition(347.35, 389.9);
+					testButton.setPosition(367.35, 389.9);
 				case 1:
-					testButton.setPosition(645.5, 389.9);
+					testButton.setPosition(665.5, 389.9);
 				case 2:
-					testButton.setPosition(347.35, 523.3);
+					testButton.setPosition(367.35, 523.3);
 				case 3:
-					testButton.setPosition(645.5, 523.3);
+					testButton.setPosition(665.5, 523.3);
 			}
 			menuItems.add(testButton);
 		}		
@@ -193,6 +212,9 @@ class MainMenuState extends MusicBeatState
 					canClick = false;
 				}
 			}
+
+			starFG.x -= 0.03;
+			starBG.x -= 0.01;
 	
 			spr.updateHitbox();
 		});
@@ -201,40 +223,9 @@ class MainMenuState extends MusicBeatState
 		{
 			var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-			if (gamepad != null)
-			{
-				if (gamepad.justPressed.DPAD_UP)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(-1);
-				}
-				if (gamepad.justPressed.DPAD_DOWN)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(1);
-				}
-			}
-
-			if (FlxG.keys.justPressed.UP)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(-1);
-			}
-
-			if (FlxG.keys.justPressed.DOWN)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
-			}
-
 			if (controls.BACK)
 			{
 				FlxG.switchState(new TitleState());
-			}
-
-			if (controls.ACCEPT)
-			{
-				selectSomething();
 			}
 		}
 
@@ -263,6 +254,11 @@ class MainMenuState extends MusicBeatState
 			{
 				if (curSelected != spr.ID)
 				{
+					FlxTween.tween(starFG, {y: starFG.y + 500}, 0.7, {ease: FlxEase.quadInOut});
+					FlxTween.tween(starBG, {y: starBG.y + 500}, 0.7, {ease: FlxEase.quadInOut, startDelay: 0.2});
+					FlxTween.tween(greenImpostor, {y: greenImpostor.y + 800}, 0.7, {ease: FlxEase.quadInOut, startDelay: 0.24});
+					FlxTween.tween(redImpostor, {y: redImpostor.y + 800}, 0.7, {ease: FlxEase.quadInOut, startDelay: 0.3});
+					FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
 					FlxTween.tween(spr, {alpha: 0}, 1.3, {
 						ease: FlxEase.quadOut,
 						onComplete: function(twn:FlxTween)
@@ -273,6 +269,11 @@ class MainMenuState extends MusicBeatState
 				}
 				else
 				{
+					FlxTween.tween(starFG, {y: starFG.y + 500}, 1, {ease: FlxEase.quadInOut});
+					FlxTween.tween(starBG, {y: starBG.y + 500}, 1, {ease: FlxEase.quadInOut, startDelay: 0.2});
+					FlxTween.tween(greenImpostor, {y: greenImpostor.y + 800}, 0.7, {ease: FlxEase.quadInOut, startDelay: 0.24});
+					FlxTween.tween(redImpostor, {y: redImpostor.y + 800}, 0.7, {ease: FlxEase.quadInOut, startDelay: 0.3});
+					FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
 					new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
 							goToState();
@@ -298,7 +299,7 @@ class MainMenuState extends MusicBeatState
 
 			case 'Options':
 				FlxG.switchState(new OptionsMenu());
-		}
+		}		
 	}
 
 	function changeItem(huh:Int = 0)
