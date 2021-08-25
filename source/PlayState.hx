@@ -4045,7 +4045,6 @@ class PlayState extends MusicBeatState
 	var offsetTest:Float = 0;
 
 	var timeShown = 0;
-	var currentTimingShown:FlxText = null;
 
 	private function popUpScore(daNote:Note):Void
 	{
@@ -4149,26 +4148,7 @@ class PlayState extends MusicBeatState
 
 			if (loadRep)
 				msTiming = HelperFunctions.truncateFloat(findByTime(daNote.strumTime)[3], 3);
-
-			if (currentTimingShown != null)
-				remove(currentTimingShown);
-
-			currentTimingShown = new FlxText(0, 0, 0, "0ms");
 			timeShown = 0;
-			switch (daRating)
-			{
-				case 'shit' | 'bad':
-					currentTimingShown.color = FlxColor.RED;
-				case 'good':
-					currentTimingShown.color = FlxColor.GREEN;
-				case 'sick':
-					currentTimingShown.color = FlxColor.CYAN;
-			}
-			currentTimingShown.borderStyle = OUTLINE;
-			currentTimingShown.borderSize = 1;
-			currentTimingShown.borderColor = FlxColor.BLACK;
-			currentTimingShown.text = msTiming + "ms";
-			currentTimingShown.size = 20;
 
 			if (msTiming >= 0.03 && offsetTesting)
 			{
@@ -4189,11 +4169,6 @@ class PlayState extends MusicBeatState
 				offsetTest = HelperFunctions.truncateFloat(total / hits.length, 2);
 			}
 
-			if (currentTimingShown.alpha != 1)
-				currentTimingShown.alpha = 1;
-
-			if (!PlayStateChangeables.botPlay || loadRep)
-				add(currentTimingShown);
 
 			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 			comboSpr.screenCenter();
@@ -4202,14 +4177,7 @@ class PlayState extends MusicBeatState
 			comboSpr.acceleration.y = 600;
 			comboSpr.velocity.y -= 150;
 
-			currentTimingShown.screenCenter();
-			currentTimingShown.x = comboSpr.x + 100;
-			currentTimingShown.y = rating.y + 100;
-			currentTimingShown.acceleration.y = 600;
-			currentTimingShown.velocity.y -= 150;
-
 			comboSpr.velocity.x += FlxG.random.int(1, 10);
-			currentTimingShown.velocity.x += comboSpr.velocity.x;
 			if (!PlayStateChangeables.botPlay || loadRep)
 				add(rating);
 
@@ -4232,11 +4200,9 @@ class PlayState extends MusicBeatState
 				comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.7));
 			}
 
-			currentTimingShown.updateHitbox();
 			comboSpr.updateHitbox();
 			rating.updateHitbox();
 
-			currentTimingShown.cameras = [camHUD];
 			comboSpr.cameras = [camHUD];
 			rating.cameras = [camHUD];
 
@@ -4313,8 +4279,6 @@ class PlayState extends MusicBeatState
 				startDelay: Conductor.crochet * 0.001,
 				onUpdate: function(tween:FlxTween)
 				{
-					if (currentTimingShown != null)
-						currentTimingShown.alpha -= 0.02;
 					timeShown++;
 				}
 			});
@@ -4324,11 +4288,6 @@ class PlayState extends MusicBeatState
 				{
 					coolText.destroy();
 					comboSpr.destroy();
-					if (currentTimingShown != null && timeShown >= 20)
-					{
-						remove(currentTimingShown);
-						currentTimingShown = null;
-					}
 					rating.destroy();
 				},
 				startDelay: Conductor.crochet * 0.001
@@ -5129,6 +5088,7 @@ class PlayState extends MusicBeatState
 			{var sussusBeats = [94, 95, 288, 296, 304, 312, 318, 319];
 				var saboBeats = [16, 24, 32, 40, 48, 56, 62, 63, 272, 280, 288, 296, 302, 303, 376, 384, 892];
 				var meltBeats = [0, 16, 32, 48, 64, 72, 80, 88, 96, 104, 112, 120, 126, 127, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 382, 464, 480, 496, 512];
+				var toogusBeats = [94, 95, 96, 98, 100, 102, 104, 106, 107, 109, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130, 132, 134, 136, 138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 192, 194, 196, 198, 200, 202, 204, 206, 208, 210, 212, 214, 216, 218, 220, 222, 288, 296, 304, 312, 318, 319, 320, 322, 324, 326, 328, 330, 332, 334, 336, 338, 340, 342, 344, 346, 348, 350, 352, 354, 356, 358, 360, 362, 364, 366, 368, 370, 372, 374, 376, 378, 380, 382];
 				var _b = 0;
 				//FlxG.watch.addQuick("Flash Timer", _cb); debug stuff
 		
@@ -5203,6 +5163,17 @@ class PlayState extends MusicBeatState
 						{
 							bgFlash();
 							_cb = 0;
+						}
+					}
+				}
+				if(curSong == 'Sussus-Toogus') // meltdown flashes
+				{
+					while(_b < toogusBeats.length) {
+						var meltflash = toogusBeats[_b];
+						++_b;
+						if(curBeat == meltflash)
+						{
+							bgFlash();
 						}
 					}
 				}
