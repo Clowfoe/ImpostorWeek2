@@ -1140,7 +1140,7 @@ class PlayState extends MusicBeatState
 					}
 					case 'ejected':
 						{
-							defaultCamZoom = 0.7;
+							defaultCamZoom = 0.45;
 							curStage = 'ejected';
 							crowd = new FlxSprite(-2500, 	-900);
 							crowd.frames = Paths.getSparrowAtlas('SkyFall');
@@ -1352,8 +1352,11 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 280;
 				gf.y += 360;
-
-				
+			case 'ejected':
+				boyfriend.x += 450;
+				boyfriend.y += 200;
+				dad.x += -450;
+				dad.y += 200;
 			case 'schoolEvil':
 				boyfriend.x += 200;
 				boyfriend.y += 220;
@@ -1378,6 +1381,8 @@ class PlayState extends MusicBeatState
 			if(curStage == "ejected")
 			{
 				bfStartpos = new FlxPoint(boyfriend.x, boyfriend.y);
+				gfStartpos = new FlxPoint(gf.x, gf.y);
+				dadStartpos = new FlxPoint(dad.x, dad.y);
 			}
 
 			if (curStage == 'toogus')
@@ -2688,9 +2693,6 @@ class PlayState extends MusicBeatState
 		{
 			camGame.shake(0.002, 0.1);
 
-			gf.alpha = 0;
-			dad.alpha = 0;
-
 			if(!tweeningChar)
 			{
 				tweeningChar = true;
@@ -2701,6 +2703,10 @@ class PlayState extends MusicBeatState
 						tweeningChar = false;
 					}
 				});
+				FlxTween.tween(gf, {x: FlxG.random.float(gfStartpos.x - 10, gfStartpos.x + 10), y: FlxG.random.float(gfStartpos.y - 10, gfStartpos.y + 10)}, 0.4, {
+					ease: FlxEase.smoothStepInOut});
+				FlxTween.tween(dad, {x: FlxG.random.float(dadStartpos.x - 15, dadStartpos.x + 15), y: FlxG.random.float(dadStartpos.y - 15, dadStartpos.y + 15)}, 0.4, {
+					ease: FlxEase.smoothStepInOut});
 			}
 		}
 
