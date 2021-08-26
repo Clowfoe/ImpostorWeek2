@@ -151,6 +151,7 @@ class PlayState extends MusicBeatState
 	public static var cpuStrums:FlxTypedGroup<FlxSprite> = null;
 
 	private var camZooming:Bool = false;
+	private var ejectedBoom:FlxSprite = new FlxSprite();
 	private var curSong:String = "";
 
 	private var gfSpeed:Int = 1;
@@ -1852,6 +1853,48 @@ class PlayState extends MusicBeatState
 					susIntro(doof);
 				case 'reactor':
 					susIntro(doof);
+				case 'ejected':
+					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					add(blackScreen);
+					blackScreen.scrollFactor.set();
+					camHUD.visible = false;
+					inCutscene = true;
+					ejectedBoom = new FlxSprite();
+					defaultCamZoom = 1;
+					FlxG.camera.zoom = 1;
+					new FlxTimer().start(2, function(tmr:FlxTimer)
+					{
+
+						camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 500);
+						FlxG.camera.focusOn(camFollow.getPosition());
+						ejectedBoom.frames = Paths.getSparrowAtlas('ejected/explosion', 'impostor');
+						ejectedBoom.animation.addByPrefix('KABOOM', 'The instance 1', 24, false);
+						ejectedBoom.updateHitbox();
+						ejectedBoom.scrollFactor.set();
+						ejectedBoom.screenCenter();
+						ejectedBoom.scale.set(2, 2);
+						ejectedBoom.animation.play('KABOOM');
+						add(ejectedBoom);						
+
+						new FlxTimer().start(0.7, function(tmr2:FlxTimer)
+						{							
+							blackScreen.destroy();					
+						});
+
+						new FlxTimer().start(2, function(tmr3:FlxTimer)
+						{							
+							ejectedBoom.destroy();					
+						});
+
+						FlxTween.tween(FlxG.camera, {zoom: 0.45}, 2, {ease:FlxEase.quadOut, startDelay: 1.5});
+
+						new FlxTimer().start(2, function(tmr2:FlxTimer)
+						{						
+							defaultCamZoom = 0.45;
+							camHUD.visible = true;	
+							startCountdown();				
+						});
+					});
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
