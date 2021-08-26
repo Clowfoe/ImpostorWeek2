@@ -283,6 +283,11 @@ class PlayState extends MusicBeatState
 
 	var speedPass:Array<Float> = [30, 30, 30, 30];
 
+	//array of two objects get ufkced
+	var middleBuildings:Array<FlxSprite>;
+	var rightBuildings:Array<FlxSprite>;
+	var leftBuildings:Array<FlxSprite>;
+
 	// BotPlay text
 	private var botPlayState:FlxText;
 	// Replay shit
@@ -1162,6 +1167,40 @@ class PlayState extends MusicBeatState
 						fgCloud.updateHitbox();
 						fgCloud.scrollFactor.set(0.3, 0.3);
 						add(fgCloud);
+
+						rightBuildings = [];
+						leftBuildings = [];
+						middleBuildings = [];
+						for(i in 0...2) {
+							var rightBuilding = new FlxSprite(1022.3, -390.45).loadGraphic(Paths.image('ejected/buildingB', 'impostor'));
+							rightBuilding.antialiasing = true;
+							rightBuilding.updateHitbox();
+							rightBuilding.scrollFactor.set(0.5, 0.5);
+							add(rightBuilding);
+							rightBuildings.push(rightBuilding);
+						}
+						
+						for(i in 0...2) {
+							var middleBuilding = new FlxSprite(-76.15, 1398.5).loadGraphic(Paths.image('ejected/buildingA', 'impostor'));
+							middleBuilding.antialiasing = true;
+							middleBuilding.updateHitbox();
+							middleBuilding.scrollFactor.set(0.5, 0.5);
+							add(middleBuilding);
+							middleBuildings.push(middleBuilding);
+						}
+						
+						for(i in 0...2) {
+							var leftBuilding = new FlxSprite(-1099.3, 7286.55).loadGraphic(Paths.image('ejected/buildingB', 'impostor'));
+							leftBuilding.antialiasing = true;
+							leftBuilding.updateHitbox();
+							leftBuilding.scrollFactor.set(0.5, 0.5);
+							add(leftBuilding);
+							leftBuildings.push(leftBuilding);
+						}
+
+						rightBuildings[0].y = 6803.1;
+						middleBuildings[0].y = 8570.5;
+						leftBuildings[0].y = 14050.2;
 
 						for(i in 0...3) {
 							//now i could add the clouds manually
@@ -2958,6 +2997,31 @@ class PlayState extends MusicBeatState
 						cloudScroll.members[i].x = FlxG.random.float(-3578.95, 3259.6);
 						cloudScroll.members[i].y = 2196.15;
 					}
+				}
+			}
+			//AAAAAAAAAAAAAAAAAAAA			
+			if(leftBuildings.length > 0) {
+				for(i in 0...leftBuildings.length) {
+					if(leftBuildings[i].y < -5871.85) {
+						leftBuildings[i].y = 9078.55;
+					}
+					leftBuildings[i].y -= 80;
+				}
+			}
+			if(middleBuildings.length > 0) {
+				for(i in 0...middleBuildings.length) {
+					if(middleBuildings[i].y < -11759.9) {
+						middleBuildings[i].y = 3190.5;
+					}			
+					middleBuildings[i].y -= 80;
+				}
+			}
+			if(rightBuildings.length > 0) {
+				for(i in 0...rightBuildings.length) {
+					if(rightBuildings[i].y < -13548.85) {
+						rightBuildings[i].y = 1401.55;
+					}
+					rightBuildings[i].y -= 80;
 				}
 			}
 			speedLines.y -= 70;
