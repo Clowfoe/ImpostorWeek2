@@ -6,6 +6,7 @@ import smTools.SMFile;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
@@ -46,6 +47,8 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var starFG:FlxBackdrop;
+	var starBG:FlxBackdrop;
 
 	var curWacky:Array<String> = [];
 
@@ -113,7 +116,6 @@ class TitleState extends MusicBeatState
 	}
 
 	var logoBl:FlxSprite;
-	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 
@@ -127,6 +129,26 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
+		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.scrollFactor.set();
+		if(FlxG.save.data.antialiasing)
+			{
+				bg.antialiasing = true;
+			}
+		add(bg);
+
+		starFG = new FlxBackdrop(Paths.image('menuBooba/starFG', 'impostor'), 1, 1, true, true);
+		starFG.updateHitbox();
+		starFG.antialiasing = true;
+		starFG.scrollFactor.set();
+		add(starFG);
+
+		starBG = new FlxBackdrop(Paths.image('menuBooba/starBG', 'impostor'), 1, 1, true, true);
+		starBG.updateHitbox();
+		starBG.antialiasing = true;
+		starBG.scrollFactor.set();
+		add(starBG);
+
 			logoBl = new FlxSprite(-150, -100);
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		if(FlxG.save.data.antialiasing)
@@ -138,28 +160,20 @@ class TitleState extends MusicBeatState
 		logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
-		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
-		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		if(FlxG.save.data.antialiasing)
-			{
-				gfDance.antialiasing = true;
-			}
-		add(gfDance);
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
-		titleText.frames = Paths.getSparrowAtlas('titleEnter');
-		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		titleText.frames = Paths.getSparrowAtlas('menuBooba/startText', 'impostor');
+		titleText.animation.addByPrefix('idle', "EnterIdle", 24, false);
+		titleText.animation.addByPrefix('press', "EnterStart", 24, false);		
 		if(FlxG.save.data.antialiasing)
 			{
 				titleText.antialiasing = true;
 			}
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
-		// titleText.screenCenter(X);
+		titleText.screenCenter(X);
+		titleText.y -= 80;
 		add(titleText);
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
@@ -263,6 +277,9 @@ class TitleState extends MusicBeatState
 			FlxG.fullscreen = !FlxG.fullscreen;
 		}
 
+		starFG.x -= 0.06;
+		starBG.x -= 0.02;
+
 		var pressedEnter:Bool = controls.ACCEPT;
 
 		#if mobile
@@ -287,6 +304,7 @@ class TitleState extends MusicBeatState
 
 			if (FlxG.save.data.flashing)
 				titleText.animation.play('press');
+				titleText.offset.set(278, 2);
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
@@ -365,11 +383,6 @@ class TitleState extends MusicBeatState
 
 		logoBl.animation.play('bump', true);
 		danceLeft = !danceLeft;
-
-		if (danceLeft)
-			gfDance.animation.play('danceRight');
-		else
-			gfDance.animation.play('danceLeft');
 
 		FlxG.log.add(curBeat);
 

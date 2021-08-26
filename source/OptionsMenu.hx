@@ -14,6 +14,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 
@@ -23,6 +24,8 @@ class OptionsMenu extends MusicBeatState
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
+	var starFG:FlxBackdrop;
+	var starBG:FlxBackdrop;
 
 	var options:Array<OptionCategory> = [
 		new OptionCategory("Gameplay", [
@@ -88,15 +91,25 @@ class OptionsMenu extends MusicBeatState
 		instance = this;
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
 
-		menuBG.color = 0xFFea71fd;
-		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
-		menuBG.updateHitbox();
-		menuBG.screenCenter();
+		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.scrollFactor.set();
 		if(FlxG.save.data.antialiasing)
 			{
-				menuBG.antialiasing = true;
+				bg.antialiasing = true;
 			}
-		add(menuBG);
+		add(bg);
+
+		starFG = new FlxBackdrop(Paths.image('menuBooba/starFG', 'impostor'), 1, 1, true, true);
+		starFG.updateHitbox();
+		starFG.antialiasing = true;
+		starFG.scrollFactor.set();
+		add(starFG);
+
+		starBG = new FlxBackdrop(Paths.image('menuBooba/starBG', 'impostor'), 1, 1, true, true);
+		starBG.updateHitbox();
+		starBG.antialiasing = true;
+		starBG.scrollFactor.set();
+		add(starBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
 		add(grpControls);
@@ -235,6 +248,9 @@ class OptionsMenu extends MusicBeatState
 				
 				versionShit.text = "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription;
 			}
+
+			starFG.x -= 0.06;
+			starBG.x -= 0.02;
 		
 
 			if (controls.RESET)

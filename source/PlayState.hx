@@ -1489,8 +1489,8 @@ class PlayState extends MusicBeatState
 				boyfriend.x += 320;
 				dad.y -= 80;
 			case 'ejected':
-				boyfriend.setPosition(1306.7, 313.5);
-				dad.setPosition(-670.85, 274.3);
+				boyfriend.setPosition(1008.6, 504);
+				dad.setPosition(-775.75, 274.3);
 				gf.setPosition(114.4, 78.45);
 			case 'school':
 				boyfriend.x += 270;
