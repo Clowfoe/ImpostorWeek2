@@ -758,6 +758,23 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 78, 17);
 				addOffset("singDOWN", -57, -24);
 
+				playAnim('idle');
+
+			case 'parasite':
+				tex = Paths.getSparrowAtlas('characters/parasite', 'shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'mungus idle', 24, false);
+				animation.addByPrefix('singUP', 'parasite up new', 24, false);
+				animation.addByPrefix('singRIGHT', 'parasite right', 24, false);
+				animation.addByPrefix('singDOWN', 'paracite down', 24, false);
+				animation.addByPrefix('singLEFT', 'parasite left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -10, 160);
+				addOffset("singRIGHT", 30, 80);
+				addOffset("singLEFT", 50, 49);
+				addOffset("singDOWN", 0, -90);
+
 				playAnim('idle');	
 
 			case 'crewmate':
