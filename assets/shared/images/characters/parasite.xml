@@ -44,24 +44,24 @@
 	<SubTexture name="parasite left0007" x="6256" y="1661" width="741" height="529" frameX="-29" frameY="-27" frameWidth="794" frameHeight="585"/>
 	<SubTexture name="parasite left0008" x="7027" y="1661" width="723" height="559" frameX="-49" frameY="-26" frameWidth="794" frameHeight="585"/>
 	<SubTexture name="parasite left0009" x="0" y="2263" width="708" height="564" frameX="-67" frameY="-21" frameWidth="794" frameHeight="585"/>
-	<SubTexture name="parasite right0000" x="738" y="2263" width="853" height="656" frameX="-4" frameY="0" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0001" x="1621" y="2263" width="820" height="577" frameX="-23" frameY="-50" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0002" x="2471" y="2263" width="893" height="466" frameX="-6" frameY="-104" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0003" x="3394" y="2263" width="875" height="479" frameX="0" frameY="-77" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0004" x="4299" y="2263" width="799" height="494" frameX="-9" frameY="-77" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0005" x="5128" y="2263" width="793" height="558" frameX="-18" frameY="-81" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0006" x="5951" y="2263" width="828" height="562" frameX="-9" frameY="-86" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0007" x="6809" y="2263" width="818" height="553" frameX="-15" frameY="-86" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0008" x="0" y="2949" width="816" height="560" frameX="-10" frameY="-87" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite right0009" x="846" y="2949" width="828" height="552" frameX="-9" frameY="-89" frameWidth="899" frameHeight="656"/>
-	<SubTexture name="parasite up new0000" x="1704" y="2949" width="771" height="648" frameX="-9" frameY="0" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0001" x="2505" y="2949" width="771" height="559" frameX="-9" frameY="-92" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0002" x="3306" y="2949" width="810" height="480" frameX="0" frameY="-167" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0003" x="4146" y="2949" width="794" height="462" frameX="-4" frameY="-178" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0004" x="4970" y="2949" width="744" height="463" frameX="-20" frameY="-189" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0005" x="5744" y="2949" width="672" height="458" frameX="-64" frameY="-189" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0006" x="6446" y="2949" width="730" height="451" frameX="-24" frameY="-189" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0007" x="7206" y="2949" width="762" height="487" frameX="-9" frameY="-165" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0008" x="0" y="3627" width="760" height="498" frameX="-10" frameY="-162" frameWidth="810" frameHeight="660"/>
-	<SubTexture name="parasite up new0009" x="790" y="3627" width="765" height="478" frameX="-20" frameY="-162" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite right new0000" x="738" y="2263" width="794" height="607" frameX="-15" frameY="0" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0001" x="1562" y="2263" width="763" height="537" frameX="-34" frameY="-47" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0002" x="2355" y="2263" width="832" height="403" frameX="-9" frameY="-97" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0003" x="3217" y="2263" width="813" height="439" frameX="0" frameY="-71" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0004" x="4060" y="2263" width="753" height="441" frameX="0" frameY="-71" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0005" x="4843" y="2263" width="746" height="510" frameX="-10" frameY="-71" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0006" x="5619" y="2263" width="779" height="517" frameX="0" frameY="-75" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0007" x="6428" y="2263" width="769" height="511" frameX="-6" frameY="-79" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0008" x="7227" y="2263" width="767" height="522" frameX="-2" frameY="-74" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite right new0009" x="0" y="2900" width="779" height="515" frameX="0" frameY="-79" frameWidth="841" frameHeight="607"/>
+	<SubTexture name="parasite up new0000" x="809" y="2900" width="771" height="648" frameX="-9" frameY="0" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0001" x="1610" y="2900" width="771" height="559" frameX="-9" frameY="-92" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0002" x="2411" y="2900" width="810" height="480" frameX="0" frameY="-167" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0003" x="3251" y="2900" width="794" height="462" frameX="-4" frameY="-178" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0004" x="4075" y="2900" width="744" height="463" frameX="-20" frameY="-189" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0005" x="4849" y="2900" width="672" height="458" frameX="-64" frameY="-189" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0006" x="5551" y="2900" width="730" height="451" frameX="-24" frameY="-189" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0007" x="6311" y="2900" width="762" height="487" frameX="-9" frameY="-165" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0008" x="7103" y="2900" width="760" height="498" frameX="-10" frameY="-162" frameWidth="810" frameHeight="660"/>
+	<SubTexture name="parasite up new0009" x="0" y="3578" width="765" height="478" frameX="-20" frameY="-162" frameWidth="810" frameHeight="660"/>
 </TextureAtlas>

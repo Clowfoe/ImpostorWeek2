@@ -775,6 +775,8 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 50, 49);
 				addOffset("singDOWN", 0, -90);
 
+				setGraphicSize(Std.int(width * 1.5));
+
 				playAnim('idle');	
 
 			case 'crewmate':
