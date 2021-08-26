@@ -1181,7 +1181,11 @@ class PlayState extends MusicBeatState
 						leftBuildings = [];
 						middleBuildings = [];
 						for(i in 0...2) {
-							var rightBuilding = new FlxSprite(1022.3, -390.45).loadGraphic(Paths.image('ejected/buildingB', 'impostor'));
+							var rightBuilding = new FlxSprite(1022.3, -390.45);
+							rightBuilding.frames = Paths.getSparrowAtlas('ejected/buildingSheet', 'impostor');
+							rightBuilding.animation.addByPrefix('1', 'BuildingB1', 24, false);
+							rightBuilding.animation.addByPrefix('2', 'BuildingB2', 24, false);
+							rightBuilding.animation.play('1');
 							rightBuilding.antialiasing = true;
 							rightBuilding.updateHitbox();
 							rightBuilding.scrollFactor.set(0.5, 0.5);
@@ -1190,7 +1194,11 @@ class PlayState extends MusicBeatState
 						}
 						
 						for(i in 0...2) {
-							var middleBuilding = new FlxSprite(-76.15, 1398.5).loadGraphic(Paths.image('ejected/buildingA', 'impostor'));
+							var middleBuilding = new FlxSprite(-76.15, 1398.5);
+							middleBuilding.frames = Paths.getSparrowAtlas('ejected/buildingSheet', 'impostor');
+							middleBuilding.animation.addByPrefix('1', 'BuildingA1', 24, false);
+							middleBuilding.animation.addByPrefix('2', 'BuildingA2', 24, false);
+							middleBuilding.animation.play('1');
 							middleBuilding.antialiasing = true;
 							middleBuilding.updateHitbox();
 							middleBuilding.scrollFactor.set(0.5, 0.5);
@@ -1199,7 +1207,11 @@ class PlayState extends MusicBeatState
 						}
 						
 						for(i in 0...2) {
-							var leftBuilding = new FlxSprite(-1099.3, 7286.55).loadGraphic(Paths.image('ejected/buildingB', 'impostor'));
+							var leftBuilding = new FlxSprite(-1099.3, 7286.55);
+							leftBuilding.frames = Paths.getSparrowAtlas('ejected/buildingSheet', 'impostor');
+							leftBuilding.animation.addByPrefix('1', 'BuildingB1', 24, false);
+							leftBuilding.animation.addByPrefix('2', 'BuildingB2', 24, false);
+							leftBuilding.animation.play('1');
 							leftBuilding.antialiasing = true;
 							leftBuilding.updateHitbox();
 							leftBuilding.scrollFactor.set(0.5, 0.5);
@@ -3068,6 +3080,7 @@ class PlayState extends MusicBeatState
 				for(i in 0...leftBuildings.length) {
 					if(leftBuildings[i].y < -5871.85) {
 						leftBuildings[i].y = 9078.55;
+						leftBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}
 					leftBuildings[i].y -= 80;
 				}
@@ -3076,6 +3089,7 @@ class PlayState extends MusicBeatState
 				for(i in 0...middleBuildings.length) {
 					if(middleBuildings[i].y < -11759.9) {
 						middleBuildings[i].y = 3190.5;
+						middleBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}			
 					middleBuildings[i].y -= 80;
 				}
@@ -3084,6 +3098,7 @@ class PlayState extends MusicBeatState
 				for(i in 0...rightBuildings.length) {
 					if(rightBuildings[i].y < -13548.85) {
 						rightBuildings[i].y = 1401.55;
+						rightBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}
 					rightBuildings[i].y -= 80;
 				}
