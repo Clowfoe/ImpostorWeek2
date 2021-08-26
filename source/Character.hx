@@ -512,6 +512,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFTmiss', 'BF LEFT MISS', 24, false);
 				animation.addByPrefix('singRIGHTmiss', 'BF RIGHT MISS', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'BF DOWN MISS', 24, false);
+				animation.addByPrefix('shoot', 'BF SHOOT', 24, false);
 
 				loadOffsetFile(curCharacter);
 
@@ -776,7 +777,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 50, 49);
 				addOffset("singDOWN", -18, -111);
 
-				setGraphicSize(Std.int(width * 1.5));
+				setGraphicSize(Std.int(width * 2));
 
 				playAnim('idle');	
 
