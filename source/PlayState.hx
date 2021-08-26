@@ -5486,6 +5486,12 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if (curBeat == 260 && curSong == 'Rivals')
+		{
+			boyfriend.playAnim('shoot', true);
+		}
+
+
 		/*if (!dad.animation.curAnim.name.startsWith("sing"))
 		{
 			dad.dance();
