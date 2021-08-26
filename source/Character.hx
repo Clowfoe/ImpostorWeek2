@@ -776,7 +776,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 50, 49);
 				addOffset("singDOWN", -18, -111);
 
-				setGraphicSize(Std.int(width * 1.5));
+				setGraphicSize(Std.int(width * 2));
 
 				playAnim('idle');	
 
