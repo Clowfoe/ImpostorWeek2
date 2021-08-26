@@ -761,9 +761,10 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 			case 'parasite':
+				playerColor = "40ab22";
 				tex = Paths.getSparrowAtlas('characters/parasite', 'shared');
 				frames = tex;
-				animation.addByPrefix('idle', 'mungus idle', 24, false);
+				animation.addByPrefix('idle', 'mungus idle', 24, true);
 				animation.addByPrefix('singUP', 'parasite up new', 24, false);
 				animation.addByPrefix('singRIGHT', 'parasite right', 24, false);
 				animation.addByPrefix('singDOWN', 'paracite down', 24, false);

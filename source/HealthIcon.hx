@@ -29,7 +29,7 @@ class HealthIcon extends FlxSprite
 		{
 			switch(char)
 			{
-				case 'bf-pixel' | 'tomongus'| 'hamster':
+				case 'bf-pixel' | 'tomongus'| 'hamster' | 'bf-sus':
 					antialiasing = false;
 				default:
 					antialiasing = true;
@@ -47,7 +47,7 @@ class HealthIcon extends FlxSprite
 
 	public function changeIcon(char:String)
 	{
-		if (char != 'bf-pixel' && char != 'bf-old')
+		if (char != 'bf-pixel' && char != 'bf-old' && char != 'bf-sus')
 			char = char.split("-")[0];
 
 

@@ -234,6 +234,7 @@ class PlayState extends MusicBeatState
 	var gfStartpos:FlxPoint;
 
 	var cloudScroll:FlxTypedGroup<FlxSprite>;
+	var farClouds:FlxTypedGroup<FlxSprite>;
 
 	var orb:FlxSprite = new FlxSprite();
 
@@ -282,11 +283,13 @@ class PlayState extends MusicBeatState
 	public static var songOffset:Float = 0;
 
 	var speedPass:Array<Float> = [30, 30, 30, 30];
+	var farSpeedPass:Array<Float> = [30, 30, 30, 30, 30, 30, 30];
 
 	//array of two objects get ufkced
 	var middleBuildings:Array<FlxSprite>;
 	var rightBuildings:Array<FlxSprite>;
 	var leftBuildings:Array<FlxSprite>;
+	var fgCloud:FlxSprite;
 
 	// BotPlay text
 	private var botPlayState:FlxText;
@@ -1156,17 +1159,23 @@ class PlayState extends MusicBeatState
 						defaultCamZoom = 0.45;
 						curStage = 'ejected';
 						cloudScroll = new FlxTypedGroup<FlxSprite>();
+						farClouds = new FlxTypedGroup<FlxSprite>();
 						var sky:FlxSprite = new FlxSprite(-2372.25, -4181.7).loadGraphic(Paths.image('ejected/sky', 'impostor'));
 						sky.antialiasing = true;
 						sky.updateHitbox();
 						sky.scrollFactor.set(0, 0);			
 						add(sky);
 
-						var fgCloud:FlxSprite = new FlxSprite(-2660.4, -402).loadGraphic(Paths.image('ejected/fgClouds', 'impostor'));
+						fgCloud = new FlxSprite(-2660.4, -402).loadGraphic(Paths.image('ejected/fgClouds', 'impostor'));
 						fgCloud.antialiasing = true;
 						fgCloud.updateHitbox();
 						fgCloud.scrollFactor.set(0.3, 0.3);
 						add(fgCloud);
+
+						for(i in 0...farClouds.members.length) {
+							add(farClouds.members[i]);
+						}
+						add(farClouds);
 
 						rightBuildings = [];
 						leftBuildings = [];
@@ -1227,6 +1236,33 @@ class PlayState extends MusicBeatState
 									newCloud.scrollFactor.set(1, 1);
 							}
 							cloudScroll.add(newCloud);								
+						}
+
+						for(i in 0...7) {
+							var newCloud:FlxSprite = new FlxSprite();
+							newCloud.frames = Paths.getSparrowAtlas('ejected/scrollingClouds', 'impostor');
+							newCloud.animation.addByPrefix('idle', 'Cloud' + i, 24, false);
+							newCloud.animation.play('idle');
+							newCloud.updateHitbox();
+							newCloud.alpha = 0.5;
+							
+							switch(i) {
+								case 0:
+									newCloud.setPosition(-1308, -1039.9);
+								case 1:
+									newCloud.setPosition(464.3, -890.5);
+								case 2:
+									newCloud.setPosition(2458.45, -1085.85);
+								case 3:
+									newCloud.setPosition(-666.95, -172.05);
+								case 4:
+									newCloud.setPosition(-1616.6, 1016.95);
+								case 5:
+									newCloud.setPosition(1714.25, 200.45);
+								case 6:
+									newCloud.setPosition(-167.05, 710.25);
+							}
+							farClouds.add(newCloud);								
 						}
 
 						speedLines = new FlxBackdrop(Paths.image('ejected/speedLines', 'impostor'), 1, 1, true, true);
@@ -1315,7 +1351,12 @@ class PlayState extends MusicBeatState
 		}
 
 		gf = new Character(400, 130, curGf);
-		gf.scrollFactor.set(1, 1);
+		if(curSong == 'Ejected') {
+			gf.scrollFactor.set(0.7, 0.7);
+		}
+		else {
+			gf.scrollFactor.set(1, 1);
+		}
 
 		dad = new Character(100, 100, SONG.player2);
 
@@ -1675,6 +1716,9 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
+		if(isStoryMode) {
+			kadeEngineWatermark.visible = false;
+		}
 
 		if (PlayStateChangeables.useDownscroll)
 			kadeEngineWatermark.y = FlxG.height * 0.9 + 45;
@@ -1690,6 +1734,10 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 
 		add(scoreTxt);
+
+		if(isStoryMode) {
+			scoreTxt.visible = false;
+		}
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY",
 			20);
@@ -2999,6 +3047,22 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
+			if(farClouds.members.length == 7) {
+				for(i in 0...farClouds.members.length) {					
+					farClouds.members[i].y -= farSpeedPass[i];
+					if(farClouds.members[i].y < -1614) {
+						var randomScale = FlxG.random.float(0.2, 0.5);
+						var randomScroll = FlxG.random.float(0.2, 0.4);
+
+						farSpeedPass[i] = FlxG.random.float(30, 50);
+
+						farClouds.members[i].scale.set(randomScale, randomScale);
+						farClouds.members[i].scrollFactor.set(randomScroll, randomScroll);
+						farClouds.members[i].x = FlxG.random.float(-2737.85, 3485.4);
+						farClouds.members[i].y = 1738.6;
+					}
+				}
+			}
 			//AAAAAAAAAAAAAAAAAAAA			
 			if(leftBuildings.length > 0) {
 				for(i in 0...leftBuildings.length) {
@@ -3025,6 +3089,9 @@ class PlayState extends MusicBeatState
 				}
 			}
 			speedLines.y -= 70;
+			if(fgCloud != null) {
+				fgCloud.y -= 0.01;
+			}
 		}
 
 		super.update(elapsed);
