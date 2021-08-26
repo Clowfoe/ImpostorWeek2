@@ -1,6 +1,7 @@
 package;
 
 
+import flixel.math.FlxRandom;
 import Song.Event;
 import openfl.media.Sound;
 #if sys
@@ -68,6 +69,7 @@ import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
+import flixel.addons.display.FlxBackdrop;
 import openfl.filters.ShaderFilter;
 #if windows
 import Discord.DiscordClient;
@@ -231,6 +233,8 @@ class PlayState extends MusicBeatState
 	var dadStartpos:FlxPoint;
 	var gfStartpos:FlxPoint;
 
+	var cloudScroll:FlxTypedGroup<FlxSprite>;
+
 	var orb:FlxSprite = new FlxSprite();
 
 	var crowd:FlxSprite = new FlxSprite();
@@ -247,6 +251,8 @@ class PlayState extends MusicBeatState
 	var songScoreDef:Int = 0;
 	var scoreTxt:FlxText;
 	var replayTxt:FlxText;
+
+	var speedLines:FlxBackdrop;
 
 	public static var campaignScore:Int = 0;
 
@@ -274,6 +280,8 @@ class PlayState extends MusicBeatState
 
 	// Per song additive offset
 	public static var songOffset:Float = 0;
+
+	var speedPass:Array<Float> = [30, 30, 30, 30];
 
 	// BotPlay text
 	private var botPlayState:FlxText;
@@ -1139,27 +1147,66 @@ class PlayState extends MusicBeatState
 
 					}
 					case 'ejected':
-						{
-							defaultCamZoom = 0.45;
-							curStage = 'ejected';
-							crowd = new FlxSprite(-2500, 	-900);
-							crowd.frames = Paths.getSparrowAtlas('SkyFall');
-							crowd.animation.addByPrefix('Background', 'Background', 24);
-							crowd.animation.play('Background');
-							crowd.antialiasing = true;
-							crowd.updateHitbox();
-							add(crowd);					
+					{
+						defaultCamZoom = 0.45;
+						curStage = 'ejected';
+						cloudScroll = new FlxTypedGroup<FlxSprite>();
+						var sky:FlxSprite = new FlxSprite(-2372.25, -4181.7).loadGraphic(Paths.image('ejected/sky', 'impostor'));
+						sky.antialiasing = true;
+						sky.updateHitbox();
+						sky.scrollFactor.set(0, 0);			
+						add(sky);
+
+						var fgCloud:FlxSprite = new FlxSprite(-2660.4, -402).loadGraphic(Paths.image('ejected/fgClouds', 'impostor'));
+						fgCloud.antialiasing = true;
+						fgCloud.updateHitbox();
+						fgCloud.scrollFactor.set(0.3, 0.3);
+						add(fgCloud);
+
+						for(i in 0...3) {
+							//now i could add the clouds manually
+							//but i wont!!! trolled
+							var newCloud:FlxSprite = new FlxSprite();
+							newCloud.frames = Paths.getSparrowAtlas('ejected/scrollingClouds', 'impostor');
+							newCloud.animation.addByPrefix('idle', 'Cloud' + i, 24, false);
+							newCloud.animation.play('idle');
+							newCloud.updateHitbox();
+							newCloud.alpha = 1;
+							
+							switch(i) {
+								case 0:
+									newCloud.setPosition(-9.65, -224.35);
+									newCloud.scrollFactor.set(0.8, 0.8);
+								case 1:
+									newCloud.setPosition(-1342.85, -350.45);
+									newCloud.scrollFactor.set(0.6, 0.6);
+								case 2:
+									newCloud.setPosition(1784.65, -957.05);
+									newCloud.scrollFactor.set(1.3, 1.3);
+								case 3:
+									newCloud.setPosition(-2217.45, -1377.65);
+									newCloud.scrollFactor.set(1, 1);
+							}
+							cloudScroll.add(newCloud);								
 						}
+
+						speedLines = new FlxBackdrop(Paths.image('ejected/speedLines', 'impostor'), 1, 1, true, true);
+						speedLines.antialiasing = true;
+						speedLines.updateHitbox();
+						speedLines.scrollFactor.set(1.3, 1.3);
+						speedLines.alpha = 0.3;
+											
+					}
 					case 'defeat':
-						{
-							defaultCamZoom = 0.9;
-							curStage = 'defeat';
-							var defeat:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('defeatfnf', 'shared'));		
-							defeat.setGraphicSize(Std.int(defeat.width * 2));
-							defeat.scrollFactor.set(1,1);
-							defeat.antialiasing = true;
-							add(defeat);
-						}
+					{
+						defaultCamZoom = 0.9;
+						curStage = 'defeat';
+						var defeat:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('defeatfnf', 'shared'));		
+						defeat.setGraphicSize(Std.int(defeat.width * 2));
+						defeat.scrollFactor.set(1,1);
+						defeat.antialiasing = true;
+						add(defeat);
+					}
 					default:
 					{
 						defaultCamZoom = 0.9;
@@ -1218,6 +1265,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-car';
 			case 'gf-christmas':
 				curGf = 'gf-christmas';
+			case 'gfparachute':
+				curGf = 'gfparachute';
 			case 'gf-pixel':
 				curGf = 'gf-pixel';
 			case 'gfr':
@@ -1347,16 +1396,15 @@ class PlayState extends MusicBeatState
 			case 'mallEvil':
 				boyfriend.x += 320;
 				dad.y -= 80;
+			case 'ejected':
+				boyfriend.setPosition(1306.7, 313.5);
+				dad.setPosition(-641.55, 432.15);
+				gf.setPosition(114.4, 78.45);
 			case 'school':
 				boyfriend.x += 270;
 				boyfriend.y += 220;
 				gf.x += 280;
 				gf.y += 360;
-			case 'ejected':
-				boyfriend.x += 450;
-				boyfriend.y += 200;
-				dad.x += -450;
-				dad.y += 200;
 			case 'schoolEvil':
 				boyfriend.x += 200;
 				boyfriend.y += 220;
@@ -1383,6 +1431,11 @@ class PlayState extends MusicBeatState
 				bfStartpos = new FlxPoint(boyfriend.x, boyfriend.y);
 				gfStartpos = new FlxPoint(gf.x, gf.y);
 				dadStartpos = new FlxPoint(dad.x, dad.y);
+				for(i in 0...cloudScroll.members.length) {
+					add(cloudScroll.members[i]);
+				}
+				add(cloudScroll);
+				add(speedLines);
 			}
 
 			if (curStage == 'toogus')
@@ -2886,6 +2939,28 @@ class PlayState extends MusicBeatState
 					}
 				}
 				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
+		}
+
+		if(curStage == 'ejected') {
+			//make sure that the clouds exist
+			if(cloudScroll.members.length == 3) {
+				for(i in 0...cloudScroll.members.length) {					
+					cloudScroll.members[i].y -= speedPass[i];
+					if(cloudScroll.members[i].y < -1789.65) {
+						//im not using flxbackdrops so this is how we're doing things today
+						var randomScale = FlxG.random.float(1.5, 2.2);
+						var randomScroll = FlxG.random.float(1, 1.3);
+
+						speedPass[i] = FlxG.random.float(60, 90);
+
+						cloudScroll.members[i].scale.set(randomScale, randomScale);
+						cloudScroll.members[i].scrollFactor.set(randomScroll, randomScroll);
+						cloudScroll.members[i].x = FlxG.random.float(-3578.95, 3259.6);
+						cloudScroll.members[i].y = 2196.15;
+					}
+				}
+			}
+			speedLines.y -= 70;
 		}
 
 		super.update(elapsed);
@@ -5306,6 +5381,7 @@ class PlayState extends MusicBeatState
 			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
     }
 	//FUCKING EPIC DROP NIGGA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//clowfoe wrote this btw im not racist
 		if (curBeat == 480 && curSong == 'Reactor')
     {
 			defaultCamZoom = 0.9;

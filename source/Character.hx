@@ -70,7 +70,7 @@ class Character extends FlxSprite
 
 
 			case 'gfparachute':
-				tex = Paths.getSparrowAtlas('characters/gfparachute');
+				tex = Paths.getSparrowAtlas('characters/gf_parachute');
 				frames = tex;
 				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
 				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
@@ -899,7 +899,7 @@ class Character extends FlxSprite
 		{
 			switch (curCharacter)
 			{
-				case 'gf' | 'gf-christmas' | 'gfr' | 'gf-pixel':
+				case 'gf' | 'gf-christmas' | 'gfr' | 'gf-pixel' | 'gfparachute':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;

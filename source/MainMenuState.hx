@@ -77,20 +77,20 @@ class MainMenuState extends MusicBeatState
 			}
 		add(bg);
 
-		starFG = new FlxBackdrop(Paths.image('MENU/starFG', 'impostor'), 1, 1, true, true);
+		starFG = new FlxBackdrop(Paths.image('menuBooba/starFG', 'impostor'), 1, 1, true, true);
 		starFG.updateHitbox();
 		starFG.antialiasing = true;
 		starFG.scrollFactor.set();
 		add(starFG);
 
-		starBG = new FlxBackdrop(Paths.image('MENU/starBG', 'impostor'), 1, 1, true, true);
+		starBG = new FlxBackdrop(Paths.image('menuBooba/starBG', 'impostor'), 1, 1, true, true);
 		starBG.updateHitbox();
 		starBG.antialiasing = true;
 		starBG.scrollFactor.set();
 		add(starBG);
 
 		redImpostor = new FlxSprite(704.55, 106.65);
-		redImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		redImpostor.frames = Paths.getSparrowAtlas('menuBooba/impostorMenu', 'impostor');
 		redImpostor.animation.addByPrefix('idle', 'red smile', 24, true);
 		redImpostor.animation.play('idle');
 		redImpostor.antialiasing = true;
@@ -100,7 +100,7 @@ class MainMenuState extends MusicBeatState
 		add(redImpostor);
 
 		greenImpostor = new FlxSprite(-159.35, 102.35);
-		greenImpostor.frames = Paths.getSparrowAtlas('MENU/impostorMenu', 'impostor');
+		greenImpostor.frames = Paths.getSparrowAtlas('menuBooba/impostorMenu', 'impostor');
 		greenImpostor.animation.addByPrefix('idle', 'green smile', 24, true);
 		greenImpostor.animation.play('idle');
 		greenImpostor.antialiasing = true;
@@ -109,7 +109,7 @@ class MainMenuState extends MusicBeatState
 		greenImpostor.scrollFactor.set();
 		add(greenImpostor);
 
-		vignette = new FlxSprite(0, 0).loadGraphic(Paths.image('MENU/vignette', 'impostor'));
+		vignette = new FlxSprite(0, 0).loadGraphic(Paths.image('menuBooba/vignette', 'impostor'));
 		vignette.antialiasing = true;
 		vignette.updateHitbox();
 		vignette.active = false;
@@ -124,7 +124,7 @@ class MainMenuState extends MusicBeatState
 		for(i in 0...optionShit.length) {
 			var testButton:FlxSprite = new FlxSprite(0, 130);
 			testButton.ID = i;
-			testButton.frames = Paths.getSparrowAtlas('MENU/ButtonSheet', 'impostor');
+			testButton.frames = Paths.getSparrowAtlas('menuBooba/ButtonSheet', 'impostor');
 			testButton.animation.addByPrefix('idle', optionShit[i] + 'Idle', 24, true);
 			testButton.animation.addByPrefix('hover', optionShit[i] + 'Hover', 24, true);
 			testButton.animation.play('idle');
