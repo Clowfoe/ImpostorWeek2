@@ -818,6 +818,25 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -28, -17);
 
 				playAnim('idle');
+
+			case 'ziffy':
+				// impostor
+				playerColor = "FF3333";
+				tex = Paths.getSparrowAtlas('characters/ziffy', 'impostor');
+				frames = tex;
+				animation.addByPrefix('idle', 'IdleZiffy', 24, false);
+				animation.addByPrefix('singUP', 'UpZiffy', 24, false);
+				animation.addByPrefix('singRIGHT', 'RightZiffy', 24, false);
+				animation.addByPrefix('singDOWN', 'DownZiffy', 24, false);
+				animation.addByPrefix('singLEFT', 'LeftZiffy', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 0, 2);
+				addOffset("singRIGHT", -5, 0);
+				addOffset("singLEFT", 7, -3);
+				addOffset("singDOWN", 0, -6);
+
+				playAnim('idle');
 				
 			case 'black':
 				// i hate black people

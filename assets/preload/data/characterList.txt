@@ -16,3 +16,4 @@ bf-pixel
 bf-sus
 gf
 parasite
+ziffy
