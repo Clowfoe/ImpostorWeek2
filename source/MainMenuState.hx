@@ -211,7 +211,6 @@ class MainMenuState extends MusicBeatState
 				if(FlxG.mouse.pressed && canClick)
 				{
 					selectSomething();
-					canClick = false;
 				}
 			}
 
@@ -244,13 +243,14 @@ class MainMenuState extends MusicBeatState
 		if (optionShit[curSelected] == 'Discord')
 		{
 			//LOL!!! SELF PROMOTION BITCHASS!!!
-				fancyOpenURL("https://discord.gg/pY54h9wq7q");
+			fancyOpenURL("https://discord.gg/pY54h9wq7q");
 		}
 		else
 		{
 			selectedSomethin = true;
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 			
+			canClick = false;
 
 			menuItems.forEach(function(spr:FlxSprite)
 			{

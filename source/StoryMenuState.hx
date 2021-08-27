@@ -583,6 +583,32 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
+		for (i in 0...grpWeekText.members.length)
+			{
+				if(i > curWeek) {
+					FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+				}
+				else if(i == curWeek) {
+					FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+				}
+				else if(i < curWeek) {
+					FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
+				}
+			}
+
+		grpLocks.forEach(function(lock:FlxSprite)
+		{
+			if(lock.ID > curWeek) {
+				FlxTween.tween(lock, {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+			}
+			else if(lock.ID == curWeek) {
+				FlxTween.tween(lock, {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+			}
+			else if(lock.ID < curWeek) {
+				FlxTween.tween(lock, {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
+			}
+		});
+
 		switch(curWeek)
 		{
 			case 0: 
@@ -605,19 +631,6 @@ class StoryMenuState extends MusicBeatState
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 
-				for (i in 0...grpWeekText.members.length)
-					{
-						if(i > curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i == curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i < curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
-						}
-					}
-
 			}
 			case 1:
 			{
@@ -639,21 +652,8 @@ class StoryMenuState extends MusicBeatState
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 
-				var currentNuts:Int = 0;
+				var currentNuts:Int = 0; // i love testicle among s!
 
-
-				for (i in 0...grpWeekText.members.length)
-					{
-						if(i > curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.2, {ease: FlxEase.expoOut});							
-						}
-						else if(i == curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.2, {ease: FlxEase.expoOut});							
-						}
-						else if(i < curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.2, {ease: FlxEase.expoOut});							
-						}
-					}
 			}
 			case 2:
 			{
@@ -674,19 +674,7 @@ class StoryMenuState extends MusicBeatState
 					effect.setStrength(v, v);
 				});
 				FlxTween.tween(bgSky, {alpha: 1}, 0.4, {ease: FlxEase.expoOut});
-			
-				for (i in 0...grpWeekText.members.length)
-					{
-						if(i > curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i == curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i < curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
-						}
-					}
+				
 			}
 			case 3:
 			{
@@ -708,18 +696,6 @@ class StoryMenuState extends MusicBeatState
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 
-				for (i in 0...grpWeekText.members.length)
-					{
-						if(i > curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i == curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
-						}
-						else if(i < curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
-						}
-					}
 			}
 		}
 
