@@ -1057,7 +1057,7 @@ class PlayState extends MusicBeatState
 								amogus.active = true;
 								add(amogus);
 
-								brown = new FlxSprite(-850, 170);
+								brown = new FlxSprite(-850, 190);
 								brown.frames = Paths.getSparrowAtlas('reactor/susBoppers', 'impostor');
 								brown.animation.addByPrefix('bop', 'brown sus', 24, false);
 								brown.animation.play('bop');
