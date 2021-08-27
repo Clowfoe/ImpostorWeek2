@@ -188,6 +188,7 @@ class DialogueBox extends FlxSpriteGroup
 					FlxTween.tween(rightChar, {alpha: 0}, 0.5);
 					FlxTween.tween(leftChar, {alpha: 0}, 0.5);
 					FlxTween.tween(box, {alpha: 0}, 0.5);
+					FlxTween.tween(swagDialogue, {alpha: 0}, 0.5);
 					FlxTween.tween(shitground, {alpha: 0}, 0.5);
 
 					new FlxTimer().start(0.7, function(tmr:FlxTimer)
