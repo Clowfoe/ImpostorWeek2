@@ -41,6 +41,7 @@ class DialogueBox extends FlxSpriteGroup
 	var handSelect:FlxSprite;
 
 	var bgFade:FlxSprite;
+	var shitground:FlxSprite;
 
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>, ?greenImpostor:Bool)
 	{
@@ -49,7 +50,7 @@ class DialogueBox extends FlxSpriteGroup
 		var hasDialog = false;
 		hasDialog = true;
 
-		var shitground = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+		shitground = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		shitground.updateHitbox();
 		shitground.screenCenter();
 		shitground.alpha = 0;
@@ -141,13 +142,18 @@ class DialogueBox extends FlxSpriteGroup
 
 		add(box);
 
-		this.dialogueList = dialogueList;
+		box.y += 500;
 
+		
+		this.dialogueList = dialogueList;
+		
+		FlxTween.tween(box, {y: box.y - 500}, 0.5, {ease: FlxEase.quadOut});
+		FlxTween.tween(shitground, {alpha: 0.3}, 0.5);
 		
 		if (!hasDialog)
 			return;
-	
-
+		
+		
 		swagDialogue = new FlxTypeText(240, 450, Std.int(FlxG.width * 0.70), "", 32);
 		swagDialogue.font = Paths.font('dialogue.ttf');
 		swagDialogue.color = FlxColor.BLACK;
@@ -155,8 +161,7 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.screenCenter(X);
 		swagDialogue.antialiasing = true;
 		add(swagDialogue);
-
-		FlxTween.tween(shitground, {alpha: 0.3}, 0.5);
+		
 	}
 
 	var dialogueOpened:Bool = false;
@@ -180,8 +185,16 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					finishThing();
-					kill();
+					FlxTween.tween(rightChar, {alpha: 0}, 0.5);
+					FlxTween.tween(leftChar, {alpha: 0}, 0.5);
+					FlxTween.tween(box, {alpha: 0}, 0.5);
+					FlxTween.tween(shitground, {alpha: 0}, 0.5);
+
+					new FlxTimer().start(0.7, function(tmr:FlxTimer)
+					{
+						finishThing();
+						kill();
+					});
 				}
 			}
 			else

@@ -150,8 +150,8 @@ class MainMenuState extends MusicBeatState
 		var logo:FlxSprite = new FlxSprite(0, 100);
 		logo.frames = Paths.getSparrowAtlas('logoBumpin');
 		logo.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logo.updateHitbox();
 		logo.screenCenter();
+		logo.updateHitbox();
 		logo.antialiasing = true;
 		logo.scale.set(0.7, 0.7);
 		logo.y -= 160;
@@ -159,9 +159,11 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer +  (Main.watermarks ? " FNF - " + kadeEngineVer + " Kade Engine" : ""), 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 900, "Kade Engine 1.6 - V.S. Impostor 3.0 - Mod Created by Team Funktastic");
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.updateHitbox();
+		versionShit.screenCenter(X);
 		add(versionShit);
 
 		// NG.core.calls.event.logEvent('swag').send();
