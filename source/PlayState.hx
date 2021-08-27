@@ -1509,7 +1509,7 @@ class PlayState extends MusicBeatState
 				dad.setPosition(-169.55, 264.9);
 				gf.setPosition(206, -106.7);
 				boyfriend.setPosition(751.7, 217.55);
-				if(SONG.song.toLowerCase() == 'meltdown') {
+				if(SONG.song.toLowerCase() == 'meltdown' || SONG.song.toLowerCase() == 'sabotage') {
 					gf.y -= 100;
 				}
 		}

@@ -453,6 +453,7 @@ class StoryMenuState extends MusicBeatState
 
 				switch(curWeek)
 				{
+					//this shit might show up as an error but it will build, trust me
 					case 0:
 						grpWeekText.members[curWeek].startFlashing(0xFF3E1D60);
 					case 1:
