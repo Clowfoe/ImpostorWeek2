@@ -1863,7 +1863,7 @@ class PlayState extends MusicBeatState
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
 					blackScreen.screenCenter();
-					camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 500);
+					camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 1000);
 
 					camHUD.visible = false;
 					inCutscene = true;
@@ -1881,7 +1881,9 @@ class PlayState extends MusicBeatState
 						eyeShine.updateHitbox();
 						eyeShine.scrollFactor.set();
 						eyeShine.screenCenter();
+						eyeShine.x -= 500;
 						add(eyeShine);
+						FlxG.sound.play(Paths.sound('explosion', 'impostor'));
 						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{						
 							FlxG.camera.focusOn(camFollow.getPosition());
@@ -1897,17 +1899,17 @@ class PlayState extends MusicBeatState
 							new FlxTimer().start(0.7, function(tmr2:FlxTimer)
 							{							
 								blackScreen.destroy();	
-								FlxTween.tween(camFollow, {y: camFollow.y + 500}, 2, {ease: FlxEase.quadInOut});			
+								FlxTween.tween(FlxG.camera, {zoom: 0.45}, 2, {ease:FlxEase.quadInOut});
+								FlxTween.tween(camFollow, {y: dad.getMidpoint().y}, 2, {ease: FlxEase.quadInOut});			
 							});
 	
-							new FlxTimer().start(2, function(tmr3:FlxTimer)
+							new FlxTimer().start(1.6, function(tmr3:FlxTimer)
 							{							
 								ejectedBoom.destroy();					
 							});
 	
-							FlxTween.tween(FlxG.camera, {zoom: 0.45}, 2, {ease:FlxEase.quadInOut, startDelay: 2.5});
 	
-							new FlxTimer().start(4.3, function(tmr2:FlxTimer)
+							new FlxTimer().start(3, function(tmr2:FlxTimer)
 							{						
 								defaultCamZoom = 0.45;
 								camHUD.visible = true;	

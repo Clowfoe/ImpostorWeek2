@@ -75,8 +75,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				FlxG.sound.play(Paths.sound('loss-defeat', 'impostor'));
 			else
 				FlxG.sound.play(Paths.sound('no-balls', 'impostor'));
-		}else{
-			FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+		}
+		else if(PlayState.SONG.player2 == 'bf-fall') {
+			FlxG.sound.play(Paths.sound('loss_ejected', 'impostor'));
+		}
+		else{
+			FlxG.sound.play(Paths.sound('fnf_loss_sfx'));
 		}
 		Conductor.changeBPM(100);
 
