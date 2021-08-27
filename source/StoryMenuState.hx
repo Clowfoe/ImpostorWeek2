@@ -32,6 +32,7 @@ class StoryMenuState extends MusicBeatState
 		return [
 			['Sussus Moogus', 'Sabotage', 'Meltdown'],
 			['Sussus Toogus', 'Lights Down', 'Reactor', 'Ejected'],
+			['Sussy Bussy', 'Rivals', 'Chewmate'],
 			['Defeat']
 		];
 	}
@@ -40,6 +41,7 @@ class StoryMenuState extends MusicBeatState
 	public static var weekUnlocked:Array<Bool> = [true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
+		['', 'bf', 'gf'],
 		['', 'bf', 'gf'],
 		['', 'bf', 'gf'],
 		['', 'bf', 'gf']
