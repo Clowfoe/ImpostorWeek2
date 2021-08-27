@@ -4,7 +4,7 @@ Meltdown:impostor:1
 Sussus Toogus:impostor3:2
 Lights Down:impostor3:2
 Reactor:impostor3:2
-Ejected:impostor3:2
+Ejected:parasite:2
 Sussy Bussy:tomongus:3
 Rivals:tomongus:3
 Chewmate:hamster:3
