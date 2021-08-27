@@ -1529,6 +1529,7 @@ class PlayState extends MusicBeatState
 			// Shitty layering but whatev it works LOL
 
 			if(SONG.song.toLowerCase() == 'meltdown') {
+				//FUCKING DEAD
 				add(deadBF);
 			}
 			
