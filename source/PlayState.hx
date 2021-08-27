@@ -1136,7 +1136,7 @@ class PlayState extends MusicBeatState
 						warehouse.active = false;
 						add(warehouse);
 
-						var crowd:FlxSprite = new FlxSprite(-280.5, 220.8);
+						var crowd:FlxSprite = new FlxSprite(-280.5, 240.8);
 						crowd.frames = Paths.getSparrowAtlas('polus/CrowdBop', 'impostor');
 						crowd.animation.addByPrefix('CrowdBop', 'CrowdBop', 24);
 						crowd.animation.play('CrowdBop');
@@ -1508,6 +1508,9 @@ class PlayState extends MusicBeatState
 				dad.setPosition(-169.55, 264.9);
 				gf.setPosition(206, -106.7);
 				boyfriend.setPosition(751.7, 217.55);
+				if(SONG.song.toLowerCase() == 'meltdown') {
+					gf.y -= 100;
+				}
 		}
 
 		if (!PlayStateChangeables.Optimize)
@@ -1596,6 +1599,7 @@ class PlayState extends MusicBeatState
 		trace("SF CALC: " + Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
 		var greenImpostor:Bool = false;
+		
 		if(SONG.song.toLowerCase() == 'sussus-toogus') {
 			//bitch update
 			greenImpostor = true;
