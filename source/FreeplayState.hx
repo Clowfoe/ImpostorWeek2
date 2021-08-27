@@ -64,6 +64,11 @@ class FreeplayState extends MusicBeatState
 	var reactor:FlxSprite;
 	var baller:FlxSprite;
 
+	var bgSky:FlxSprite;
+
+	var effect:MosaicEffect;
+	var effectTween:FlxTween;
+
 	var defeatScroll:FlxSprite;
 
 	public static function loadDiff(diff:Int, format:String, name:String, array:Array<SwagSong>)
@@ -222,6 +227,16 @@ class FreeplayState extends MusicBeatState
 		reactor = new FlxSprite(-2300, -400).loadGraphic(Paths.image('reactorroom'));
 		reactor.setGraphicSize(Std.int(reactor.width * 0.3));
 		add(reactor);
+
+		bgSky = new FlxSprite(-500, 270).loadGraphic(Paths.image('tomong'));
+		bgSky.scrollFactor.set(0.1, 0.1);
+		bgSky.screenCenter();
+		add(bgSky);
+		bgSky.setGraphicSize(Std.int(bgSky.width * 5));
+		bgSky.alpha = 0;
+
+		effect = new MosaicEffect();
+		bgSky.shader = effect.shader;
 
 		defeatScroll = new FlxSprite(-100, 937).loadGraphic(Paths.image('defeatScroll'));
 		defeatScroll.scrollFactor.x = 0;
@@ -621,6 +636,11 @@ class FreeplayState extends MusicBeatState
 				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 
 			}
 			case 2:
@@ -636,6 +656,11 @@ class FreeplayState extends MusicBeatState
 				reactorTween = FlxTween.tween(reactor,{y: -1400}, 0.6 ,{ease: FlxEase.expoOut});
 				ballerTween = FlxTween.tween(baller,{y: -900}, 0.8 ,{ease: FlxEase.expoOut});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 			}
 			case 3:
 			{
@@ -649,7 +674,12 @@ class FreeplayState extends MusicBeatState
 				warehouseTween = FlxTween.tween(polusWarehouse,{y: 1220.92}, 0.7 ,{ease: FlxEase.expoIn});
 				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
-				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
+				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
+				effectTween = FlxTween.num(15, MosaicEffect.DEFAULT_STRENGTH, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 1}, 0.4, {ease: FlxEase.expoOut});
 			}
 			case 4:
 			{
@@ -664,6 +694,11 @@ class FreeplayState extends MusicBeatState
 				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 			}
 		}
 	}
