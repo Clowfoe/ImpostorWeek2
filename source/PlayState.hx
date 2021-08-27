@@ -1670,6 +1670,9 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == 'reactor') {
 			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
 		}
+		else if(SONG.song.toLowerCase() == 'ejected') {
+			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 500);
+		}
 
 		if (FlxG.save.data.songPosition) // I dont wanna talk about this code :(
 		{
@@ -1854,18 +1857,17 @@ class PlayState extends MusicBeatState
 				case 'reactor':
 					susIntro(doof);
 				case 'ejected':
-					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 5), Std.int(FlxG.height * 5), FlxColor.BLACK);
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
+					camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 500);
 					camHUD.visible = false;
 					inCutscene = true;
 					ejectedBoom = new FlxSprite();
 					defaultCamZoom = 1;
 					FlxG.camera.zoom = 1;
 					new FlxTimer().start(2, function(tmr:FlxTimer)
-					{
-
-						camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 500);
+					{						
 						FlxG.camera.focusOn(camFollow.getPosition());
 						ejectedBoom.frames = Paths.getSparrowAtlas('ejected/explosion', 'impostor');
 						ejectedBoom.animation.addByPrefix('KABOOM', 'The instance 1', 24, false);
