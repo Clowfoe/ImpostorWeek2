@@ -325,9 +325,9 @@ class PlayState extends MusicBeatState
 	// sussy variable
 	var _cb = 0;
 
-	var flashSprite:FlxSprite = new FlxSprite(-70, -70).makeGraphic(5000, 5000, 0xFFb30000);
+	var flashSprite:FlxSprite = new FlxSprite(0, 0).makeGraphic(1280, 720, 0xFFb30000);
 	var lightsOutSprite:FlxSprite = new FlxSprite(-700, -70).makeGraphic(10000, 10000, 0xFF000000);
-
+	
 	override public function create()
 	{
 
@@ -1782,6 +1782,7 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 
 		strumLineNotes.cameras = [camHUD];
+		flashSprite.cameras = [camHUD];
 		ass2.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];

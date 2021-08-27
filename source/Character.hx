@@ -286,6 +286,27 @@ class Character extends FlxSprite
 
 				flipX = true;
 			
+			case 'bfclow':
+				var tex = Paths.getSparrowAtlas('clowofe','shared',true);
+				frames = tex;
+
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+
+				playAnim('idle');
+
+				flipX = true;
 			case 'bf-defeat-death':
 				var tex = Paths.getSparrowAtlas('defeatDeath','impostor',true);
 				frames = tex;
