@@ -430,7 +430,7 @@ class Character extends FlxSprite
 
 				trace(tex.frames.length);
 
-				animation.addByPrefix('idle', 'fall !idle', 24, true);
+				animation.addByPrefix('idle', 'fall !idle', 24, false);
 				animation.addByPrefix('singUP', 'fall 2up', 24, false);
 				animation.addByPrefix('singLEFT', 'fall 0left', 24, false);
 				animation.addByPrefix('singRIGHT', 'fall 3right', 24, false);
