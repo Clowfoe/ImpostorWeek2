@@ -284,8 +284,8 @@ class PlayState extends MusicBeatState
 	// Per song additive offset
 	public static var songOffset:Float = 0;
 
-	var speedPass:Array<Float> = [30, 30, 30, 30];
-	var farSpeedPass:Array<Float> = [30, 30, 30, 30, 30, 30, 30];
+	var speedPass:Array<Float> = [11000, 11000, 11000, 11000];
+	var farSpeedPass:Array<Float> = [11000, 11000, 11000, 11000, 11000, 11000, 11000];
 
 	//array of two objects get ufkced
 	var middleBuildings:Array<FlxSprite>;
@@ -3113,13 +3113,13 @@ class PlayState extends MusicBeatState
 			//make sure that the clouds exist
 			if(cloudScroll.members.length == 3) {
 				for(i in 0...cloudScroll.members.length) {					
-					cloudScroll.members[i].y -= speedPass[i];
+					cloudScroll.members[i].y -= speedPass[i] / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 					if(cloudScroll.members[i].y < -1789.65) {
 						//im not using flxbackdrops so this is how we're doing things today
 						var randomScale = FlxG.random.float(1.5, 2.2);
 						var randomScroll = FlxG.random.float(1, 1.3);
 
-						speedPass[i] = FlxG.random.float(60, 90);
+						speedPass[i] = FlxG.random.float(9000, 11000);
 
 						cloudScroll.members[i].scale.set(randomScale, randomScale);
 						cloudScroll.members[i].scrollFactor.set(randomScroll, randomScroll);
@@ -3130,12 +3130,12 @@ class PlayState extends MusicBeatState
 			}
 			if(farClouds.members.length == 7) {
 				for(i in 0...farClouds.members.length) {					
-					farClouds.members[i].y -= farSpeedPass[i];
+					farClouds.members[i].y -= farSpeedPass[i] / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 					if(farClouds.members[i].y < -1614) {
 						var randomScale = FlxG.random.float(0.2, 0.5);
 						var randomScroll = FlxG.random.float(0.2, 0.4);
 
-						farSpeedPass[i] = FlxG.random.float(30, 50);
+						farSpeedPass[i] = FlxG.random.float(9000, 11000);
 
 						farClouds.members[i].scale.set(randomScale, randomScale);
 						farClouds.members[i].scrollFactor.set(randomScroll, randomScroll);
@@ -3151,7 +3151,7 @@ class PlayState extends MusicBeatState
 						leftBuildings[i].y = 9078.55;
 						leftBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}
-					leftBuildings[i].y -= 80;
+					leftBuildings[i].y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 				}
 			}
 			if(middleBuildings.length > 0) {
@@ -3160,7 +3160,7 @@ class PlayState extends MusicBeatState
 						middleBuildings[i].y = 3190.5;
 						middleBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}			
-					middleBuildings[i].y -= 80;
+					middleBuildings[i].y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 				}
 			}
 			if(rightBuildings.length > 0) {
@@ -3169,10 +3169,10 @@ class PlayState extends MusicBeatState
 						rightBuildings[i].y = 1401.55;
 						rightBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
 					}
-					rightBuildings[i].y -= 80;
+					rightBuildings[i].y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 				}
 			}
-			speedLines.y -= 70;
+			speedLines.y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
 			if(fgCloud != null) {
 				fgCloud.y -= 0.01;
 			}
@@ -4138,6 +4138,7 @@ class PlayState extends MusicBeatState
 		camFollow.setPosition(gf.getGraphicMidpoint().x, dad.getGraphicMidpoint().y - 150);	
 		dad.changeHoldState(true);
 		gf.changeHoldState(true);
+		
 
 		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom - 0.1}, 1, {ease: FlxEase.quadOut});
 
@@ -4145,6 +4146,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.playAnim('gf');
 			gf.playAnim('die');
+			FlxG.sound.play(Paths.sound('meltdown_cutscene', 'impostor'));
 		});
 
 		new FlxTimer().start(5, function(trans:FlxTimer)
