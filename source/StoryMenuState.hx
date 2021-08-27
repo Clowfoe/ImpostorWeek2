@@ -644,12 +644,15 @@ class StoryMenuState extends MusicBeatState
 					{
 						if(i > curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpLocks.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
 						}
 						else if(i == curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpLocks.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
 						}
 						else if(i < curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpLocks.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
 						}
 					}
 			}

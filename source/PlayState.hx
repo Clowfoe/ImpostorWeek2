@@ -1417,6 +1417,7 @@ class PlayState extends MusicBeatState
 				dad.y += 390;
 				dad.x -= 100;
 			case 'impostor3':
+				camPos.set(gf.getMidpoint().x, gf.getMidpoint().y);
 				camPos.y += -200;
 				camPos.x += 400;
 				dad.y += 350;
@@ -1434,12 +1435,12 @@ class PlayState extends MusicBeatState
 			case 'tomongus':
 				dad.y += 570;
 				dad.x += 250;
+				camPos.set(gf.getMidpoint().x, gf.getMidpoint().y);
 			case 'hamster':
 				dad.y += 350;
 				dad.x += 200;
 			case 'crewmate':
-				camPos.y += -200;
-				camPos.x += 400;
+				camPos.set(gf.getMidpoint().x, gf.getMidpoint().y);
 				dad.y += 350;
 				dad.x -= 60;
 			case 'impostor2':
@@ -1599,7 +1600,7 @@ class PlayState extends MusicBeatState
 		trace("SF CALC: " + Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
 		var greenImpostor:Bool = false;
-		
+
 		if(SONG.song.toLowerCase() == 'sussus-toogus') {
 			//bitch update
 			greenImpostor = true;
