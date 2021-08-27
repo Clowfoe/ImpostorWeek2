@@ -193,6 +193,8 @@ class PlayState extends MusicBeatState
 
 	public var isSMFile:Bool = false;
 
+	var deadBF:FlxSprite;
+
 	var notesHitArray:Array<Date> = [];
 	var currentFrames:Int = 0;
 	var idleToBeat:Bool = true; // change if bf and dad would idle to the beat of the song
@@ -1147,13 +1149,19 @@ class PlayState extends MusicBeatState
 						if(SONG.song.toLowerCase() == 'meltdown') {
 							add(crowd);
 						}
-		
+
+						
 						var ground:FlxSprite = new FlxSprite(-580.9, 241.85).loadGraphic(Paths.image('polus/polusGround', 'impostor'));
 						ground.updateHitbox();
 						ground.antialiasing = true;
 						ground.scrollFactor.set(1, 1);
 						ground.active = false;
 						add(ground);
+
+						deadBF = new FlxSprite(532.95, 465.95).loadGraphic(Paths.image('polus/bfdead', 'impostor'));
+						deadBF.antialiasing = true;
+						deadBF.scrollFactor.set(1, 1);
+						deadBF.updateHitbox();						
 
 					}
 					case 'ejected':
@@ -1519,6 +1527,10 @@ class PlayState extends MusicBeatState
 			add(gf);
 
 			// Shitty layering but whatev it works LOL
+
+			if(SONG.song.toLowerCase() == 'meltdown') {
+				add(deadBF);
+			}
 			
 
 			add(dad);
@@ -1600,23 +1612,27 @@ class PlayState extends MusicBeatState
 		trace("SF CALC: " + Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
 		var greenImpostor:Bool = false;
+		var talkingRight:Bool = false;
 
 		if(SONG.song.toLowerCase() == 'sussus-toogus') {
 			//bitch update
 			greenImpostor = true;
+			talkingRight = true;
 		}
 
 		if(SONG.song.toLowerCase() == 'lights-down') {
 			//bitch update
 			greenImpostor = true;
+			talkingRight = false;
 		}
 
 		if(SONG.song.toLowerCase() == 'reactor') {
 			//bitch update
 			greenImpostor = true;
+			talkingRight = true;
 		}
 
-		var doof:DialogueBox = new DialogueBox(false, dialogue, greenImpostor);
+		var doof:DialogueBox = new DialogueBox(talkingRight, dialogue, greenImpostor);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
