@@ -21,7 +21,6 @@ class VideoState extends MusicBeatState
 {
 	public var leSource:String = "";
 	public var transClass:FlxState;
-	public var txt:FlxText;
 	public var fuckingVolume:Float = 1;
 	public var notDone:Bool = true;
 	public var vidSound:FlxSound;
@@ -29,7 +28,6 @@ class VideoState extends MusicBeatState
 	public var soundMultiplier:Float = 1;
 	public var prevSoundMultiplier:Float = 1;
 	public var videoFrames:Int = 0;
-	public var defaultText:String = "";
 	public var doShit:Bool = false;
 	public var pauseText:String = "Press P To Pause/Unpause";
 	public var autoPause:Bool = false;
@@ -68,18 +66,6 @@ class VideoState extends MusicBeatState
 		#end
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
-		var html5Text:String = "You Are Not Using HTML5...\nThe Video Didnt Load!";
-		if (isHTML)
-		{
-			html5Text = "You Are Using HTML5!";
-		}
-		defaultText = "If Your On HTML5\nTap Anything...\nThe Bottom Text Indicates If You\nAre Using HTML5...\n\n" + html5Text;
-		txt = new FlxText(0, 0, FlxG.width,
-			defaultText,
-			32);
-		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
-		txt.screenCenter();
-		add(txt);
 
 		if (GlobalVideo.isWebm)
 		{
@@ -185,7 +171,6 @@ class VideoState extends MusicBeatState
 		
 		if (FlxG.keys.justPressed.P)
 		{
-			txt.text = pauseText;
 			trace("PRESSED PAUSE");
 			GlobalVideo.get().togglePause();
 			if (GlobalVideo.get().paused)
@@ -193,13 +178,11 @@ class VideoState extends MusicBeatState
 				GlobalVideo.get().alpha();
 			} else {
 				GlobalVideo.get().unalpha();
-				txt.text = defaultText;
 			}
 		}
 		
 		if (controls.ACCEPT || GlobalVideo.get().ended || GlobalVideo.get().stopped)
 		{
-			txt.visible = false;
 			GlobalVideo.get().hide();
 			GlobalVideo.get().stop();
 		}
@@ -208,7 +191,6 @@ class VideoState extends MusicBeatState
 		{
 			notDone = false;
 			FlxG.sound.music.volume = fuckingVolume;
-			txt.text = pauseText;
 			if (musicPaused)
 			{
 				musicPaused = false;
