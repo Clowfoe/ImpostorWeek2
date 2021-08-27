@@ -161,6 +161,15 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.screenCenter(X);
 		swagDialogue.antialiasing = true;
 		add(swagDialogue);
+
+		if(talkingRight) {
+			leftTween = FlxTween.tween(leftChar, {x: 207.15 + 30, alpha: 1}, 0.3, {ease: FlxEase.quadOut});
+			rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.3, {ease: FlxEase.quadOut});
+		}
+		else {
+			leftTween = FlxTween.tween(leftChar, {x: 207.15 + 30, alpha: 1}, 0.3, {ease: FlxEase.quadOut});
+			rightTween = FlxTween.tween(rightChar, {x: 820.15 + 30, alpha: 0}, 0.3, {ease: FlxEase.quadOut});
+		}
 		
 	}
 
