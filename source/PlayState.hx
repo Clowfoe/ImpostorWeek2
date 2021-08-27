@@ -143,6 +143,7 @@ class PlayState extends MusicBeatState
 	private var curSection:Int = 0;
 
 	private var camFollow:FlxObject;
+	private var lockedCam:Bool = false;
 
 	private static var prevCamFollow:FlxObject;
 
@@ -1670,9 +1671,6 @@ class PlayState extends MusicBeatState
 		if(SONG.song.toLowerCase() == 'reactor') {
 			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 100);
 		}
-		else if(SONG.song.toLowerCase() == 'ejected') {
-			camFollow.setPosition(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y - 500);
-		}
 
 		if (FlxG.save.data.songPosition) // I dont wanna talk about this code :(
 		{
@@ -1857,45 +1855,67 @@ class PlayState extends MusicBeatState
 				case 'reactor':
 					susIntro(doof);
 				case 'ejected':
+					//hi im ziffy i wrote this
+					//i know everytime i do an ingame cutscene it looks like this (bad)
+					//but it works so go away please
 					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 5), Std.int(FlxG.height * 5), FlxColor.BLACK);
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
+					blackScreen.screenCenter();
 					camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y - 500);
+
 					camHUD.visible = false;
 					inCutscene = true;
+					lockedCam = true;
 					ejectedBoom = new FlxSprite();
-					defaultCamZoom = 1;
-					FlxG.camera.zoom = 1;
-					new FlxTimer().start(2, function(tmr:FlxTimer)
-					{						
-						FlxG.camera.focusOn(camFollow.getPosition());
-						ejectedBoom.frames = Paths.getSparrowAtlas('ejected/explosion', 'impostor');
-						ejectedBoom.animation.addByPrefix('KABOOM', 'The instance 1', 24, false);
-						ejectedBoom.updateHitbox();
-						ejectedBoom.scrollFactor.set();
-						ejectedBoom.screenCenter();
-						ejectedBoom.scale.set(2, 2);
-						ejectedBoom.animation.play('KABOOM');
-						add(ejectedBoom);						
-
-						new FlxTimer().start(0.7, function(tmr2:FlxTimer)
-						{							
-							blackScreen.destroy();					
-						});
-
-						new FlxTimer().start(2, function(tmr3:FlxTimer)
-						{							
-							ejectedBoom.destroy();					
-						});
-
-						FlxTween.tween(FlxG.camera, {zoom: 0.45}, 2, {ease:FlxEase.quadOut, startDelay: 1.5});
-
-						new FlxTimer().start(2, function(tmr2:FlxTimer)
+					defaultCamZoom = 0.8;
+					FlxG.camera.zoom = 0.8;			
+					
+					new FlxTimer().start(2, function(shine:FlxTimer) {
+						var eyeShine:FlxSprite = new FlxSprite(0, 0);
+						eyeShine.antialiasing = true;
+						eyeShine.frames = Paths.getSparrowAtlas('ejected/eye_shine_thing', 'impostor');
+						eyeShine.animation.addByPrefix('idle', 'eye shine thing lol instance 1', 24, false);
+						eyeShine.animation.play('idle');
+						eyeShine.updateHitbox();
+						eyeShine.scrollFactor.set();
+						eyeShine.screenCenter();
+						add(eyeShine);
+						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{						
-							defaultCamZoom = 0.45;
-							camHUD.visible = true;	
-							startCountdown();				
-						});
+							FlxG.camera.focusOn(camFollow.getPosition());
+							ejectedBoom.frames = Paths.getSparrowAtlas('ejected/explosion', 'impostor');
+							ejectedBoom.animation.addByPrefix('KABOOM', 'The instance 1', 24, false);
+							ejectedBoom.updateHitbox();
+							ejectedBoom.scrollFactor.set();
+							ejectedBoom.screenCenter();
+							ejectedBoom.scale.set(2, 2);
+							ejectedBoom.animation.play('KABOOM');
+							add(ejectedBoom);						
+	
+							new FlxTimer().start(0.7, function(tmr2:FlxTimer)
+							{							
+								blackScreen.destroy();	
+								FlxTween.tween(camFollow, {y: camFollow.y + 500}, 2, {ease: FlxEase.quadInOut});			
+							});
+	
+							new FlxTimer().start(2, function(tmr3:FlxTimer)
+							{							
+								ejectedBoom.destroy();					
+							});
+	
+							FlxTween.tween(FlxG.camera, {zoom: 0.45}, 2, {ease:FlxEase.quadInOut, startDelay: 2.5});
+	
+							new FlxTimer().start(4.3, function(tmr2:FlxTimer)
+							{						
+								defaultCamZoom = 0.45;
+								camHUD.visible = true;	
+								lockedCam = false;
+								inCutscene = false;
+								startCountdown();				
+							});
+					});
+
 					});
 				case 'roses':
 					FlxG.sound.play(Paths.sound('ANGRY'));
@@ -2888,9 +2908,10 @@ class PlayState extends MusicBeatState
 
 		if(curStage == "ejected")
 		{
-			camGame.shake(0.002, 0.1);
+			if(!inCutscene)
+				camGame.shake(0.002, 0.1);
 
-			if(!tweeningChar)
+			if(!tweeningChar && !inCutscene)
 			{
 				tweeningChar = true;
 				FlxTween.tween(boyfriend, {x: FlxG.random.float(bfStartpos.x - 15, bfStartpos.x + 15), y: FlxG.random.float(bfStartpos.y - 15, bfStartpos.y + 15)}, 0.4, {
@@ -3481,7 +3502,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				if(curSong != 'Reactor') {
+				if(curSong != 'Reactor' && !lockedCam) {
 					camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y - 100 + offsetY);
 				}
 				#if windows
@@ -3523,7 +3544,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				if(curSong != 'Reactor') {
+				if(curSong != 'Reactor' && !lockedCam) {
 					camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
 				}
 
