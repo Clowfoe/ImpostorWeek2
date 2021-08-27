@@ -7,6 +7,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
@@ -73,6 +74,11 @@ class StoryMenuState extends MusicBeatState
 	var reactor:FlxSprite;
 	var baller:FlxSprite;
 
+	var bgSky:FlxSprite;
+
+	var effect:MosaicEffect;
+	var effectTween:FlxTween;
+
 	var defeatScroll:FlxSprite;
 
 	function unlockWeeks():Array<Bool>
@@ -119,6 +125,8 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+
+		
 
 		weekUnlocked = unlockWeeks();
 
@@ -172,6 +180,16 @@ class StoryMenuState extends MusicBeatState
 		reactor = new FlxSprite(-2300, -400).loadGraphic(Paths.image('reactorroom'));
 		reactor.setGraphicSize(Std.int(reactor.width * 0.3));
 		add(reactor);
+
+		bgSky = new FlxSprite(-500, 270).loadGraphic(Paths.image('tomong'));
+		bgSky.scrollFactor.set(0.1, 0.1);
+		bgSky.screenCenter();
+		add(bgSky);
+		bgSky.setGraphicSize(Std.int(bgSky.width * 5));
+		bgSky.alpha = 0;
+
+		effect = new MosaicEffect();
+		bgSky.shader = effect.shader;
 
 		defeatScroll = new FlxSprite(-100, 937).loadGraphic(Paths.image('defeatScroll'));
 		defeatScroll.scrollFactor.x = 0;
@@ -433,7 +451,18 @@ class StoryMenuState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-				grpWeekText.members[curWeek].startFlashing();
+				switch(curWeek)
+				{
+					case 0:
+						grpWeekText.members[curWeek].startFlashing(0xFF3E1D60);
+					case 1:
+						grpWeekText.members[curWeek].startFlashing(0xFFE23100);
+					case 2:
+						grpWeekText.members[curWeek].startFlashing(0xFF4B6858);
+					case 3:
+						grpWeekText.members[curWeek].startFlashing(0xFF8C0800);
+				}
+				
 				grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
@@ -526,7 +555,7 @@ class StoryMenuState extends MusicBeatState
 		defeatTween.cancel();
 	}	
 
-	function changeWeek(change:Int = 0):Void
+	function changeWeek(change:Int = 0):Void 
 	{
 		curWeek += change;
 
@@ -563,13 +592,22 @@ class StoryMenuState extends MusicBeatState
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
 
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+
 				for (i in 0...grpWeekText.members.length)
 					{
-						if(i != curWeek) {
+						if(i > curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
 						}
 						else if(i == curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i < curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
 						}
 					}
 
@@ -588,13 +626,23 @@ class StoryMenuState extends MusicBeatState
 				ballerTween = FlxTween.tween(baller,{y: -900}, 0.8 ,{ease: FlxEase.expoOut});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
 
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+
+
 				for (i in 0...grpWeekText.members.length)
 					{
-						if(i != curWeek) {
+						if(i > curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
 						}
 						else if(i == curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i < curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
 						}
 					}
 			}
@@ -610,15 +658,57 @@ class StoryMenuState extends MusicBeatState
 				warehouseTween = FlxTween.tween(polusWarehouse,{y: 1220.92}, 0.7 ,{ease: FlxEase.expoIn});
 				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
-				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
+				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
 
+				effectTween = FlxTween.num(15, MosaicEffect.DEFAULT_STRENGTH, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 1}, 0.4, {ease: FlxEase.expoOut});
+			
 				for (i in 0...grpWeekText.members.length)
 					{
-						if(i != curWeek) {
+						if(i > curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
 						}
 						else if(i == curWeek) {
 							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i < curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
+						}
+					}
+			}
+			case 3:
+			{
+				if(groundTween != null)
+				{
+						cancelTweens();
+				}
+				groundTween = FlxTween.tween(polusGround,{y: 1169.29}, 0.5 ,{ease: FlxEase.expoIn});
+				hillsTween = FlxTween.tween(polusHills,{y: 873.62}, 0.6 ,{ease: FlxEase.expoIn});
+				rocksTween = FlxTween.tween(polusRocks,{y: 712.09}, 0.8 ,{ease: FlxEase.expoIn});
+				warehouseTween = FlxTween.tween(polusWarehouse,{y: 1220.92}, 0.7 ,{ease: FlxEase.expoIn});
+				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
+				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
+				defeatTween = FlxTween.tween(defeatScroll,{y: -2050}, 3 ,{ease: FlxEase.expoOut});
+
+				effectTween = FlxTween.num(MosaicEffect.DEFAULT_STRENGTH, 15, 0.5, {type: ONESHOT}, function(v)
+				{
+					effect.setStrength(v, v);
+				});
+				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+
+				for (i in 0...grpWeekText.members.length)
+					{
+						if(i > curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i == curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+						}
+						else if(i < curWeek) {
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
 						}
 					}
 			}

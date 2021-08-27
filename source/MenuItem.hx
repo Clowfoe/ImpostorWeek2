@@ -13,6 +13,8 @@ class MenuItem extends FlxSpriteGroup
 	public var week:FlxSprite;
 	public var flashingInt:Int = 0;
 
+	public var flashColor:FlxColor = 0xFF33ffff;
+
 	public function new(x:Float, y:Float, weekNum:Int = 0)
 	{
 		super(x, y);
@@ -22,8 +24,9 @@ class MenuItem extends FlxSpriteGroup
 
 	private var isFlashing:Bool = false;
 
-	public function startFlashing():Void
+	public function startFlashing(colour:FlxColor):Void
 	{
+		flashColor = colour;
 		isFlashing = true;
 	}
 
@@ -42,7 +45,7 @@ class MenuItem extends FlxSpriteGroup
 			flashingInt += 1;
 	
 		if (flashingInt % fakeFramerate >= Math.floor(fakeFramerate / 2))
-			week.color = 0xFF33ffff;
+			week.color = flashColor;
 		else if (FlxG.save.data.flashing)
 			week.color = FlxColor.WHITE;
 	}
