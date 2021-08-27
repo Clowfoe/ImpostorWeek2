@@ -821,7 +821,7 @@ class Character extends FlxSprite
 
 			case 'ziffy':
 				// impostor
-				playerColor = "FF3333";
+				playerColor = "FFFFFF";
 				tex = Paths.getSparrowAtlas('characters/ziffy', 'impostor');
 				frames = tex;
 				animation.addByPrefix('idle', 'IdleZiffy', 24, false);
