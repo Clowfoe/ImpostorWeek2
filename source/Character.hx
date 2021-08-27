@@ -613,9 +613,9 @@ class Character extends FlxSprite
 				playerColor = "FF6770";
 				frames = Paths.getSparrowAtlas('tomongus','shared',true);
 				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singUP', 'Right', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singRIGHT', 'Up', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('die', 'SHOT', 24, false);
 
