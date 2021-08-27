@@ -617,12 +617,14 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('die', 'SHOT', 24, false);
 
 				addOffset('idle');
 				addOffset('singUP');
 				addOffset('singRIGHT');
 				addOffset('singLEFT');
 				addOffset('singDOWN');
+				addOffset("die", 1024, 120);
 
 				playAnim('idle');
 
