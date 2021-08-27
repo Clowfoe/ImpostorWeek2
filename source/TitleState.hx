@@ -397,6 +397,7 @@ class TitleState extends MusicBeatState
 				addMoreText('presents');
 			// credTextShit.text += '\npresent...';
 			// credTextShit.addText();
+			//FUCK YOU LOGGO
 			case 4:
 				deleteCoolText();
 			// credTextShit.visible = false;

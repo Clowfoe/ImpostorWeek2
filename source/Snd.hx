@@ -25,6 +25,7 @@ class Channel {
 	public function poolBack(){
 		#if false
 		//trace("pool back");
+		//trace humbay HAS RED HAIR
 		#end
 		started 	= false;
 		paused 		= false;
