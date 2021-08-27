@@ -1,11 +1,10 @@
 Sussus Moogus:impostor:1
 Sabotage:impostor:1
 Meltdown:impostor:1
-Sussus Toogus:impostor3:2
+Sussus Toogus:crewmate:2
 Lights Down:impostor3:2
 Reactor:impostor3:2
 Ejected:parasite:2
 Sussy Bussy:tomongus:3
 Rivals:tomongus:3
 Chewmate:hamster:3
-Defeat:black:4
