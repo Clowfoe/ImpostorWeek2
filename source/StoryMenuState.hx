@@ -639,20 +639,19 @@ class StoryMenuState extends MusicBeatState
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
 
+				var currentNuts:Int = 0;
+
 
 				for (i in 0...grpWeekText.members.length)
 					{
 						if(i > curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
-							FlxTween.tween(grpLocks.members[i], {alpha: 0.3}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0.3}, 0.2, {ease: FlxEase.expoOut});							
 						}
 						else if(i == curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
-							FlxTween.tween(grpLocks.members[i], {alpha: 1}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpWeekText.members[i], {alpha: 1}, 0.2, {ease: FlxEase.expoOut});							
 						}
 						else if(i < curWeek) {
-							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
-							FlxTween.tween(grpLocks.members[i], {alpha: 0}, 0.1, {ease: FlxEase.expoOut});
+							FlxTween.tween(grpWeekText.members[i], {alpha: 0}, 0.2, {ease: FlxEase.expoOut});							
 						}
 					}
 			}
