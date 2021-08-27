@@ -207,11 +207,11 @@ class StoryMenuState extends MusicBeatState
 		gradient.screenCenter();
 		add(gradient);
 
-		var topBlack:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 60, FlxColor.BLACK);
-		add(topBlack);
+		//var topBlack:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 60, FlxColor.BLACK);
+		//add(topBlack);
 
-		var bottomBlack:FlxSprite = new FlxSprite(0, 450).makeGraphic(FlxG.width, 500, FlxColor.BLACK);
-		add(bottomBlack);
+		//var bottomBlack:FlxSprite = new FlxSprite(0, 450).makeGraphic(FlxG.width, 500, FlxColor.BLACK);
+		//add(bottomBlack);
 
 		persistentUpdate = persistentDraw = true;
 
