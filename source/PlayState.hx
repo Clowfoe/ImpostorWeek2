@@ -1170,7 +1170,7 @@ class PlayState extends MusicBeatState
 						fgCloud = new FlxSprite(-2660.4, -402).loadGraphic(Paths.image('ejected/fgClouds', 'impostor'));
 						fgCloud.antialiasing = true;
 						fgCloud.updateHitbox();
-						fgCloud.scrollFactor.set(0.3, 0.3);
+						fgCloud.scrollFactor.set(0.2, 0.2);
 						add(fgCloud);
 
 						for(i in 0...farClouds.members.length) {
