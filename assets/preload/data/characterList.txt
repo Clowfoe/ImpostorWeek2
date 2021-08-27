@@ -17,4 +17,5 @@ bf-sus
 gf
 parasite
 ziffy
+hamster
 bfclow
