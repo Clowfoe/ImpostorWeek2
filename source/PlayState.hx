@@ -186,6 +186,8 @@ class PlayState extends MusicBeatState
 	public var camSustains:FlxCamera;
 	public var camNotes:FlxCamera;
 
+	public static var naughtyToday:Bool = true;
+
 	private var camGame:FlxCamera;
 	public var cannotDie = false;
 
@@ -502,6 +504,9 @@ class PlayState extends MusicBeatState
 		trace('INFORMATION ABOUT WHAT U PLAYIN WIT:\nFRAMES: ' + PlayStateChangeables.safeFrames + '\nZONE: ' + Conductor.safeZoneOffset + '\nTS: '
 			+ Conductor.timeScale + '\nBotPlay : ' + PlayStateChangeables.botPlay);
 
+		var nnSuffix:String = "";
+		if(!naughtyToday)
+			nnSuffix = '-nn';
 		// dialogue shit
 		switch (songLowercase)
 		{
@@ -525,15 +530,15 @@ class PlayState extends MusicBeatState
 			case 'senpai':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/senpai/senpaiDialogue'));
 			case 'sussus-moogus':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-moogus/moogus'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-moogus/moogus' + nnSuffix));
 			case 'sabotage':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sabotage/sabotage'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sabotage/sabotage' + nnSuffix));
 			case 'meltdown':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/meltdown/meltdown'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/meltdown/meltdown' + nnSuffix));
 			case 'sussus-toogus':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-toogus/toogus'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/sussus-toogus/toogus' + nnSuffix));
 			case 'lights-down':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/lights-down/down'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('data/lights-down/down' + nnSuffix));
 			case 'reactor':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('data/reactor/reactor'));
 			case 'roses':
@@ -1925,7 +1930,7 @@ class PlayState extends MusicBeatState
 								FlxTween.tween(camFollow, {y: dad.getMidpoint().y}, 2, {ease: FlxEase.quadInOut});			
 							});
 	
-							new FlxTimer().start(1.6, function(tmr3:FlxTimer)
+							new FlxTimer().start(1.5, function(tmr3:FlxTimer)
 							{							
 								ejectedBoom.destroy();					
 							});

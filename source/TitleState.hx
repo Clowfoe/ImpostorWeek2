@@ -326,7 +326,7 @@ class TitleState extends MusicBeatState
 				{
 					returnedData[0] = data.substring(0, data.indexOf(';'));
 					returnedData[1] = data.substring(data.indexOf('-'), data.length);
-					FlxG.switchState(new MainMenuState());
+					FlxG.switchState(new OutdatedSubState());
 				}
 				
 				http.onError = function (error) {
