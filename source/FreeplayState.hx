@@ -60,6 +60,7 @@ class FreeplayState extends MusicBeatState
 	var polusRocks:FlxSprite;
 	var polusHills:FlxSprite;
 	var polusGround:FlxSprite;
+	var pixelSelected:Bool = false;
 
 	var reactor:FlxSprite;
 	var baller:FlxSprite;
@@ -641,6 +642,7 @@ class FreeplayState extends MusicBeatState
 					effect.setStrength(v, v);
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+				pixelSelected = false;
 
 			}
 			case 2:
@@ -661,6 +663,8 @@ class FreeplayState extends MusicBeatState
 					effect.setStrength(v, v);
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+				pixelSelected = false;
+				//ARGGHHHH MY NUTS!
 			}
 			case 3:
 			{
@@ -675,11 +679,14 @@ class FreeplayState extends MusicBeatState
 				reactorTween = FlxTween.tween(reactor,{y: -400}, 0.6 ,{ease: FlxEase.expoIn});
 				ballerTween = FlxTween.tween(baller,{y: 100}, 0.8 ,{ease: FlxEase.expoIn});
 				defeatTween = FlxTween.tween(defeatScroll,{y: 937}, 3 ,{ease: FlxEase.expoOut});
-				effectTween = FlxTween.num(15, MosaicEffect.DEFAULT_STRENGTH, 0.5, {type: ONESHOT}, function(v)
-				{
-					effect.setStrength(v, v);
-				});
+				if(!pixelSelected) {
+					effectTween = FlxTween.num(15, MosaicEffect.DEFAULT_STRENGTH, 0.5, {type: ONESHOT}, function(v)
+					{
+						effect.setStrength(v, v);
+					});
+				}
 				FlxTween.tween(bgSky, {alpha: 1}, 0.4, {ease: FlxEase.expoOut});
+				pixelSelected = true;
 			}
 			case 4:
 			{
@@ -699,6 +706,7 @@ class FreeplayState extends MusicBeatState
 					effect.setStrength(v, v);
 				});
 				FlxTween.tween(bgSky, {alpha: 0}, 0.4, {ease: FlxEase.expoIn});
+				pixelSelected = false;
 			}
 		}
 	}

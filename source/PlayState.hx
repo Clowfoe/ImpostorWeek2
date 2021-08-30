@@ -407,7 +407,7 @@ class PlayState extends MusicBeatState
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
 		if (isStoryMode)
 		{
-			detailsText = "Story Mode: Week " + storyWeek;
+			detailsText = "Story Mode: Week " + (storyWeek + 1);
 		}
 		else
 		{
@@ -830,7 +830,7 @@ class PlayState extends MusicBeatState
 						// defaultCamZoom = 0.9;
 
 						var bgSky = new FlxSprite().loadGraphic(Paths.image('weeb/weebSky'));
-						bgSky.scrollFactor.set(0.1, 0.1);
+						bgSky.scrollFactor.set(0, 0);
 						add(bgSky);
 
 						var repositionShit = -200;
@@ -2146,6 +2146,7 @@ class PlayState extends MusicBeatState
 
 			var introAlts:Array<String> = introAssets.get('default');
 			var altSuffix:String = "";
+			var inPixel:Bool = false;
 
 			for (value in introAssets.keys())
 			{
@@ -2154,7 +2155,7 @@ class PlayState extends MusicBeatState
 					trace(value + " - " + curStage);
 					introAlts = introAssets.get(value);
 					if (curStage.contains('school'))
-						altSuffix = '-pixel';
+						inPixel = true;
 				}
 			}
 
@@ -2162,7 +2163,12 @@ class PlayState extends MusicBeatState
 
 			{
 				case 0:
-					FlxG.sound.play(Paths.sound('intro3' + altSuffix), 0.6);
+					if(inPixel) {
+						FlxG.sound.play(Paths.sound('intro3', 'impostor'), 0.6);
+					}
+					else {
+						FlxG.sound.play(Paths.sound('intro3'), 0.6);
+					}
 				case 1:
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 					ready.scrollFactor.set();
@@ -2180,7 +2186,12 @@ class PlayState extends MusicBeatState
 							ready.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro2' + altSuffix), 0.6);
+					if(inPixel) {
+						FlxG.sound.play(Paths.sound('intro2', 'impostor'), 0.6);
+					}
+					else {
+						FlxG.sound.play(Paths.sound('intro2'), 0.6);
+					}
 				case 2:
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
 					set.scrollFactor.set();
@@ -2197,7 +2208,12 @@ class PlayState extends MusicBeatState
 							set.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro1' + altSuffix), 0.6);
+					if(inPixel) {
+						FlxG.sound.play(Paths.sound('intro1', 'impostor'), 0.6);
+					}
+					else {
+						FlxG.sound.play(Paths.sound('intro1'), 0.6);
+					}
 				case 3:
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
 					go.scrollFactor.set();
@@ -2216,7 +2232,12 @@ class PlayState extends MusicBeatState
 							go.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
+					if(inPixel) {
+						FlxG.sound.play(Paths.sound('introGo', 'impostor'), 0.6);
+					}
+					else {
+						FlxG.sound.play(Paths.sound('introGo'), 0.6);
+					}
 				case 4:
 			}
 
@@ -3169,11 +3190,7 @@ class PlayState extends MusicBeatState
 			//AAAAAAAAAAAAAAAAAAAA			
 			if(leftBuildings.length > 0) {
 				for(i in 0...leftBuildings.length) {
-					if(leftBuildings[i].y < -5871.85) {
-						leftBuildings[i].y = 9078.55;
-						leftBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
-					}
-					leftBuildings[i].y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
+					leftBuildings[i].y = middleBuildings[i].y + 5888;
 				}
 			}
 			if(middleBuildings.length > 0) {
@@ -3187,11 +3204,7 @@ class PlayState extends MusicBeatState
 			}
 			if(rightBuildings.length > 0) {
 				for(i in 0...rightBuildings.length) {
-					if(rightBuildings[i].y < -13548.85) {
-						rightBuildings[i].y = 1401.55;
-						rightBuildings[i].animation.play(FlxG.random.bool(50) ? '1' : '2');
-					}
-					rightBuildings[i].y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
+					rightBuildings[i].y = leftBuildings[i].y;
 				}
 			}
 			speedLines.y -= 9000 / (cast(Lib.current.getChildAt(0), Main)).getFPS();
@@ -5371,7 +5384,7 @@ class PlayState extends MusicBeatState
 			changeDadCharacter("whiteimpostor");
 			changeBFCharacter("bfeyes");
 			changeDadCharacter("impostor3");
-			changeBFCharacter("bf");
+			changeBFCharacter("bf");			
 		}
 		if(curSong == "Lights-Down" && curBeat == 32) 
 		{
