@@ -37,7 +37,10 @@ class OutdatedSubState extends MusicBeatState
 			}
 		add(bg);
 
-		var naughty:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menu/naughty', 'impostor'));
+		var naughty:FlxSprite = new FlxSprite();
+		naughty.frames = Paths.getSparrowAtlas('menu/naughtyMeny', 'impostor');
+		naughty.animation.addByPrefix('idle', 'Screen instance 1', 24, true);
+		naughty.animation.play('idle');
 		naughty.updateHitbox();
 		naughty.antialiasing = FlxG.save.data.antialiasing = true;
 		naughty.scrollFactor.set();
