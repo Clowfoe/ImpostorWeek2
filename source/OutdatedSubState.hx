@@ -38,7 +38,7 @@ class OutdatedSubState extends MusicBeatState
 		add(bg);
 
 		var naughty:FlxSprite = new FlxSprite();
-		naughty.frames = Paths.getSparrowAtlas('menu/naughtyMeny', 'impostor');
+		naughty.frames = Paths.getSparrowAtlas('MENU/naughtyMeny', 'impostor');
 		naughty.animation.addByPrefix('idle', 'Screen instance 1', 24, true);
 		naughty.animation.play('idle');
 		naughty.updateHitbox();
